@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<answer>
+    <id val="2"/>
+    <questionAnswer idQuestion="1">1,3</questionAnswer>
+    <questionAnswer idQuestion="2">2</questionAnswer>
+    <questionAnswer idQuestion="3"><![CDATA[hypertext markup language]]></questionAnswer>
+</answer>

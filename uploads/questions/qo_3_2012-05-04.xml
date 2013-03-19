@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<question type="questionOuverte">
+    <id val="3"/>
+    <text><![CDATA[Que signifie <b>HTML</b> ?]]></text>
+    <answers>
+        <answer><![CDATA[hypertext markup language]]></answer>
+    </answers>
+    <points val="1"/>
+</question>

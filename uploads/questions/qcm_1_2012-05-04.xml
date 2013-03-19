@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<question type="choixMultiple">
+    <id val="1"/>
+    <text><![CDATA[La propriété overflow permet de :]]></text>
+    <choice>
+        <option num="0"><![CDATA[cacher du texte qui dépasse]]></option>
+        <option num="1"><![CDATA[changer la couleur d\'une image]]></option>
+        <option num="2"><![CDATA[modifier la taille d\'une boite]]></option>
+        <option num="3"><![CDATA[ajouter une barre de scroll si le texte dépasse]]></option>
+    </choice>
+    <answer>0,3</answer>
+    <points val="2"/>
+</question>

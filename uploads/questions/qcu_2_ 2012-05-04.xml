@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<question type="choixUnique">
+    <id val="2"/>
+    <text><![CDATA[Quelle est la <b>propriété CSS</b> qui modifie la couleur du texte ?]]></text>
+    <choice>
+        <option num="0"><![CDATA[background-color]]></option>
+        <option num="1"><![CDATA[font-color]]></option>
+        <option num="2"><![CDATA[text-color]]></option>
+        <option num="3"><![CDATA[color]]></option>
+        <option num="4"><![CDATA[font-couleur]]></option>
+    </choice>
+    <answer>3</answer>
+    <points val="1"/>
+</question>
