@@ -1,5 +1,5 @@
 <?php
-App::uses('AbstractsQuestions', 'Controller');
+App::uses('AbstractsQuestions', 'Classes');
 
 class QuosController extends AbstractsQuestions {
     public $component = array('Xml');
@@ -9,14 +9,14 @@ class QuosController extends AbstractsQuestions {
  *@param array $param ('path'=>string)
  *@return true|false en fonction du succès ou non du chargement
  */
-    public function load($aParam);
+    public function load($aParam){}
 
 /**
  *@desc Cette fonction permet d'executer un module, elle doit retourner l'HTML a afficher
  *pour l'execution
  *@return le contenu HTML dans un string
  */
-    public function executeToHTML();
+    public function executeToHTML(){}
 
 /**
  *@desc Cette fonction permet de créer un module, elle doit retourner l'HTML a afficher
@@ -24,7 +24,7 @@ class QuosController extends AbstractsQuestions {
  *@param string $urlRedirection : l'url sur laquelle devra pointer l'envoi du module
  *@return le contenu HTML dans un string
  */
-    public function creationToHTML($urlRedirection);
+    public function creationToHTML($urlRedirection){}
 
 
 /**
@@ -32,7 +32,7 @@ class QuosController extends AbstractsQuestions {
  *@param array $param ('reponses'=>array(), 'path'=>string)
  *@return boolean true | false en fonctio de s'il est bon
  */
-    public function valider($param);
+    public function valider($param){}
 
 /**
  *@desc cette fonction est celle qui gère l'ajout en base de données et création
@@ -40,11 +40,11 @@ class QuosController extends AbstractsQuestions {
  *@param array $param ('infos'=>array) (infos est en fait la variable POST)
  *@return boolean true|false en fonction du succès ou non de la sauvegarde
  */
-    public function saveFromPost($param);
+    public function saveFromPost($param){}
 
 /**
  *@desc Cette fonction va sauvegarder en base l'instance chargée
  */
-    public function saveInstance();
+    public function saveInstance(){}
 }
 ?>

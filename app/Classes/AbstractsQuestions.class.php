@@ -6,13 +6,12 @@ class AbstractsQuestions
 {
 
 //Info générales
-    private $id; //L'id de la question
-    private $namefile; //Le nom du fichier XML de la question
-    private $author=''; //L'auteur de la question
-    private $points=''; //Le nombre de points que vaut la question
-    private $difficulty=''; //Le niveau de difficulte que vaut la question
-    private $type=''; //Le type de la question
-
+    private $id = 0; //L'id de la question
+    private $namefile = ''; //Le nom du fichier XML de la question
+    private $author = ''; //L'auteur de la question
+    private $points = 0; //Le nombre de points que vaut la question
+    private $difficulty = 0; //Le niveau de difficulte que vaut la question
+    private $type = ''; //Le type de la question
 
 /**
  *@desc Le constructeur de la classe, il n'y a rien à spécifier.
@@ -65,11 +64,17 @@ class AbstractsQuestions
  */
     public abstract function saveInstance();
 
-    public function getId(){ return $this->iId;}
-    public function setId($val){ $this->iId=$val;}
-    public function getAuteur(){ return $this->sAuteur;}
-    public function setAuteur($val){ $this->sAuteur=$val;}
-    public function getUtilisateur(){ return $this->iUtilisateur;}
-    public function setUtilisateur($val){ $this->iUtilisateur=$val;}
+    public function getId(){ return $this->$id;}
+    public function setId($val){ $this->$id=$val;}
+    public function getNamefile(){ return $this->$namefile;}
+    public function setNamefile($val){ $this->$namefile=$val;}
+    public function getAuthor(){ return $this->$author;}
+    public function setAuthor($val){ $this->$author=$val;}
+    public function getPoints(){ return $this->$points;}
+    public function setPoints($val){ $this->$points=$val;}
+    public function getDifficulty(){ return $this->$difficulty;}
+    public function setDifficulty($val){ $this->=$difficulty$val;}
+    public function getType(){ return $this->$type;}
+    public function setType($val){ $this->$type=$val;}
 }
 ?>
