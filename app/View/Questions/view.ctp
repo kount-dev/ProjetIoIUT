@@ -26,14 +26,9 @@
 			<?php echo h($question['Question']['difficulty']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Question Type'); ?></dt>
+		<dt><?php echo __('Type'); ?></dt>
 		<dd>
-			<?php echo h($question['Question']['question_type']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Discipline'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($question['Discipline']['name'], array('controller' => 'disciplines', 'action' => 'view', $question['Discipline']['id'])); ?>
+			<?php echo h($question['Question']['type']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>

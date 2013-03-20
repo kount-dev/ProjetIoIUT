@@ -8,8 +8,7 @@
 		echo $this->Form->input('author');
 		echo $this->Form->input('points');
 		echo $this->Form->input('difficulty');
-		echo $this->Form->input('question_type');
-		echo $this->Form->input('discipline_id');
+		echo $this->Form->input('type');
 		echo $this->Form->input('Discipline');
 	?>
 	</fieldset>

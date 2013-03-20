@@ -6,13 +6,12 @@ class AbstractsQuestions
 {
 
 //Info générales
-    private $author='';//L'auteur du QCM
-    private $nombre_point='';//Le nom du QCM
-    private $sType='';//Le type du QCM
-    private $sMatiere='';//La matière du QCM
-    private $iId=0;//L'id du QCM
-    private $iMinimumPoints=0;//Le minimum de points recquis pour le QCM
-    private $iTotalPoints=0;//Le nombre total de points disponible dans le QCM
+    private $id; //L'id de la question
+    private $namefile; //Le nom du fichier XML de la question
+    private $author=''; //L'auteur de la question
+    private $points=''; //Le nombre de points que vaut la question
+    private $difficulty=''; //Le niveau de difficulte que vaut la question
+    private $type=''; //Le type de la question
 
 
 /**

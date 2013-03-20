@@ -272,8 +272,7 @@ CREATE TABLE `questions` (
   `author` varchar(100) NOT NULL,
   `points` int(10) NOT NULL,
   `difficulty` int(10) NOT NULL,
-  `question_type` varchar(50) NOT NULL,
-  `discipline_id` int(11) NOT NULL,
+  `type` varchar(50) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
