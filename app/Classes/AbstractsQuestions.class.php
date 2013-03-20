@@ -2,7 +2,7 @@
 /**
 * AbstractsQuestions Class
 */
-class AbstractsQuestions
+abstract class AbstractsQuestions
 {
 
 //Info générales
@@ -12,14 +12,6 @@ class AbstractsQuestions
     private $points = 0; //Le nombre de points que vaut la question
     private $difficulty = 0; //Le niveau de difficulte que vaut la question
     private $type = ''; //Le type de la question
-
-/**
- *@desc Le constructeur de la classe, il n'y a rien à spécifier.
- */
-    function __construct(argument)
-    {
-        //rien a specifier
-    }
 
 /**
  *@desc Cette fonction permet de charger, si besoin est, un fichier
@@ -73,7 +65,7 @@ class AbstractsQuestions
     public function getPoints(){ return $this->$points;}
     public function setPoints($val){ $this->$points=$val;}
     public function getDifficulty(){ return $this->$difficulty;}
-    public function setDifficulty($val){ $this->=$difficulty$val;}
+    public function setDifficulty($val){ $this->$difficulty=$val;}
     public function getType(){ return $this->$type;}
     public function setType($val){ $this->$type=$val;}
 }
