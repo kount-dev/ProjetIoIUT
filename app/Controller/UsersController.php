@@ -99,40 +99,40 @@ class UsersController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	public function beforeFilter() {
-	    parent::beforeFilter();
-	    $this->Auth->allow('index', 'view');
-	}
-	public function login() {
-		if ($this->Session->read('Auth.User')) {
-	        $this->Session->setFlash('Vous êtes connecté!');
-	        $this->redirect('/', null, false);
-	    }
-		else if ($this->request->is('post')) {
-	        if ($this->Auth->login()) {
-	            $this->redirect($this->Auth->redirect());
-	        } else {
-	            $this->Session->setFlash('Votre nom d\'user ou mot de passe sont incorrects.');
-	        }
-	    }
-	}
+         parent::beforeFilter();
+         $this->Auth->allow('index', 'view');
+     }
+     public function login() {
+          if ($this->Session->read('Auth.User')) {
+             $this->Session->setFlash('Vous êtes connecté!');
+             $this->redirect('/', null, false);
+         }
+          else if ($this->request->is('post')) {
+             if ($this->Auth->login()) {
+                 $this->redirect($this->Auth->redirect());
+             } else {
+                 $this->Session->setFlash('Votre nom d\'user ou mot de passe sont incorrects.');
+             }
+         }
+     }
 
-	public function logout() {
-	    $this->Session->setFlash('Au-revoir');
-		$this->redirect($this->Auth->logout());
-	}
+     public function logout() {
+         $this->Session->setFlash('Au-revoir');
+          $this->redirect($this->Auth->logout());
+     }
 
-	// public function beforeFilter() {
-	//     parent::beforeFilter();
-	//     $this->Auth->allow('initDB'); // Nous pouvons supprimer cette ligne après avoir fini
-	// }
+     // public function beforeFilter() {
+     //     parent::beforeFilter();
+     //     $this->Auth->allow('initDB'); // Nous pouvons supprimer cette ligne après avoir fini
+     // }
 
-	// public function initDB() {
-	//     $group = $this->User->Group;
-	//     //Allow admins to everything
-	//     $group->id = 1;
-	//     $this->Acl->allow($group, 'controllers');
+     // public function initDB() {
+     //     $group = $this->User->Group;
+     //     //Allow admins to everything
+     //     $group->id = 1;
+     //     $this->Acl->allow($group, 'controllers');
 
-	//     echo "tout est ok";
-	//     exit;
-	// }
+     //     echo "tout est ok";
+     //     exit;
+     // }
 }

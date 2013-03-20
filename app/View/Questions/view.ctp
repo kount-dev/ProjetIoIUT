@@ -16,19 +16,19 @@
 			<?php echo h($question['Question']['author']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Nombre Points'); ?></dt>
+		<dt><?php echo __('Points'); ?></dt>
 		<dd>
-			<?php echo h($question['Question']['nombre_points']); ?>
+			<?php echo h($question['Question']['points']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Difficultee'); ?></dt>
+		<dt><?php echo __('Difficulty'); ?></dt>
 		<dd>
-			<?php echo h($question['Question']['difficultee']); ?>
+			<?php echo h($question['Question']['difficulty']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Type Question'); ?></dt>
+		<dt><?php echo __('Question Type'); ?></dt>
 		<dd>
-			<?php echo h($question['Question']['type_question']); ?>
+			<?php echo h($question['Question']['question_type']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Discipline'); ?></dt>

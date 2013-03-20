@@ -20,8 +20,10 @@ class ExercisesControllerTest extends ControllerTestCase {
 		'app.group_list',
 		'app.iut_group',
 		'app.resultat',
+		'app.exercices_discipline',
 		'app.exercices_question',
-		'app.question'
+		'app.question',
+		'app.questions_discipline'
 	);
 
 /**

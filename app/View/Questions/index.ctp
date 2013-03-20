@@ -5,9 +5,9 @@
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('namefile'); ?></th>
 			<th><?php echo $this->Paginator->sort('author'); ?></th>
-			<th><?php echo $this->Paginator->sort('nombre_points'); ?></th>
-			<th><?php echo $this->Paginator->sort('difficultee'); ?></th>
-			<th><?php echo $this->Paginator->sort('type_question'); ?></th>
+			<th><?php echo $this->Paginator->sort('points'); ?></th>
+			<th><?php echo $this->Paginator->sort('difficulty'); ?></th>
+			<th><?php echo $this->Paginator->sort('question_type'); ?></th>
 			<th><?php echo $this->Paginator->sort('discipline_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
@@ -18,9 +18,9 @@
 		<td><?php echo h($question['Question']['id']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['namefile']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['author']); ?>&nbsp;</td>
-		<td><?php echo h($question['Question']['nombre_points']); ?>&nbsp;</td>
-		<td><?php echo h($question['Question']['difficultee']); ?>&nbsp;</td>
-		<td><?php echo h($question['Question']['type_question']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['points']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['difficulty']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['question_type']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($question['Discipline']['name'], array('controller' => 'disciplines', 'action' => 'view', $question['Discipline']['id'])); ?>
 		</td>

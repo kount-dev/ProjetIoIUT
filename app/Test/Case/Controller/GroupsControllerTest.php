@@ -14,12 +14,15 @@ class GroupsControllerTest extends ControllerTestCase {
  */
 	public $fixtures = array(
 		'app.group',
-		'app.group_list',
 		'app.user',
-		'app.groups_access_right',
 		'app.exercise',
 		'app.discipline',
+		'app.exercices_discipline',
+		'app.exercices_question',
+		'app.question',
+		'app.questions_discipline',
 		'app.resultat',
+		'app.group_list',
 		'app.iut_group'
 	);
 

@@ -30,35 +30,47 @@
 		<li><?php echo $this->Form->postLink(__('Delete Group'), array('action' => 'delete', $group['Group']['id']), null, __('Are you sure you want to delete # %s?', $group['Group']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Groups'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Group'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Group Lists'), array('controller' => 'group_lists', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Group List'), array('controller' => 'group_lists', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 <div class="related">
-	<h3><?php echo __('Related Group Lists'); ?></h3>
-	<?php if (!empty($group['GroupList'])): ?>
+	<h3><?php echo __('Related Users'); ?></h3>
+	<?php if (!empty($group['User'])): ?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('User Id'); ?></th>
-		<th><?php echo __('Iut Group Id'); ?></th>
+		<th><?php echo __('Username'); ?></th>
+		<th><?php echo __('Password'); ?></th>
+		<th><?php echo __('Mail'); ?></th>
+		<th><?php echo __('Xp'); ?></th>
+		<th><?php echo __('Actual Rank'); ?></th>
+		<th><?php echo __('Last Rank'); ?></th>
+		<th><?php echo __('Group Id'); ?></th>
+		<th><?php echo __('Avatar Namefile'); ?></th>
 		<th><?php echo __('Created'); ?></th>
 		<th><?php echo __('Modified'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($group['GroupList'] as $groupList): ?>
+		foreach ($group['User'] as $user): ?>
 		<tr>
-			<td><?php echo $groupList['id']; ?></td>
-			<td><?php echo $groupList['user_id']; ?></td>
-			<td><?php echo $groupList['iut_group_id']; ?></td>
-			<td><?php echo $groupList['created']; ?></td>
-			<td><?php echo $groupList['modified']; ?></td>
+			<td><?php echo $user['id']; ?></td>
+			<td><?php echo $user['username']; ?></td>
+			<td><?php echo $user['password']; ?></td>
+			<td><?php echo $user['mail']; ?></td>
+			<td><?php echo $user['xp']; ?></td>
+			<td><?php echo $user['actual_rank']; ?></td>
+			<td><?php echo $user['last_rank']; ?></td>
+			<td><?php echo $user['group_id']; ?></td>
+			<td><?php echo $user['avatar_namefile']; ?></td>
+			<td><?php echo $user['created']; ?></td>
+			<td><?php echo $user['modified']; ?></td>
 			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'group_lists', 'action' => 'view', $groupList['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'group_lists', 'action' => 'edit', $groupList['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'group_lists', 'action' => 'delete', $groupList['id']), null, __('Are you sure you want to delete # %s?', $groupList['id'])); ?>
+				<?php echo $this->Html->link(__('View'), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>
+				<?php echo $this->Html->link(__('Edit'), array('controller' => 'users', 'action' => 'edit', $user['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'users', 'action' => 'delete', $user['id']), null, __('Are you sure you want to delete # %s?', $user['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -67,7 +79,7 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('New Group List'), array('controller' => 'group_lists', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 		</ul>
 	</div>
 </div>

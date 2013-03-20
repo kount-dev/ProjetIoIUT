@@ -21,14 +21,14 @@
 			<?php echo h($exercise['Exercise']['minimum_points']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Date Ouverture'); ?></dt>
+		<dt><?php echo __('Opening Date'); ?></dt>
 		<dd>
-			<?php echo h($exercise['Exercise']['date_ouverture']); ?>
+			<?php echo h($exercise['Exercise']['opening_date']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Date Fermeture'); ?></dt>
+		<dt><?php echo __('Closing Date'); ?></dt>
 		<dd>
-			<?php echo h($exercise['Exercise']['date_fermeture']); ?>
+			<?php echo h($exercise['Exercise']['closing_date']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Discipline'); ?></dt>
@@ -64,11 +64,50 @@
 		<li><?php echo $this->Html->link(__('New Discipline'), array('controller' => 'disciplines', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Exercices Disciplines'), array('controller' => 'exercices_disciplines', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Exercices Discipline'), array('controller' => 'exercices_disciplines', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Exercices Questions'), array('controller' => 'exercices_questions', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Exercices Question'), array('controller' => 'exercices_questions', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Resultats'), array('controller' => 'resultats', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Resultat'), array('controller' => 'resultats', 'action' => 'add')); ?> </li>
 	</ul>
+</div>
+<div class="related">
+	<h3><?php echo __('Related Exercices Disciplines'); ?></h3>
+	<?php if (!empty($exercise['ExercicesDiscipline'])): ?>
+	<table cellpadding = "0" cellspacing = "0">
+	<tr>
+		<th><?php echo __('Id'); ?></th>
+		<th><?php echo __('Exercise Id'); ?></th>
+		<th><?php echo __('Discipline Id'); ?></th>
+		<th><?php echo __('Created'); ?></th>
+		<th><?php echo __('Modified'); ?></th>
+		<th class="actions"><?php echo __('Actions'); ?></th>
+	</tr>
+	<?php
+		$i = 0;
+		foreach ($exercise['ExercicesDiscipline'] as $exercicesDiscipline): ?>
+		<tr>
+			<td><?php echo $exercicesDiscipline['id']; ?></td>
+			<td><?php echo $exercicesDiscipline['exercise_id']; ?></td>
+			<td><?php echo $exercicesDiscipline['discipline_id']; ?></td>
+			<td><?php echo $exercicesDiscipline['created']; ?></td>
+			<td><?php echo $exercicesDiscipline['modified']; ?></td>
+			<td class="actions">
+				<?php echo $this->Html->link(__('View'), array('controller' => 'exercices_disciplines', 'action' => 'view', $exercicesDiscipline['id'])); ?>
+				<?php echo $this->Html->link(__('Edit'), array('controller' => 'exercices_disciplines', 'action' => 'edit', $exercicesDiscipline['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'exercices_disciplines', 'action' => 'delete', $exercicesDiscipline['id']), null, __('Are you sure you want to delete # %s?', $exercicesDiscipline['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</table>
+<?php endif; ?>
+
+	<div class="actions">
+		<ul>
+			<li><?php echo $this->Html->link(__('New Exercices Discipline'), array('controller' => 'exercices_disciplines', 'action' => 'add')); ?> </li>
+		</ul>
+	</div>
 </div>
 <div class="related">
 	<h3><?php echo __('Related Exercices Questions'); ?></h3>
@@ -116,9 +155,8 @@
 		<th><?php echo __('Namefile'); ?></th>
 		<th><?php echo __('User Id'); ?></th>
 		<th><?php echo __('Exercise Id'); ?></th>
-		<th><?php echo __('Numero Tentative'); ?></th>
-		<th><?php echo __('Date Envoie'); ?></th>
-		<th><?php echo __('Taux Reussite'); ?></th>
+		<th><?php echo __('Attempt Number'); ?></th>
+		<th><?php echo __('Success Rate'); ?></th>
 		<th><?php echo __('Created'); ?></th>
 		<th><?php echo __('Modified'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
@@ -131,9 +169,8 @@
 			<td><?php echo $resultat['namefile']; ?></td>
 			<td><?php echo $resultat['user_id']; ?></td>
 			<td><?php echo $resultat['exercise_id']; ?></td>
-			<td><?php echo $resultat['numero_tentative']; ?></td>
-			<td><?php echo $resultat['date_envoie']; ?></td>
-			<td><?php echo $resultat['taux_reussite']; ?></td>
+			<td><?php echo $resultat['attempt_number']; ?></td>
+			<td><?php echo $resultat['success_rate']; ?></td>
 			<td><?php echo $resultat['created']; ?></td>
 			<td><?php echo $resultat['modified']; ?></td>
 			<td class="actions">

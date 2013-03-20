@@ -5,7 +5,12 @@
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('username'); ?></th>
 			<th><?php echo $this->Paginator->sort('password'); ?></th>
+			<th><?php echo $this->Paginator->sort('mail'); ?></th>
+			<th><?php echo $this->Paginator->sort('xp'); ?></th>
+			<th><?php echo $this->Paginator->sort('actual_rank'); ?></th>
+			<th><?php echo $this->Paginator->sort('last_rank'); ?></th>
 			<th><?php echo $this->Paginator->sort('group_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('avatar_namefile'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -15,9 +20,14 @@
 		<td><?php echo h($user['User']['id']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['password']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['mail']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['xp']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['actual_rank']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['last_rank']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
 		</td>
+		<td><?php echo h($user['User']['avatar_namefile']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['modified']); ?>&nbsp;</td>
 		<td class="actions">

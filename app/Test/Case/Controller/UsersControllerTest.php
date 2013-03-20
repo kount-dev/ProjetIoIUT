@@ -17,6 +17,10 @@ class UsersControllerTest extends ControllerTestCase {
 		'app.group',
 		'app.exercise',
 		'app.discipline',
+		'app.exercices_discipline',
+		'app.exercices_question',
+		'app.question',
+		'app.questions_discipline',
 		'app.resultat',
 		'app.group_list',
 		'app.iut_group'

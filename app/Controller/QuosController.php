@@ -1,7 +1,7 @@
 <?php
 App::uses('AbstractsQuestions', 'Controller');
 
-class QcusController extends AbstractsQuestions {
+class QuosController extends AbstractsQuestions {
     public $component = array('Xml');
 
 /**

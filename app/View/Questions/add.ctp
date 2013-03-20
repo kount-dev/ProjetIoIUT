@@ -5,9 +5,9 @@
 	<?php
 		echo $this->Form->input('namefile');
 		echo $this->Form->input('author');
-		echo $this->Form->input('nombre_points');
-		echo $this->Form->input('difficultee');
-		echo $this->Form->input('type_question');
+		echo $this->Form->input('points');
+		echo $this->Form->input('difficulty');
+		echo $this->Form->input('question_type');
 		echo $this->Form->input('discipline_id');
 		echo $this->Form->input('Discipline');
 	?>

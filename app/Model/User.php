@@ -3,17 +3,18 @@ App::uses('AppModel', 'Model');
 App::uses('AuthComponent', 'Controller/Component');
 
 /**
- * User Model
- *
- * @property Group $Group
- * @property Exercise $Exercise
- * @property GroupList $GroupList
- * @property Resultat $Resultat
- */
+* User Model
+*
+* @property Group $Group
+* @property Exercise $Exercise
+* @property GroupList $GroupList
+* @property Resultat $Resultat
+*/
 class User extends AppModel {
 
-	public $name = 'User';
+    public $name = 'User';
     public $actsAs = array('Acl' => array('type' => 'requester'));
+
 /**
  * Validation rules
  *
@@ -31,6 +32,16 @@ class User extends AppModel {
 			),
 		),
 		'password' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'mail' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -116,29 +127,29 @@ class User extends AppModel {
 		)
 	);
 
-    public function parentNode() {
-        if (!$this->id && empty($this->data)) {
-            return null;
-        }
-        if (isset($this->data['User']['group_id'])) {
-            $groupId = $this->data['User']['group_id'];
-        } else {
-            $groupId = $this->field('group_id');
-        }
-        if (!$groupId) {
-            return null;
-        } else {
-            return array('Group' => array('id' => $groupId));
-        }
+	public function parentNode() {
+       if (!$this->id && empty($this->data)) {
+           return null;
+       }
+       if (isset($this->data['User']['group_id'])) {
+           $groupId = $this->data['User']['group_id'];
+       } else {
+           $groupId = $this->field('group_id');
+       }
+       if (!$groupId) {
+           return null;
+       } else {
+           return array('Group' => array('id' => $groupId));
+       }
     }
 
-	public function beforeSave($option = array()) {
-        $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
-        return true;
+    public function beforeSave($option = array()) {
+       $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+       return true;
     }
 
     public function bindNode($user) {
-	    return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
-	}	
+        return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
+    }
 
 }

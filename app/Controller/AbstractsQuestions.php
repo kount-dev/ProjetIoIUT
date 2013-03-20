@@ -4,6 +4,17 @@
 */
 class AbstractsQuestions
 {
+
+//Info générales
+    private $author='';//L'auteur du QCM
+    private $nombre_point='';//Le nom du QCM
+    private $sType='';//Le type du QCM
+    private $sMatiere='';//La matière du QCM
+    private $iId=0;//L'id du QCM
+    private $iMinimumPoints=0;//Le minimum de points recquis pour le QCM
+    private $iTotalPoints=0;//Le nombre total de points disponible dans le QCM
+
+
 /**
  *@desc Le constructeur de la classe, il n'y a rien à spécifier.
  */
@@ -54,5 +65,12 @@ class AbstractsQuestions
  *@desc Cette fonction va sauvegarder en base l'instance chargée
  */
     public abstract function saveInstance();
+
+    public function getId(){ return $this->iId;}
+    public function setId($val){ $this->iId=$val;}
+    public function getAuteur(){ return $this->sAuteur;}
+    public function setAuteur($val){ $this->sAuteur=$val;}
+    public function getUtilisateur(){ return $this->iUtilisateur;}
+    public function setUtilisateur($val){ $this->iUtilisateur=$val;}
 }
 ?>

@@ -16,9 +16,34 @@
 			<?php echo h($user['User']['password']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Mail'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['mail']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Xp'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['xp']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Actual Rank'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['actual_rank']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Last Rank'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['last_rank']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Group'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Avatar Namefile'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['avatar_namefile']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
@@ -57,9 +82,10 @@
 	<tr>
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('Name'); ?></th>
-		<th><?php echo __('Date Ouverture'); ?></th>
-		<th><?php echo __('Date Fermeture'); ?></th>
-		<th><?php echo __('Chemin Fichier Xml'); ?></th>
+		<th><?php echo __('Author'); ?></th>
+		<th><?php echo __('Minimum Points'); ?></th>
+		<th><?php echo __('Opening Date'); ?></th>
+		<th><?php echo __('Closing Date'); ?></th>
 		<th><?php echo __('Discipline Id'); ?></th>
 		<th><?php echo __('User Id'); ?></th>
 		<th><?php echo __('Created'); ?></th>
@@ -72,9 +98,10 @@
 		<tr>
 			<td><?php echo $exercise['id']; ?></td>
 			<td><?php echo $exercise['name']; ?></td>
-			<td><?php echo $exercise['date_ouverture']; ?></td>
-			<td><?php echo $exercise['date_fermeture']; ?></td>
-			<td><?php echo $exercise['chemin_fichier_xml']; ?></td>
+			<td><?php echo $exercise['author']; ?></td>
+			<td><?php echo $exercise['minimum_points']; ?></td>
+			<td><?php echo $exercise['opening_date']; ?></td>
+			<td><?php echo $exercise['closing_date']; ?></td>
 			<td><?php echo $exercise['discipline_id']; ?></td>
 			<td><?php echo $exercise['user_id']; ?></td>
 			<td><?php echo $exercise['created']; ?></td>
@@ -138,12 +165,11 @@
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
+		<th><?php echo __('Namefile'); ?></th>
 		<th><?php echo __('User Id'); ?></th>
 		<th><?php echo __('Exercise Id'); ?></th>
-		<th><?php echo __('Chemin Reponse'); ?></th>
-		<th><?php echo __('Numero Tentative'); ?></th>
-		<th><?php echo __('Date Envoie'); ?></th>
-		<th><?php echo __('Taux Reussite'); ?></th>
+		<th><?php echo __('Attempt Number'); ?></th>
+		<th><?php echo __('Success Rate'); ?></th>
 		<th><?php echo __('Created'); ?></th>
 		<th><?php echo __('Modified'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
@@ -153,12 +179,11 @@
 		foreach ($user['Resultat'] as $resultat): ?>
 		<tr>
 			<td><?php echo $resultat['id']; ?></td>
+			<td><?php echo $resultat['namefile']; ?></td>
 			<td><?php echo $resultat['user_id']; ?></td>
 			<td><?php echo $resultat['exercise_id']; ?></td>
-			<td><?php echo $resultat['chemin_reponse']; ?></td>
-			<td><?php echo $resultat['numero_tentative']; ?></td>
-			<td><?php echo $resultat['date_envoie']; ?></td>
-			<td><?php echo $resultat['taux_reussite']; ?></td>
+			<td><?php echo $resultat['attempt_number']; ?></td>
+			<td><?php echo $resultat['success_rate']; ?></td>
 			<td><?php echo $resultat['created']; ?></td>
 			<td><?php echo $resultat['modified']; ?></td>
 			<td class="actions">
