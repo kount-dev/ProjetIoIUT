@@ -4,6 +4,7 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
+			<th><?php echo $this->Paginator->sort('author'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -12,6 +13,7 @@
 	<tr>
 		<td><?php echo h($question['Question']['id']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['name']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['author']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['created']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['modified']); ?>&nbsp;</td>
 		<td class="actions">

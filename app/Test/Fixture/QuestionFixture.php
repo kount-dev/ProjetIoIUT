@@ -13,6 +13,7 @@ class QuestionFixture extends CakeTestFixture {
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'author' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 100, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
@@ -30,8 +31,9 @@ class QuestionFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
-			'created' => '2013-03-18 17:00:20',
-			'modified' => '2013-03-18 17:00:20'
+			'author' => 'Lorem ipsum dolor sit amet',
+			'created' => '2013-03-20 09:20:41',
+			'modified' => '2013-03-20 09:20:41'
 		),
 	);
 

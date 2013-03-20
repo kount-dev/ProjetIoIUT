@@ -4,6 +4,7 @@
 		<legend><?php echo __('Add Question'); ?></legend>
 	<?php
 		echo $this->Form->input('name');
+		echo $this->Form->input('author');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

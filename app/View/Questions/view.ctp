@@ -11,6 +11,11 @@
 			<?php echo h($question['Question']['name']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Author'); ?></dt>
+		<dd>
+			<?php echo h($question['Question']['author']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($question['Question']['created']); ?>
