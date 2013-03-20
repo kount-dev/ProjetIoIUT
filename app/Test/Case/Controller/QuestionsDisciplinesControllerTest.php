@@ -1,11 +1,11 @@
 <?php
-App::uses('QuestionsController', 'Controller');
+App::uses('QuestionsDisciplinesController', 'Controller');
 
 /**
- * QuestionsController Test Case
+ * QuestionsDisciplinesController Test Case
  *
  */
-class QuestionsControllerTest extends ControllerTestCase {
+class QuestionsDisciplinesControllerTest extends ControllerTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class QuestionsControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.questions_discipline',
 		'app.question',
 		'app.discipline',
 		'app.exercise',
@@ -21,9 +22,7 @@ class QuestionsControllerTest extends ControllerTestCase {
 		'app.group_list',
 		'app.iut_group',
 		'app.resultat',
-		'app.exercices_discipline',
-		'app.exercices_question',
-		'app.questions_discipline'
+		'app.exercices_question'
 	);
 
 /**

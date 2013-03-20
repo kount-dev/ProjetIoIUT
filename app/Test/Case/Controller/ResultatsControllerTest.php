@@ -18,6 +18,7 @@ class ResultatsControllerTest extends ControllerTestCase {
 		'app.group',
 		'app.exercise',
 		'app.discipline',
+		'app.exercices_discipline',
 		'app.exercices_question',
 		'app.question',
 		'app.group_list',

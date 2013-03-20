@@ -14,7 +14,7 @@ class Resultat extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'name' => array(
+		'namefile' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',

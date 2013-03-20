@@ -3,7 +3,7 @@
 	<fieldset>
 		<legend><?php echo __('Add Resultat'); ?></legend>
 	<?php
-		echo $this->Form->input('name');
+		echo $this->Form->input('namefile');
 		echo $this->Form->input('user_id');
 		echo $this->Form->input('exercise_id');
 		echo $this->Form->input('numero_tentative');

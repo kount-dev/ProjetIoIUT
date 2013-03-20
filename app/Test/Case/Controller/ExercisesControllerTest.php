@@ -16,10 +16,12 @@ class ExercisesControllerTest extends ControllerTestCase {
 		'app.exercise',
 		'app.discipline',
 		'app.user',
-		'app.groups_access_right',
-		'app.group_list',
 		'app.group',
-		'app.resultat'
+		'app.group_list',
+		'app.iut_group',
+		'app.resultat',
+		'app.exercices_question',
+		'app.question'
 	);
 
 /**

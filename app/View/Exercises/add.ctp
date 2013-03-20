@@ -4,6 +4,8 @@
 		<legend><?php echo __('Add Exercise'); ?></legend>
 	<?php
 		echo $this->Form->input('name');
+		echo $this->Form->input('author');
+		echo $this->Form->input('minimum_points');
 		echo $this->Form->input('date_ouverture');
 		echo $this->Form->input('date_fermeture');
 		echo $this->Form->input('discipline_id');
@@ -21,6 +23,8 @@
 		<li><?php echo $this->Html->link(__('New Discipline'), array('controller' => 'disciplines', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Exercices Questions'), array('controller' => 'exercices_questions', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Exercices Question'), array('controller' => 'exercices_questions', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Resultats'), array('controller' => 'resultats', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Resultat'), array('controller' => 'resultats', 'action' => 'add')); ?> </li>
 	</ul>

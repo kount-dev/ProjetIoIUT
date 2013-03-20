@@ -6,9 +6,9 @@
 			<?php echo h($resultat['Resultat']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Name'); ?></dt>
+		<dt><?php echo __('Namefile'); ?></dt>
 		<dd>
-			<?php echo h($resultat['Resultat']['name']); ?>
+			<?php echo h($resultat['Resultat']['namefile']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('User'); ?></dt>

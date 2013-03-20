@@ -3,7 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
+			<th><?php echo $this->Paginator->sort('namefile'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('exercise_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('numero_tentative'); ?></th>
@@ -16,7 +16,7 @@
 	<?php foreach ($resultats as $resultat): ?>
 	<tr>
 		<td><?php echo h($resultat['Resultat']['id']); ?>&nbsp;</td>
-		<td><?php echo h($resultat['Resultat']['name']); ?>&nbsp;</td>
+		<td><?php echo h($resultat['Resultat']['namefile']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($resultat['User']['id'], array('controller' => 'users', 'action' => 'view', $resultat['User']['id'])); ?>
 		</td>

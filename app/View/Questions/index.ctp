@@ -3,8 +3,12 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
+			<th><?php echo $this->Paginator->sort('namefile'); ?></th>
 			<th><?php echo $this->Paginator->sort('author'); ?></th>
+			<th><?php echo $this->Paginator->sort('nombre_points'); ?></th>
+			<th><?php echo $this->Paginator->sort('difficultee'); ?></th>
+			<th><?php echo $this->Paginator->sort('type_question'); ?></th>
+			<th><?php echo $this->Paginator->sort('discipline_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -12,8 +16,14 @@
 	<?php foreach ($questions as $question): ?>
 	<tr>
 		<td><?php echo h($question['Question']['id']); ?>&nbsp;</td>
-		<td><?php echo h($question['Question']['name']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['namefile']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['author']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['nombre_points']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['difficultee']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['type_question']); ?>&nbsp;</td>
+		<td>
+			<?php echo $this->Html->link($question['Discipline']['name'], array('controller' => 'disciplines', 'action' => 'view', $question['Discipline']['id'])); ?>
+		</td>
 		<td><?php echo h($question['Question']['created']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['modified']); ?>&nbsp;</td>
 		<td class="actions">
@@ -42,5 +52,7 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Question'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Disciplines'), array('controller' => 'disciplines', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Discipline'), array('controller' => 'disciplines', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

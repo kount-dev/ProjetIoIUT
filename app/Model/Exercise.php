@@ -5,6 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property Discipline $Discipline
  * @property User $User
+ * @property ExercicesDiscipline $ExercicesDiscipline
  * @property ExercicesQuestion $ExercicesQuestion
  * @property Resultat $Resultat
  */
@@ -19,6 +20,26 @@ class Exercise extends AppModel {
 		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'author' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'minimum_points' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -78,6 +99,19 @@ class Exercise extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+		'ExercicesDiscipline' => array(
+			'className' => 'ExercicesDiscipline',
+			'foreignKey' => 'exercise_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'ExercicesQuestion' => array(
 			'className' => 'ExercicesQuestion',
 			'foreignKey' => 'exercise_id',

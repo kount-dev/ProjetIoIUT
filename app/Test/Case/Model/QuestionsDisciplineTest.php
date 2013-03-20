@@ -1,11 +1,11 @@
 <?php
-App::uses('Question', 'Model');
+App::uses('QuestionsDiscipline', 'Model');
 
 /**
- * Question Test Case
+ * QuestionsDiscipline Test Case
  *
  */
-class QuestionTest extends CakeTestCase {
+class QuestionsDisciplineTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class QuestionTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.questions_discipline',
 		'app.question',
 		'app.discipline',
 		'app.exercise',
@@ -21,9 +22,7 @@ class QuestionTest extends CakeTestCase {
 		'app.group_list',
 		'app.iut_group',
 		'app.resultat',
-		'app.exercices_discipline',
-		'app.exercices_question',
-		'app.questions_discipline'
+		'app.exercices_question'
 	);
 
 /**
@@ -33,7 +32,7 @@ class QuestionTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Question = ClassRegistry::init('Question');
+		$this->QuestionsDiscipline = ClassRegistry::init('QuestionsDiscipline');
 	}
 
 /**
@@ -42,7 +41,7 @@ class QuestionTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Question);
+		unset($this->QuestionsDiscipline);
 
 		parent::tearDown();
 	}

@@ -47,6 +47,9 @@ class QuestionsController extends AppController {
 				$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
 			}
 		}
+		$disciplines = $this->Question->Discipline->find('list');
+		$disciplines = $this->Question->Discipline->find('list');
+		$this->set(compact('disciplines', 'disciplines'));
 	}
 
 /**
@@ -71,6 +74,9 @@ class QuestionsController extends AppController {
 			$options = array('conditions' => array('Question.' . $this->Question->primaryKey => $id));
 			$this->request->data = $this->Question->find('first', $options);
 		}
+		$disciplines = $this->Question->Discipline->find('list');
+		$disciplines = $this->Question->Discipline->find('list');
+		$this->set(compact('disciplines', 'disciplines'));
 	}
 
 /**

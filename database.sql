@@ -197,6 +197,8 @@ CREATE TABLE `exercices_questions` (
 CREATE TABLE `exercises` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `minimum_points` int(11) NOT NULL,
   `date_ouverture` datetime DEFAULT NULL,
   `date_fermeture` datetime DEFAULT NULL,
   `discipline_id` int(11) NOT NULL,
@@ -266,8 +268,12 @@ CREATE TABLE `iut_groups` (
 
 CREATE TABLE `questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `namefile` varchar(255) NOT NULL,
   `author` varchar(100) NOT NULL,
+  `nombre_points` int(10) NOT NULL,
+  `difficultee` int(10) NOT NULL,
+  `type_question` varchar(50) NOT NULL, 
+  `discipline_id` int(11) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -281,7 +287,7 @@ CREATE TABLE `questions` (
 
 CREATE TABLE `resultats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `namefile` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `exercise_id` int(11) NOT NULL,
   `numero_tentative` int(11) NOT NULL,
@@ -317,3 +323,33 @@ INSERT INTO `users` (`id`, `username`, `password`, `group_id`, `created`, `modif
 (4, 'quentin', 'aa26144053d99fcff013ff1e96c169d0f7a35401', 1, '2013-03-18 18:20:25', '2013-03-18 18:20:25'),
 (5, 'florian', 'ef3ce76a84fe7519453a613804375f66b9a7a118', 1, '2013-03-19 09:23:55', '2013-03-19 09:23:55'),
 (6, 'louis', 'b28d04149bc5151bfc258aa7c01f605d354f81ef', 1, '2013-03-19 09:24:06', '2013-03-19 09:24:06');
+
+--
+-- Structure de la table `questions_disciplines`
+--
+
+CREATE TABLE `questions_disciplines` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) NOT NULL,
+  `discipline_id` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `exercices_disciplines`
+--
+
+CREATE TABLE `exercices_disciplines` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `exercise_id` int(11) NOT NULL,
+  `discipline_id` int(11) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
