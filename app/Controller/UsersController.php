@@ -7,6 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+	public $helpers = array('Js' => array('Jquery'),'Html','Form');
 /**
  * index method
  *
@@ -99,40 +100,104 @@ class UsersController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	public function beforeFilter() {
-         parent::beforeFilter();
-         $this->Auth->allow('index', 'view');
-     }
-     public function login() {
-          if ($this->Session->read('Auth.User')) {
-             $this->Session->setFlash('Vous êtes connecté!');
-             $this->redirect('/', null, false);
-         }
-          else if ($this->request->is('post')) {
-             if ($this->Auth->login()) {
-                 $this->redirect($this->Auth->redirect());
-             } else {
-                 $this->Session->setFlash('Votre nom d\'user ou mot de passe sont incorrects.');
-             }
-         }
-     }
+	    parent::beforeFilter();
+	    $this->Auth->allow('index', 'view');
+	}
+	public function login() {
+		if ($this->Session->read('Auth.User')) {
+	        $this->Session->setFlash('Vous êtes connecté!');
+	        $this->redirect('/', null, false);
+	    }
+		else if ($this->request->is('post')) {
+	        if ($this->Auth->login()) {
+	            $this->redirect($this->Auth->redirect());
+	        } else {
+	            $this->Session->setFlash('Votre nom d\'user ou mot de passe sont incorrects.');
+	        }
+	    }
+	}
 
-     public function logout() {
-         $this->Session->setFlash('Au-revoir');
-          $this->redirect($this->Auth->logout());
-     }
+	public function logout() {
+	    $this->Session->setFlash('Au-revoir');
+		$this->redirect($this->Auth->logout());
+	}
 
-     // public function beforeFilter() {
-     //     parent::beforeFilter();
-     //     $this->Auth->allow('initDB'); // Nous pouvons supprimer cette ligne après avoir fini
-     // }
+	public function leaderboard(){
+		$aLeaderboard = $this->User->find('all', array('conditions' => array('User.xp >' => '0'), 'order'=> 'User.xp DESC'));
 
-     // public function initDB() {
-     //     $group = $this->User->Group;
-     //     //Allow admins to everything
-     //     $group->id = 1;
-     //     $this->Acl->allow($group, 'controllers');
+		$nCpt = 0;
+		$aUsers = array();
+		
+		foreach ($aLeaderboard as $aUserTab) {
+			$nEcartRank = -1*($aUserTab['User']['actual_rank'] - $aUserTab['User']['last_rank']); 
+			
+			if(!$aUserTab['User']['actual_rank'] && !$aUserTab['User']['last_rank']){
+				$this->User->updateAll(
+				    array('User.last_rank' => (int)$nCpt+1, 'User.actual_rank' => (int)$nCpt+1),
+				    array('User.id =' => (int)$aUserTab['User']['id'])
+				);
+				$nEcartRank = 0;
+			}
+			elseif($aUserTab['User']['actual_rank'] != $nCpt+1){
+				$this->User->updateAll(
+				    array('User.last_rank' => (int)$aUserTab['User']['actual_rank'], 'User.actual_rank' => (int)$nCpt+1),
+				    array('User.id =' => (int)$aUserTab['User']['id'])
+				);
+				$nEcartRank = -1*((int)$nCpt+1 - (int)$aUserTab['User']['actual_rank']);
+			}
+			
+			$aUsers[$nCpt]['ecart'] = $nEcartRank;
+			$aUsers[$nCpt]['actual_rank'] = $nCpt+1;
+			$aUsers[$nCpt]['xp'] = $aUserTab['User']['xp'];
+			$aUsers[$nCpt]['username'] = $aUserTab['User']['username'];
+			$aUsers[$nCpt]['id'] = $aUserTab['User']['id'];
+			$nCpt++;
+		}
 
-     //     echo "tout est ok";
-     //     exit;
-     // }
+
+		$this->set('users',$aUsers);
+		$this->render();
+	}
+
+	public function sortleaderboard(){
+		$aLeaderboard = array();
+
+		if ($this->request->is('post')){
+
+			$sOrder = ($this->request->data['t'] == 'xp_rank') ? "User.xp ".$this->request->data['s'] : "User.username ".$this->request->data['s'];
+
+			$aLeaderboard = $this->User->find('all', array('conditions' => array('User.xp >' => '0'), 'order'=> $sOrder));
+			
+			$nCpt = 0;
+			$aUsers = array();
+			foreach ($aLeaderboard as $aUserTab) {
+				$aUsers[$nCpt]['ecart'] = -1*($aUserTab['User']['actual_rank'] - $aUserTab['User']['last_rank']);
+				$aUsers[$nCpt]['actual_rank'] = $aUserTab['User']['actual_rank'];
+				$aUsers[$nCpt]['xp'] = $aUserTab['User']['xp'];
+				$aUsers[$nCpt]['username'] = $aUserTab['User']['username'];
+				$aUsers[$nCpt]['id'] = $aUserTab['User']['id'];
+				$nCpt++;
+			}
+
+
+			$this->set('users',$aUsers);
+			$this->layout = false;
+			$this->render();
+		}
+	}
+
+	// public function beforeFilter() {
+	//     parent::beforeFilter();
+	//     $this->Auth->allow('initDB'); // Nous pouvons supprimer cette ligne après avoir fini
+	// }
+
+	// public function initDB() {
+	//     $group = $this->User->Group;
+	//     //Allow admins to everything
+	//     $group->id = 1;
+	//     $this->Acl->allow($group, 'controllers');
+
+	//     echo "tout est ok";
+	//     exit;
+	// }
 }
