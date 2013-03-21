@@ -48,8 +48,7 @@ class QuestionsController extends AppController {
 			}
 		}
 		$disciplines = $this->Question->Discipline->find('list');
-		$disciplines = $this->Question->Discipline->find('list');
-		$this->set(compact('disciplines', 'disciplines'));
+		$this->set(compact('disciplines'));
 	}
 
 /**
@@ -75,8 +74,7 @@ class QuestionsController extends AppController {
 			$this->request->data = $this->Question->find('first', $options);
 		}
 		$disciplines = $this->Question->Discipline->find('list');
-		$disciplines = $this->Question->Discipline->find('list');
-		$this->set(compact('disciplines', 'disciplines'));
+		$this->set(compact('disciplines'));
 	}
 
 /**

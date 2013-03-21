@@ -11,9 +11,9 @@
 			<?php echo h($question['Question']['namefile']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Author'); ?></dt>
+		<dt><?php echo __('User Id'); ?></dt>
 		<dd>
-			<?php echo h($question['Question']['author']); ?>
+			<?php echo h($question['Question']['user_id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Points'); ?></dt>
@@ -26,9 +26,9 @@
 			<?php echo h($question['Question']['difficulty']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Type'); ?></dt>
+		<dt><?php echo __('Question Type Id'); ?></dt>
 		<dd>
-			<?php echo h($question['Question']['type']); ?>
+			<?php echo h($question['Question']['question_type_id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>

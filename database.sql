@@ -197,7 +197,6 @@ CREATE TABLE `exercices_questions` (
 CREATE TABLE `exercises` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `author` varchar(100) NOT NULL,
   `minimum_points` int(11) NOT NULL,
   `opening_date` datetime DEFAULT NULL,
   `closing_date` datetime DEFAULT NULL,
@@ -266,13 +265,29 @@ CREATE TABLE `iut_groups` (
 -- Structure de la table `questions`
 --
 
+CREATE TABLE `question_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `questions`
+--
+
 CREATE TABLE `questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `namefile` varchar(255) NOT NULL,
-  `author` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `points` int(10) NOT NULL,
   `difficulty` int(10) NOT NULL,
-  `type` varchar(50) NOT NULL,
+  `question_type_id` int(11) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)

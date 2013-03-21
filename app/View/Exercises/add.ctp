@@ -4,7 +4,6 @@
 		<legend><?php echo __('Add Exercise'); ?></legend>
 	<?php
 		echo $this->Form->input('name');
-		echo $this->Form->input('author');
 		echo $this->Form->input('minimum_points');
 		echo $this->Form->input('opening_date');
 		echo $this->Form->input('closing_date');

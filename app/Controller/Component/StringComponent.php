@@ -1,16 +1,9 @@
 <?php
+App::uses('Component', 'Controller');
 /**
 * String Component
 */
-class StringComponent extends Component
-{
-/**
- *@desc Le constructeur de la classe, il n'y a rien à spécifier.
- */
-    function __construct(argument)
-    {
-        //rien a specifier
-    }
+class StringComponent extends Component {
 
 /**
  *@desc Cette fonction supprime les accents d'une chaine

@@ -4,10 +4,10 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('namefile'); ?></th>
-			<th><?php echo $this->Paginator->sort('author'); ?></th>
+			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('points'); ?></th>
 			<th><?php echo $this->Paginator->sort('difficulty'); ?></th>
-			<th><?php echo $this->Paginator->sort('type'); ?></th>
+			<th><?php echo $this->Paginator->sort('question_type_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -16,10 +16,10 @@
 	<tr>
 		<td><?php echo h($question['Question']['id']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['namefile']); ?>&nbsp;</td>
-		<td><?php echo h($question['Question']['author']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['user_id']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['points']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['difficulty']); ?>&nbsp;</td>
-		<td><?php echo h($question['Question']['type']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['question_type_id']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['created']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['modified']); ?>&nbsp;</td>
 		<td class="actions">

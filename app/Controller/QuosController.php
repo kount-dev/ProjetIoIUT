@@ -1,7 +1,8 @@
 <?php
-App::uses('AbstractsQuestions', 'Classes');
+App::uses('AppController', 'Controller');
+//App::uses('AbstractsQuestions', 'Classes');
 
-class QuosController extends AbstractsQuestions {
+class QuosController extends AppController{
     public $component = array('Xml');
 
 /**
@@ -19,12 +20,13 @@ class QuosController extends AbstractsQuestions {
     public function executeToHTML(){}
 
 /**
- *@desc Cette fonction permet de créer un module, elle doit retourner l'HTML a afficher
- *pour la création
- *@param string $urlRedirection : l'url sur laquelle devra pointer l'envoi du module
+ *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher
+ *pour la generation
  *@return le contenu HTML dans un string
  */
-    public function creationToHTML($urlRedirection){}
+    public function generation(){
+
+    }
 
 
 /**

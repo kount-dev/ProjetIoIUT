@@ -1,8 +1,17 @@
 <?php
-App::uses('AbstractsQuestions', 'Classes');
+App::uses('AppController', 'Controller');
+App::uses('iQuestions', 'Interfaces');
 
-class QcusController extends AbstractsQuestions {
+class QcusController extends AppController implements iQuestions {
     public $component = array('Xml');
+
+/**
+ * index method
+ *
+ * @return void
+ */
+    public function index() {
+    }
 
 /**
  *@desc Cette fonction permet de charger, si besoin est, un fichier
@@ -16,13 +25,15 @@ class QcusController extends AbstractsQuestions {
  *@return le contenu HTML dans un string
  */
     public function executeToHTML(){}
+
 /**
- *@desc Cette fonction permet de créer un module, elle doit retourner l'HTML a afficher
- *pour la création
- *@param string $urlRedirection : l'url sur laquelle devra pointer l'envoi du module
+ *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher
+ *pour la generation
  *@return le contenu HTML dans un string
  */
-    public function creationToHTML($urlRedirection){}
+    public function generation(){
+
+    }
 
 /**
  *@desc cette fonction valide le module a partir des paramètres passés

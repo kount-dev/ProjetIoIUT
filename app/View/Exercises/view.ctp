@@ -11,11 +11,6 @@
 			<?php echo h($exercise['Exercise']['name']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Author'); ?></dt>
-		<dd>
-			<?php echo h($exercise['Exercise']['author']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Minimum Points'); ?></dt>
 		<dd>
 			<?php echo h($exercise['Exercise']['minimum_points']); ?>

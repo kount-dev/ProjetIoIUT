@@ -1,17 +1,9 @@
 <?php
+App::uses('Component', 'Controller');
 /**
  * XML Component
  */
-class XmlComponent extends Component
-{
-    /**
-    *@desc Le constructeur de la classe, il n'y a rien à spécifier.
-    */
-    function __construct(argument)
-    {
-        //rien a specifier
-    }
-
+class XmlComponent extends Component{
     /**
     *@desc Cette fonction va vérifier que notre XML correspond bien a la DTD voulue
     *@param string XML_path le chemin du XML a vérifier

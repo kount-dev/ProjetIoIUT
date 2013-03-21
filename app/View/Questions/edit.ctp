@@ -5,10 +5,10 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('namefile');
-		echo $this->Form->input('author');
+		echo $this->Form->input('user_id');
 		echo $this->Form->input('points');
 		echo $this->Form->input('difficulty');
-		echo $this->Form->input('type');
+		echo $this->Form->input('question_type_id');
 		echo $this->Form->input('Discipline');
 	?>
 	</fieldset>

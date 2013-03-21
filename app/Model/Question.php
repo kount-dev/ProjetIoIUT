@@ -3,6 +3,8 @@ App::uses('AppModel', 'Model');
 /**
  * Question Model
  *
+ * @property User $User
+ * @property QuestionType $QuestionType
  * @property Discipline $Discipline
  */
 class Question extends AppModel {
@@ -23,9 +25,9 @@ class Question extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'author' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+		'user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -53,9 +55,9 @@ class Question extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'type' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+		'question_type_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -66,6 +68,28 @@ class Question extends AppModel {
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'QuestionType' => array(
+			'className' => 'QuestionType',
+			'foreignKey' => 'question_type_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 
 /**
  * hasAndBelongsToMany associations

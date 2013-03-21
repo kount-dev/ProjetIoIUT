@@ -4,7 +4,6 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('author'); ?></th>
 			<th><?php echo $this->Paginator->sort('minimum_points'); ?></th>
 			<th><?php echo $this->Paginator->sort('opening_date'); ?></th>
 			<th><?php echo $this->Paginator->sort('closing_date'); ?></th>
@@ -18,7 +17,6 @@
 	<tr>
 		<td><?php echo h($exercise['Exercise']['id']); ?>&nbsp;</td>
 		<td><?php echo h($exercise['Exercise']['name']); ?>&nbsp;</td>
-		<td><?php echo h($exercise['Exercise']['author']); ?>&nbsp;</td>
 		<td><?php echo h($exercise['Exercise']['minimum_points']); ?>&nbsp;</td>
 		<td><?php echo h($exercise['Exercise']['opening_date']); ?>&nbsp;</td>
 		<td><?php echo h($exercise['Exercise']['closing_date']); ?>&nbsp;</td>
