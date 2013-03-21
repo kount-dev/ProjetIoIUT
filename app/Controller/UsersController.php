@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
-	public $helpers = array('Js' => array('Jquery'),'Html');
+	public $helpers = array('Js' => array('Jquery'),'Html','Form');
 /**
  * index method
  *

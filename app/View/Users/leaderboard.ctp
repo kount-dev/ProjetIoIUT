@@ -2,8 +2,8 @@
 
 <?php 
 	echo $this->Html->script('sortLeaderBoard.ajax');
-	echo "<input id='valSortRankXp' type='hidden' order='ASC'/>";
-	echo "<input id='valSortUserName' type='hidden' order='ASC'/>";
+	echo $this->Form->hidden("valSortRankXp", array('order' =>'ASC'));
+	echo $this->Form->hidden("valSortUserName", array('order' =>'ASC'));
 
 	echo "<table>";
 		echo "<thead>";
