@@ -107,26 +107,7 @@ class QuestionsController extends AppController {
  *@return le contenu HTML dans un string
  */
     public function generation(){
-    	$this->Session->setFlash(__('We are here Questions'));
-    	if ($this->request->is('post')) {
-    		//$qcus = new QcusController();
-    		//$qcus->generation($this->request);
-    		$this->Session->setFlash(__('We are here Questions'));
-            //$this->redirect(array('action' => 'generation'));
-            //$this->layout = false;
-        	//$this->render(false);
-			// $this->Question->create();
-			// if ($this->Question->save($this->request->data)) {
-		 	// $this->Session->setFlash(__('The question has been saved'));
-		 	// $this->redirect(array('action' => 'index'));
-			// } else {
-			// 	$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
-			// }
-		}
-    }
-
-    public function generation2(){
-		if ($this->request->is('post')){
+    	if ($this->request->is('post')){
 	    	$question_types = $this->Question->QuestionType->find('list', array('fields' => array('controller', 'name')));
 			$author = $this->Auth->user('id');
 			$num_question = (int)$this->request->data['n'];

@@ -32,17 +32,13 @@ class QcusController extends QuestionsController implements iQuestions {
  *@return le contenu HTML dans un string
  */
     public function generation(){
-
-        //$this->Session->setFlash(__('We are here Qcus'));
-        if ($this->request->is('post')) {
-            parent::generation();
-            //$this->Question->create();
-            //if ($this->Question->save($this->request->data)) {
-                $this->Session->setFlash(__('We are here Qcus'));
-                $this->redirect(array('action' => 'generation'));
-            //} else {
-            //    $this->Session->setFlash(__('The question could not be saved. Please, try again.'));
-            //}
+        if ($this->request->is('post')){
+            $author = $this->Auth->user('id');
+            $tab = split('_',$this->request->data['f']);
+            $num_question = $tab[1];
+            $this->set(compact('author','num_question'));
+            $this->layout = false;
+            $this->render();
         }
     }
 
@@ -64,18 +60,5 @@ class QcusController extends QuestionsController implements iQuestions {
  *@desc Cette fonction va sauvegarder en base l'instance chargée
  */
     public function saveInstance(){}
-
-
-
-    public function generation2(){
-        if ($this->request->is('post')){
-            $author = $this->Auth->user('id');
-            $tab = split('_',$this->request->data['f']);
-            $num_question = $tab[1];
-            $this->set(compact('author','num_question'));
-            $this->layout = false;
-            $this->render();
-        }
-    }
 }
 ?>
