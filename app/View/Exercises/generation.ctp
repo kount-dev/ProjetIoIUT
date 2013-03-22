@@ -14,9 +14,10 @@
     ?>
     </fieldset>
     <?php echo $this->Form->hidden('nb_question', array('value' => 0)); ?>
-    <input id="add_question" type="button" value="Add question"/>
+    
     <div class="questions fieldset">
 
     </div>
+    <input id="add_question" type="button" value="Add question"/>
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>
