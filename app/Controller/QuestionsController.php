@@ -106,6 +106,11 @@ class QuestionsController extends AppController {
  *@return le contenu HTML dans un string
  */
     public function generation(){
-
+    	$question_type = $this->Question->QuestionType->find('list');
+		var_dump($question_type);
+		die();
+		$this->set(compact('question_type'));
+    	$this->layout = false;
+		$this->render();
     }
 }
