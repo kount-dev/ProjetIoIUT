@@ -106,11 +106,17 @@ class QuestionsController extends AppController {
  *@return le contenu HTML dans un string
  */
     public function generation(){
-    	$question_type = $this->Question->QuestionType->find('list');
-		var_dump($question_type);
-		die();
-		$this->set(compact('question_type'));
-    	$this->layout = false;
-		$this->render();
+    }
+
+    public function generation2(){
+
+		if ($this->request->is('post')){
+	    	$question_types = $this->Question->QuestionType->find('list', array('fields' => array('controller', 'name')));
+			$author = $this->Auth->user('id');
+			$num_question = (int)$this->request->data['n'];
+			$this->set(compact('question_types','author','num_question'));
+	    	$this->layout = false;
+			$this->render();
+    	}
     }
 }

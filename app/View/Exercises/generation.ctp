@@ -13,6 +13,7 @@
         echo $this->Form->hidden('user_id', array('value' => $author));
     ?>
     </fieldset>
+    <?php echo $this->Form->hidden('nb_question', array('value' => 0)); ?>
     <input id="add_question" type="button" value="Add question"/>
     <div class="questions fieldset">
 
