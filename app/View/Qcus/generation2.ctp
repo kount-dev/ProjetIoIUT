@@ -1,10 +1,9 @@
-<div class="questions qcu fieldset">
-        <legend><?php echo __('Add Question'); ?></legend>
-    <?php
-        echo $this->Form->input('user_id');
-        echo $this->Form->input('points');
-        echo $this->Form->input('difficulty');
-        echo $this->Form->input('Discipline');
-    	echo $this->Form->hidden('user_id', array('value' => $author));
-    ?>
-</div>
+<fieldset>
+    <legend><?php echo __('QCU'); ?></legend>
+<?php
+    echo $this->Form->input('type', array('value' => 'qcus'));
+    echo $this->Form->input('question');
+    echo $this->Form->input('choix1');
+    echo $this->Form->input('choix2');
+?>
+</fieldset>

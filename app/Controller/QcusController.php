@@ -63,8 +63,14 @@ class QcusController extends QuestionsController implements iQuestions {
 
 
     public function generation2(){
-        $this->layout = false;
-        $this->render();
+        if ($this->request->is('post')){
+            $author = $this->Auth->user('id');
+            $tab = split('_',$this->request->data['f']);
+            $num_question = $tab[1];
+            $this->set(compact('author','num_question'));
+            $this->layout = false;
+            $this->render();
+        }
     }
 }
 ?>
