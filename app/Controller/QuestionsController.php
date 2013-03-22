@@ -1,6 +1,5 @@
 <?php
 App::uses('AppController', 'Controller');
-App::uses('QcusController','Controller');
 /**
  * Questions Controller
  *
@@ -48,8 +47,10 @@ class QuestionsController extends AppController {
 				$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
 			}
 		}
+		$users = $this->Question->User->find('list');
+		$questionTypes = $this->Question->QuestionType->find('list');
 		$disciplines = $this->Question->Discipline->find('list');
-		$this->set(compact('disciplines'));
+		$this->set(compact('users', 'questionTypes', 'disciplines'));
 	}
 
 /**
@@ -74,8 +75,10 @@ class QuestionsController extends AppController {
 			$options = array('conditions' => array('Question.' . $this->Question->primaryKey => $id));
 			$this->request->data = $this->Question->find('first', $options);
 		}
+		$users = $this->Question->User->find('list');
+		$questionTypes = $this->Question->QuestionType->find('list');
 		$disciplines = $this->Question->Discipline->find('list');
-		$this->set(compact('disciplines'));
+		$this->set(compact('users', 'questionTypes', 'disciplines'));
 	}
 
 /**
@@ -99,7 +102,6 @@ class QuestionsController extends AppController {
 		$this->Session->setFlash(__('Question was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-
 
 /**
  *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher

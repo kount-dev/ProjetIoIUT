@@ -16,10 +16,14 @@
 	<tr>
 		<td><?php echo h($question['Question']['id']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['namefile']); ?>&nbsp;</td>
-		<td><?php echo h($question['Question']['user_id']); ?>&nbsp;</td>
+		<td>
+			<?php echo $this->Html->link($question['User']['id'], array('controller' => 'users', 'action' => 'view', $question['User']['id'])); ?>
+		</td>
 		<td><?php echo h($question['Question']['points']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['difficulty']); ?>&nbsp;</td>
-		<td><?php echo h($question['Question']['question_type_id']); ?>&nbsp;</td>
+		<td>
+			<?php echo $this->Html->link($question['QuestionType']['name'], array('controller' => 'question_types', 'action' => 'view', $question['QuestionType']['id'])); ?>
+		</td>
 		<td><?php echo h($question['Question']['created']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['modified']); ?>&nbsp;</td>
 		<td class="actions">
@@ -48,6 +52,10 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Question'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Question Types'), array('controller' => 'question_types', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Question Type'), array('controller' => 'question_types', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Disciplines'), array('controller' => 'disciplines', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Discipline'), array('controller' => 'disciplines', 'action' => 'add')); ?> </li>
 	</ul>

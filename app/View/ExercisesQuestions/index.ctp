@@ -1,5 +1,5 @@
-<div class="exercicesQuestions index">
-	<h2><?php echo __('Exercices Questions'); ?></h2>
+<div class="exercisesQuestions index">
+	<h2><?php echo __('Exercises Questions'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -9,21 +9,21 @@
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
-	<?php foreach ($exercicesQuestions as $exercicesQuestion): ?>
+	<?php foreach ($exercisesQuestions as $exercisesQuestion): ?>
 	<tr>
-		<td><?php echo h($exercicesQuestion['ExercicesQuestion']['id']); ?>&nbsp;</td>
+		<td><?php echo h($exercisesQuestion['ExercisesQuestion']['id']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($exercicesQuestion['Exercise']['name'], array('controller' => 'exercises', 'action' => 'view', $exercicesQuestion['Exercise']['id'])); ?>
+			<?php echo $this->Html->link($exercisesQuestion['Exercise']['name'], array('controller' => 'exercises', 'action' => 'view', $exercisesQuestion['Exercise']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($exercicesQuestion['Question']['id'], array('controller' => 'questions', 'action' => 'view', $exercicesQuestion['Question']['id'])); ?>
+			<?php echo $this->Html->link($exercisesQuestion['Question']['id'], array('controller' => 'questions', 'action' => 'view', $exercisesQuestion['Question']['id'])); ?>
 		</td>
-		<td><?php echo h($exercicesQuestion['ExercicesQuestion']['created']); ?>&nbsp;</td>
-		<td><?php echo h($exercicesQuestion['ExercicesQuestion']['modified']); ?>&nbsp;</td>
+		<td><?php echo h($exercisesQuestion['ExercisesQuestion']['created']); ?>&nbsp;</td>
+		<td><?php echo h($exercisesQuestion['ExercisesQuestion']['modified']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $exercicesQuestion['ExercicesQuestion']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercicesQuestion['ExercicesQuestion']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $exercicesQuestion['ExercicesQuestion']['id']), null, __('Are you sure you want to delete # %s?', $exercicesQuestion['ExercicesQuestion']['id'])); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $exercisesQuestion['ExercisesQuestion']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercisesQuestion['ExercisesQuestion']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $exercisesQuestion['ExercisesQuestion']['id']), null, __('Are you sure you want to delete # %s?', $exercisesQuestion['ExercisesQuestion']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -45,7 +45,7 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Exercices Question'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New Exercises Question'), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('List Exercises'), array('controller' => 'exercises', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Exercise'), array('controller' => 'exercises', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Questions'), array('controller' => 'questions', 'action' => 'index')); ?> </li>

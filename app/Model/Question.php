@@ -5,6 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property User $User
  * @property QuestionType $QuestionType
+ * @property Exercise $Exercise
  * @property Discipline $Discipline
  */
 class Question extends AppModel {
@@ -97,6 +98,21 @@ class Question extends AppModel {
  * @var array
  */
 	public $hasAndBelongsToMany = array(
+		'Exercise' => array(
+			'className' => 'Exercise',
+			'joinTable' => 'exercises_questions',
+			'foreignKey' => 'question_id',
+			'associationForeignKey' => 'exercise_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		),
 		'Discipline' => array(
 			'className' => 'Discipline',
 			'joinTable' => 'questions_disciplines',

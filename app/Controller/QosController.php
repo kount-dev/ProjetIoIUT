@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 //App::uses('AbstractsQuestions', 'Classes');
 
-class QuosController extends AppController{
+class QosController extends AppController{
     public $component = array('Xml');
 
 /**

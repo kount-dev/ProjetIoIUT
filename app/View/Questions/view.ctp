@@ -11,9 +11,9 @@
 			<?php echo h($question['Question']['namefile']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('User Id'); ?></dt>
+		<dt><?php echo __('User'); ?></dt>
 		<dd>
-			<?php echo h($question['Question']['user_id']); ?>
+			<?php echo $this->Html->link($question['User']['id'], array('controller' => 'users', 'action' => 'view', $question['User']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Points'); ?></dt>
@@ -26,9 +26,9 @@
 			<?php echo h($question['Question']['difficulty']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Question Type Id'); ?></dt>
+		<dt><?php echo __('Question Type'); ?></dt>
 		<dd>
-			<?php echo h($question['Question']['question_type_id']); ?>
+			<?php echo $this->Html->link($question['QuestionType']['name'], array('controller' => 'question_types', 'action' => 'view', $question['QuestionType']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
@@ -50,6 +50,10 @@
 		<li><?php echo $this->Form->postLink(__('Delete Question'), array('action' => 'delete', $question['Question']['id']), null, __('Are you sure you want to delete # %s?', $question['Question']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Questions'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Question'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Question Types'), array('controller' => 'question_types', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Question Type'), array('controller' => 'question_types', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Disciplines'), array('controller' => 'disciplines', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Discipline'), array('controller' => 'disciplines', 'action' => 'add')); ?> </li>
 	</ul>
