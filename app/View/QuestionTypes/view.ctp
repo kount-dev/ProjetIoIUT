@@ -6,9 +6,14 @@
 			<?php echo h($questionType['QuestionType']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Type'); ?></dt>
+		<dt><?php echo __('Name'); ?></dt>
 		<dd>
-			<?php echo h($questionType['QuestionType']['type']); ?>
+			<?php echo h($questionType['QuestionType']['name']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Controller'); ?></dt>
+		<dd>
+			<?php echo h($questionType['QuestionType']['controller']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>

@@ -1,3 +1,5 @@
+<?php echo $this->Html->script('addQuestions.ajax'); ?>
+
 <div class="exercises generation form">
 <?php echo $this->Form->create('Exercise'); ?>
     <fieldset>
@@ -9,9 +11,12 @@
         echo $this->Form->input('closing_date');
         echo $this->Form->input('discipline_id');
         echo $this->Form->hidden('user_id', array('value' => $author));
-        echo $this->Form->label('question_type_id', 'Nouvelle Question');
-        echo $this->Form->select('question_type_id', array('label' => 'Nouvelle Question'));
     ?>
     </fieldset>
+    <?php echo $this->Form->hidden('nb_question', array('value' => 0)); ?>
+    <input id="add_question" type="button" value="Add question"/>
+    <div class="questions fieldset">
+
+    </div>
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>

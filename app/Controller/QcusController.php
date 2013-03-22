@@ -59,5 +59,12 @@ class QcusController extends QuestionsController implements iQuestions {
  *@desc Cette fonction va sauvegarder en base l'instance chargée
  */
     public function saveInstance(){}
+
+
+
+    public function generation2(){
+        $this->layout = false;
+        $this->render();
+    }
 }
 ?>

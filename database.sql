@@ -267,7 +267,8 @@ CREATE TABLE `iut_groups` (
 
 CREATE TABLE `question_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `controller` varchar(50) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)

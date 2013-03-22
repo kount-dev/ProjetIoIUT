@@ -107,6 +107,7 @@ class QuestionsController extends AppController {
  *@return le contenu HTML dans un string
  */
     public function generation(){
+
     	if ($this->request->is('post')) {
     		//$qcus = new QcusController();
     		//$qcus->generation($this->request);
@@ -122,5 +123,16 @@ class QuestionsController extends AppController {
 			// 	$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
 			// }
 		}
+    }
+
+    public function generation2(){
+		if ($this->request->is('post')){
+	    	$question_types = $this->Question->QuestionType->find('list', array('fields' => array('controller', 'name')));
+			$author = $this->Auth->user('id');
+			$num_question = (int)$this->request->data['n'];
+			$this->set(compact('question_types','author','num_question'));
+	    	$this->layout = false;
+			$this->render();
+    	}
     }
 }

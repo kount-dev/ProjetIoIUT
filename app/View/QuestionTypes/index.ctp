@@ -3,7 +3,8 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('type'); ?></th>
+			<th><?php echo $this->Paginator->sort('name'); ?></th>
+			<th><?php echo $this->Paginator->sort('controller'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -11,7 +12,8 @@
 	<?php foreach ($questionTypes as $questionType): ?>
 	<tr>
 		<td><?php echo h($questionType['QuestionType']['id']); ?>&nbsp;</td>
-		<td><?php echo h($questionType['QuestionType']['type']); ?>&nbsp;</td>
+		<td><?php echo h($questionType['QuestionType']['name']); ?>&nbsp;</td>
+		<td><?php echo h($questionType['QuestionType']['controller']); ?>&nbsp;</td>
 		<td><?php echo h($questionType['QuestionType']['created']); ?>&nbsp;</td>
 		<td><?php echo h($questionType['QuestionType']['modified']); ?>&nbsp;</td>
 		<td class="actions">
