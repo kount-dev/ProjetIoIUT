@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-
 	$('.rank_xp_sort').click(function(){
 		var sort = $('#valSortRankXp').attr('order');
 		$.ajax({

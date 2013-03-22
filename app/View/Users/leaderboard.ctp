@@ -1,6 +1,4 @@
-
-
-<?php 
+<?php
 	echo $this->Html->script('sortLeaderBoard.ajax');
 	echo $this->Form->hidden("valSortRankXp", array('order' =>'ASC'));
 	echo $this->Form->hidden("valSortUserName", array('order' =>'ASC'));

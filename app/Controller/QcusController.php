@@ -1,8 +1,8 @@
 <?php
-App::uses('AppController', 'Controller');
+App::uses('QuestionsController', 'Controller');
 App::uses('iQuestions', 'Interfaces');
 
-class QcusController extends AppController implements iQuestions {
+class QcusController extends QuestionsController implements iQuestions {
     public $component = array('Xml');
 
 /**
@@ -32,13 +32,20 @@ class QcusController extends AppController implements iQuestions {
  *@return le contenu HTML dans un string
  */
     public function generation(){
-
+        parent::generation();
+        if ($this->request->is('post')) {
+            $this->Session->setFlash(__('We are here QCus'));
+            $this->redirect(array('action' => 'generation'));
+        }
+        //$this->layout = false;
+        //$this->render(false);
     }
+
 
 /**
  *@desc cette fonction valide le module a partir des paramètres passés
  *@param array $param ('reponses'=>array(), 'path'=>string)
- *@return boolean true | false en fonctio de s'il est bon
+ *@return boolean true | false en fonction de s'il est bon
  */
     public function valider($param){}
 /**
