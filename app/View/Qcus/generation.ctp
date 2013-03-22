@@ -1,3 +1,6 @@
+<?php
+echo $this->element('questions_generation');
+ ?>
 <div class="questions fieldset">
     <?php echo $this->Form->create('Qcu', array('action' => 'generation')); ?>
     <fieldset>

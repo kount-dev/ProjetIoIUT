@@ -107,14 +107,14 @@ class QuestionsController extends AppController {
  *@return le contenu HTML dans un string
  */
     public function generation(){
-
+    	$this->Session->setFlash(__('We are here Questions'));
     	if ($this->request->is('post')) {
     		//$qcus = new QcusController();
     		//$qcus->generation($this->request);
     		$this->Session->setFlash(__('We are here Questions'));
             //$this->redirect(array('action' => 'generation'));
-            $this->layout = false;
-        	$this->render(false);
+            //$this->layout = false;
+        	//$this->render(false);
 			// $this->Question->create();
 			// if ($this->Question->save($this->request->data)) {
 		 	// $this->Session->setFlash(__('The question has been saved'));
