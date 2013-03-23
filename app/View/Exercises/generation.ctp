@@ -9,7 +9,7 @@
         echo $this->Form->input('minimum_points');
         echo $this->Form->input('opening_date');
         echo $this->Form->input('closing_date');
-        echo $this->Form->input('discipline_id', array('empty' => 'Selectionnez votre type de question'));
+        echo $this->Form->input('Discipline');
         echo $this->Form->hidden('user_id', array('value' => $author));
     ?>
     </fieldset>
