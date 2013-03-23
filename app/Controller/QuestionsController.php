@@ -112,8 +112,9 @@ class QuestionsController extends AppController {
     	if ($this->request->is('post')){
 	    	$question_types = $this->Question->QuestionType->find('list', array('fields' => array('controller', 'name')));
 			$author = $this->Auth->user('id');
+			$disciplines = $this->Question->Discipline->find('list');
 			$num_question = (int)$this->request->data['n'];
-			$this->set(compact('question_types','author','num_question'));
+			$this->set(compact('disciplines','question_types','author','num_question'));
 	    	$this->layout = false;
 			$this->render();
     	}
