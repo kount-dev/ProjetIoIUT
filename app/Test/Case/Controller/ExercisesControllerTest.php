@@ -14,15 +14,16 @@ class ExercisesControllerTest extends ControllerTestCase {
  */
 	public $fixtures = array(
 		'app.exercise',
-		'app.discipline',
 		'app.user',
 		'app.group',
 		'app.group_list',
 		'app.iut_group',
 		'app.resultat',
-		'app.exercices_discipline',
-		'app.exercices_question',
+		'app.discipline',
+		'app.exercises_discipline',
 		'app.question',
+		'app.question_type',
+		'app.exercises_question',
 		'app.questions_discipline'
 	);
 

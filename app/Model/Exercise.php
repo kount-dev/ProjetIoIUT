@@ -3,11 +3,10 @@ App::uses('AppModel', 'Model');
 /**
  * Exercise Model
  *
- * @property Discipline $Discipline
  * @property User $User
- * @property ExercicesDiscipline $ExercicesDiscipline
- * @property ExercicesQuestion $ExercicesQuestion
  * @property Resultat $Resultat
+ * @property Discipline $Discipline
+ * @property Question $Question
  */
 class Exercise extends AppModel {
 
@@ -37,16 +36,6 @@ class Exercise extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'discipline_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 		'user_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -67,13 +56,6 @@ class Exercise extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Discipline' => array(
-			'className' => 'Discipline',
-			'foreignKey' => 'discipline_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
@@ -89,32 +71,6 @@ class Exercise extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'ExercicesDiscipline' => array(
-			'className' => 'ExercicesDiscipline',
-			'foreignKey' => 'exercise_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'ExercicesQuestion' => array(
-			'className' => 'ExercicesQuestion',
-			'foreignKey' => 'exercise_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'Resultat' => array(
 			'className' => 'Resultat',
 			'foreignKey' => 'exercise_id',
@@ -127,6 +83,45 @@ class Exercise extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		)
+	);
+
+
+/**
+ * hasAndBelongsToMany associations
+ *
+ * @var array
+ */
+	public $hasAndBelongsToMany = array(
+		'Discipline' => array(
+			'className' => 'Discipline',
+			'joinTable' => 'exercises_disciplines',
+			'foreignKey' => 'exercise_id',
+			'associationForeignKey' => 'discipline_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		),
+		'Question' => array(
+			'className' => 'Question',
+			'joinTable' => 'exercises_questions',
+			'foreignKey' => 'exercise_id',
+			'associationForeignKey' => 'question_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
 		)
 	);
 

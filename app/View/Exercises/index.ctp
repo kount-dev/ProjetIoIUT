@@ -7,7 +7,6 @@
 			<th><?php echo $this->Paginator->sort('minimum_points'); ?></th>
 			<th><?php echo $this->Paginator->sort('opening_date'); ?></th>
 			<th><?php echo $this->Paginator->sort('closing_date'); ?></th>
-			<th><?php echo $this->Paginator->sort('discipline_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
@@ -20,9 +19,6 @@
 		<td><?php echo h($exercise['Exercise']['minimum_points']); ?>&nbsp;</td>
 		<td><?php echo h($exercise['Exercise']['opening_date']); ?>&nbsp;</td>
 		<td><?php echo h($exercise['Exercise']['closing_date']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($exercise['Discipline']['name'], array('controller' => 'disciplines', 'action' => 'view', $exercise['Discipline']['id'])); ?>
-		</td>
 		<td>
 			<?php echo $this->Html->link($exercise['User']['id'], array('controller' => 'users', 'action' => 'view', $exercise['User']['id'])); ?>
 		</td>
@@ -54,15 +50,13 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Exercise'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Disciplines'), array('controller' => 'disciplines', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Discipline'), array('controller' => 'disciplines', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Exercices Disciplines'), array('controller' => 'exercices_disciplines', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Exercices Discipline'), array('controller' => 'exercices_disciplines', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Exercices Questions'), array('controller' => 'exercices_questions', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Exercices Question'), array('controller' => 'exercices_questions', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Resultats'), array('controller' => 'resultats', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Resultat'), array('controller' => 'resultats', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Disciplines'), array('controller' => 'disciplines', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Discipline'), array('controller' => 'disciplines', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Questions'), array('controller' => 'questions', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Question'), array('controller' => 'questions', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

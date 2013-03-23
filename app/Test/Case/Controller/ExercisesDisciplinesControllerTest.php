@@ -22,10 +22,7 @@ class ExercisesDisciplinesControllerTest extends ControllerTestCase {
 		'app.iut_group',
 		'app.resultat',
 		'app.exercices_discipline',
-		'app.exercices_question',
-		'app.question',
-		'app.question_type',
-		'app.questions_discipline'
+		'app.exercices_question'
 	);
 
 /**
