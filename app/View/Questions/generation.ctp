@@ -5,6 +5,7 @@
     echo $this->Form->input('Question.'.$num_question.'.difficulty');
     echo $this->Form->input('Question.'.$num_question.'.Discipline',array('multiple'));
     echo $this->Form->input('Question.'.$num_question.'.question_type_id',array('empty' => 'Selectionnez votre type de question','options' => $question_types, 'onchange' => "javascript:addQuestionType(this);"));
+     echo $this->Form->hidden('Question.'.$num_question.'.user_id', array('value' => $author));
 ?>
     <div class="questions typeQuestion generation">
     </div>
