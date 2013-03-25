@@ -14,7 +14,7 @@ var_dump($question_types_list);
                                   'options' => $question_types,
                                   'controlleur' => $question_types,
                                   'onchange' => "javascript:addQuestionType(this);"));
-    echo $this->Form->hidden('Exercise.user_id', array('value' => $author));
+    echo $this->Form->hidden('Question.'.$num_question.'.user_id', array('value' => $author));
 ?>
     <div class="questions typeQuestion generation">
     </div>
