@@ -1,6 +1,7 @@
 <?php
 App::uses('QuestionsController', 'Controller');
 App::uses('iQuestions', 'Interfaces');
+App::uses('Xml', 'Controller/Component');
 
 class QcusController extends QuestionsController implements iQuestions {
     public $component = array('Xml');
@@ -42,11 +43,80 @@ class QcusController extends QuestionsController implements iQuestions {
         }
     }
 
-
 /**
+*
+*
+**/
+    public function generationXML($aDAta = array()){
+        $nId = 3; //$aData['id'];
+        $sAuthor = "AuteurTest"; //$aData['author']
+        $nDifficulty = 3; //$aData['difficulty']
+        $sTextQuestion = "2+2 = ?"; //$aData['text']
+        $aChoice = array("0" => "test", "1" => "test2", "2" => "test3", "3" => 4); //$aData['Choice']
+        $nAnswer = 3; //$aData['Rep']
+        $nPoints = 1; //$aData['points']
+
+        $domDocument = new DomDocument('1.0', "UTF-8");
+        $domDocument->formatOutput = true;
+        $eQuestion = $domDocument->createElement('question');
+        $eQuestionType = $domDocument->createAttribute('type');
+        $eQuestionType->value = "choixUnique";
+        $domDocument->appendChild($eQuestion);
+        $eQuestion->appendChild($eQuestionType);
+        
+        $eId = $domDocument->createElement('id');
+        $eIdText = $domDocument->createTextNode(trim($nId));
+        $eQuestion->appendChild($eId);
+        $eId->appendChild($eIdText);
+
+        $eAuthor = $domDocument->createElement('author');
+        $eAuthorText = $domDocument->createTextNode(trim($sAuthor));
+        $eQuestion->appendChild($eAuthor);
+        $eAuthor->appendChild($eAuthorText);
+
+        $eDifficulty = $domDocument->createElement('difficulty');
+        $eDifficultyText = $domDocument->createTextNode(trim($nDifficulty));
+        $eQuestion->appendChild($eDifficulty);
+        $eDifficulty->appendChild($eDifficultyText);
+
+        $eTextQuestion = $domDocument->createElement('text');
+        $eTextQuestionText = $domDocument->createCDATASection($sTextQuestion);
+        $eQuestion->appendChild($eTextQuestion);
+        $eTextQuestion->appendChild($eTextQuestionText);
+
+        $eChoice = $domDocument->createElement('choice');
+        $eQuestion->appendChild($eChoice);
+        foreach ($aChoice as $nNum => $sTextOption) {
+            $eOption = $domDocument->createElement('option');
+            
+            $eOptionText = $domDocument->createCDATASection($sTextOption);
+            
+            $eOptionNum = $domDocument->createAttribute('num');
+            $eOptionNum->value = $nNum;
+
+            $eChoice->appendChild($eOption);
+            $eOption->appendChild($eOptionNum);
+            $eOption->appendChild($eOptionText);
+        }
+
+        $eAnswer = $domDocument->createElement('answer');
+        $eAnswerText = $domDocument->createTextNode(trim($nAnswer));
+        $eQuestion->appendChild($eAnswer);
+        $eAnswer->appendChild($eAnswerText);
+
+        $ePoints = $domDocument->createElement('points');
+        $ePointsText = $domDocument->createTextNode(trim($nPoints));
+        $eQuestion->appendChild($ePoints);
+        $ePoints->appendChild($ePointsText);
+
+        $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');  
+
+    }
+
+/*
  *@desc cette fonction valide le module a partir des paramètres passés
  *@param array $param ('reponses'=>array(), 'path'=>string)
- *@return boolean true | false en fonction de s'il est bon
+ *@return boolean true | false en fonction de s il est bon
  */
     public function valider($param){}
 /**
