@@ -110,18 +110,18 @@ class QuestionsController extends AppController {
  */
     public function generation(){
     	if ($this->request->is('post')){
-
-    		//$users = $this->User->find('list',array('fields' => array('first_name','last_name','id')));
-			//$user_list = Set::combine($users, '{n}.User.id', array('{0} {1}', '{n}.User.first_name', '{n}.User.last_name'));
-
-	    	$question_types = $this->Question->QuestionType->find('all');
-			$question_types_list = Set::extract($question_types, '{n}.QuestionType.id', array('{0} {1}', '{n}.QuestionType.name', '{n}.QuestionType.controller'));
+			$question_types_name_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'name')));
+			$question_types_controller_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'controller')));
+			$question_types_list = array();
+			foreach ($question_types_name_list as $key => $val) {
+    			$question_types_list[$key] = array('value' => $key,'name' =>$question_types_name_list[$key], 'questiontype' => $question_types_controller_list[$key]);
+			}
 
 			$author = $this->Auth->user('id');
 			$disciplines = $this->Question->Discipline->find('list');
 			$num_question = (int)$this->request->data['n'];
 
-			$this->set(compact('disciplines','question_types_list','author','num_question'));
+			$this->set(compact('disciplines','question_types_list', 'author','num_question'));
 	    	$this->layout = false;
 			$this->render();
     	}

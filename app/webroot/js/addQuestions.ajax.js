@@ -14,9 +14,10 @@ $(document).ready(function(){
 	});
 });
 
-function addQuestionType(thisType){
-	var typeQuestion = $(thisType).attr('typeQuestion');
-	var fieldset = $(thisType).parent().parent().attr('id');
+function addQuestionType(elt){
+	var typeQuestion = $(elt).find(':selected').attr('questiontype');
+	alert(typeQuestion);
+	var fieldset = $(elt).parent().parent().attr('id');
 	$.ajax({
 	    type: "post",
 	    url: "../"+ typeQuestion +"s/generation",
