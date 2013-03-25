@@ -124,17 +124,27 @@ class ExercisesController extends AppController {
  */
 public function generation(){
 	if ($this->request->is('post')) {
-		$this->Exercise->create();
-		if ($this->Exercise->save($this->request->data)) {
-			$this->Session->setFlash(__('The exercise has been saved'));
-			$this->redirect(array('action' => 'index'));
-		} else {
-			$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
-		}
+		//$this->Exercise->create();
+		var_dump($this->request->data);
+		//$this->Exercise->save($this->request->data->Exercise);
+		//$this->Question->save($this->request->data->Question);
+			//if ($this->Exercise->save($this->request->data)) {
+			//$this->Session->setFlash(__('The exercise has been saved'));
+			// if ($this->Question->save($this->request->data)){
+			// 	$this->Session->setFlash(__('The question has been saved'));
+			// 	$this->redirect(array('action' => 'index'));
+			// }
+		// } else {
+		// 	$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
+		// }
 	}
+
 	$disciplines = $this->Exercise->Discipline->find('list');
 	$author = $this->Auth->user('id');
 	$this->set(compact('disciplines', 'author'));
+
+	//$this->layout = false;
+	//		$this->render(false);
 }
 
 /**

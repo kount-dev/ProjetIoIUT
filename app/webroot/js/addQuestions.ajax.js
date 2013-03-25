@@ -15,9 +15,8 @@ $(document).ready(function(){
 });
 
 function addQuestionType(thisType){
-	var typeQuestion = $(thisType).val();
+	var typeQuestion = $(thisType).attr('typeQuestion');
 	var fieldset = $(thisType).parent().parent().attr('id');
-	console.log(fieldset);
 	$.ajax({
 	    type: "post",
 	    url: "../"+ typeQuestion +"s/generation",

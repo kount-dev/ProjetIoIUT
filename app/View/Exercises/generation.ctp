@@ -9,8 +9,12 @@
         echo $this->Form->input('Exercise.minimum_points');
         echo $this->Form->input('Exercise.opening_date');
         echo $this->Form->input('Exercise.closing_date');
-        echo $this->Form->input('Exercise.Discipline', array('multiple'));
-        echo $this->Form->hidden('Exercise.user_id', array('value' => $author));
+        echo $this->Form->input('Exercise.Discipline',
+                                array('label'=>'Exersise\'s disciplines',
+                                      'type'=>'select',
+                                      'multiple'=>true));
+        echo $this->Form->hidden('Exercise.user_id',
+            array('value' => $author));
     ?>
     </fieldset>
     <?php echo $this->Form->hidden('nb_question', array('value' => 0)); ?>
