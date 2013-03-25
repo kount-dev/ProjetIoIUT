@@ -9,7 +9,7 @@
         echo $this->Form->input('Exercise.minimum_points');
         echo $this->Form->input('Exercise.opening_date');
         echo $this->Form->input('Exercise.closing_date');
-        echo $this->Form->input('Exercise.Discipline',
+        echo $this->Form->input('Exercise.Discipline.name',
                                 array('label'=>'Exersise\'s disciplines',
                                       'type'=>'select',
                                       'multiple'=>true));

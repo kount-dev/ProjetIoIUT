@@ -3,7 +3,7 @@
 <?php
     echo $this->Form->input('Question.'.$num_question.'.points');
     echo $this->Form->input('Question.'.$num_question.'.difficulty');
-    echo $this->Form->input('Question.Discipline'.$num_question,
+    echo $this->Form->input('Question.'.$num_question.'.Discipline.name',
                             array('label'=>'Question\'s disciplines',
                                   'type'=>'select',
                                   'multiple'=>true,

@@ -16,7 +16,6 @@ $(document).ready(function(){
 
 function addQuestionType(elt){
 	var typeQuestion = $(elt).find(':selected').attr('questiontype');
-	alert(typeQuestion);
 	var fieldset = $(elt).parent().parent().attr('id');
 	$.ajax({
 	    type: "post",
