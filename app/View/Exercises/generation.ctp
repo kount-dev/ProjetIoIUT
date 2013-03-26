@@ -5,15 +5,16 @@
     <fieldset>
         <legend><?php echo __('Generation Exercise'); ?></legend>
     <?php
-        echo $this->Form->input('Exercise.name');
-        echo $this->Form->input('Exercise.minimum_points');
-        echo $this->Form->input('Exercise.opening_date');
-        echo $this->Form->input('Exercise.closing_date');
-        echo $this->Form->input('Exercise.Discipline.name',
+        echo $this->Form->input('Exercise.Exercise.name');
+        echo $this->Form->input('Exercise.Exercise.minimum_points');
+        echo $this->Form->input('Exercise.Exercise.opening_date');
+        echo $this->Form->input('Exercise.Exercise.closing_date');
+        echo $this->Form->input('Exercise.Discipline',
                                 array('label'=>'Exersise\'s disciplines',
                                       'type'=>'select',
-                                      'multiple'=>true));
-        echo $this->Form->hidden('Exercise.user_id',
+                                      'multiple'=>true,
+                                      'options' => $disciplines));
+        echo $this->Form->hidden('Exercise.Exercise.user_id',
             array('value' => $author));
     ?>
     </fieldset>

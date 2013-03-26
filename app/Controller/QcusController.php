@@ -42,6 +42,13 @@ class QcusController extends QuestionsController implements iQuestions {
         }
     }
 
+    public function saveQuestion($data){
+        var_dump($this->request->data);
+        //$this->Session->setFlash(__('We pass saveQuestion'));
+        parent::saveQuestion();
+        $this->render(false);
+    }
+
 
 /**
  *@desc cette fonction valide le module a partir des paramètres passés

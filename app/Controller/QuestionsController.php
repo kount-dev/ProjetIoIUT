@@ -120,10 +120,19 @@ class QuestionsController extends AppController {
 			$author = $this->Auth->user('id');
 			$disciplines = $this->Question->Discipline->find('list');
 			$num_question = (int)$this->request->data['n'];
+			$this->loadModel('Exercise');
+			$exerciseId = $this->Exercise->field('id', array(), 'created DESC') + 1;
+			$this->set(compact('disciplines','question_types_list', 'author','num_question', 'exerciseId'));
 
-			$this->set(compact('disciplines','question_types_list', 'author','num_question'));
 	    	$this->layout = false;
 			$this->render();
     	}
     }
+
+    public function saveQuestion(){
+    	$this->Session->setFlash(__('We pass Question.saveQuestion'));
+    	$this->Question->create();
+		$this->Question->saveMany($this->request->data->Question);
+	}
 }
+
