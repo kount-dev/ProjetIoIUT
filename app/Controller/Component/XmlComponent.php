@@ -11,7 +11,7 @@ class XmlComponent extends Component{
     *@return boolean true|false en fonction de la validation
     */
     public function XMLIsValide($XML_path, $DTD_path){
-        $root = 'infos';
+        $root = 'question';
         $old = new DOMDocument;
         set_error_handler(function(){throw new Exception('fichier inexistant');});
         try{$old->load($XML_path);}catch(Exception $e){return false;}

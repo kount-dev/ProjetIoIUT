@@ -1,7 +1,0 @@
-<!DOCTYPE qcm [<!ELEMENT question (id, text, answers, points)>
-  <!ELEMENT id val #CDATA>
-  <!ELEMENT text (#PCDATA)>
-  <!ELEMENT answers (answer)>
-  <!ELEMENT answer (#PCDATA)>
-  <!ELEMENT points val #CDATA>
-]>

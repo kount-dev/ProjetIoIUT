@@ -18,14 +18,14 @@ interface iQuestions {
  *@param array $param ('path'=>string)
  *@return true|false en fonction du succès ou non du chargement
  */
-    public function load($param);
+    public function load($sPath_fileXML);
 
 /**
  *@desc Cette fonction permet d'executer un module, elle doit retourner l'HTML a afficher
  *pour l'execution
  *@return le contenu HTML dans un string
  */
-    public function executeToHTML();
+    public function displayXmlToHtml($sPath_fileXML);
 
 /**
  *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher
