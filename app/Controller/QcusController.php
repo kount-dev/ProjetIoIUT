@@ -1,11 +1,11 @@
 <?php
 App::uses('QuestionsController', 'Controller');
 App::uses('iQuestions', 'Interfaces');
-App::uses('Xml', 'Controller/Component');
 
 class QcusController extends QuestionsController implements iQuestions {
     public $component = array('Xml');
 
+    protected $aFileXML = null;
 /**
  * index method
  *
@@ -15,17 +15,53 @@ class QcusController extends QuestionsController implements iQuestions {
     }
 
 /**
- *@desc Cette fonction permet de charger, si besoin est, un fichier
- *@param array $param ('path'=>string)
- *@return true|false en fonction du succès ou non du chargement
+ *@desc Cette fonction permet de charger un fichier xml pour une question à choix unique
+ *@param string $sPath_fileXML
  */
-    public function load($aParam){}
+    public function load($sPath_fileXML){
+        if($this->aFileXML === null){
+            $this->aFileXML = array();
+            set_error_handler(function(){throw new Exception('fichier inexistant');});
+            try{
+                $oFileXML = simplexml_load_file($sPath_fileXML);
+            }
+            catch(Exception $e){
+                return "Erreur de chargement du fichier";
+            }
+
+            foreach ($oFileXML->attributes() as $TYPE => $TYPEVAL) {
+                $this->aFileXML['question'][(string)$TYPE] = (string)$TYPEVAL ;
+            }
+
+            foreach ($oFileXML as $ATTR => $VAL) {
+                if("choice" == $ATTR){
+                    $nCpt = 0;
+                    foreach ($VAL as $OPTION => $CHOICE) {
+                        foreach ($CHOICE->attributes() as $NUM => $NUMVAL) {
+                            $this->aFileXML['question']["option"][(string)$NUMVAL] = (string)$CHOICE;                        
+                        }
+                        $nCpt ++;
+                    }
+                }
+                else{
+                    $this->aFileXML['question'][(string)$ATTR] = (string)$VAL;
+                }
+            }
+        }
+    }
+
 /**
- *@desc Cette fonction permet d'executer un module, elle doit retourner l'HTML a afficher
- *pour l'execution
- *@return le contenu HTML dans un string
+ *@desc Cette fonction permet l'affichage d'une question
  */
-    public function executeToHTML(){}
+    public function displayXmlToHtml($sPath_fileXML = ""){
+        $this->load('../../uploads/questions/qcu_3_2013-03-25.xml');
+        if ($this->request->is('post')){
+            var_dump('Submit QCU');
+        }
+        $this->set('data',$this->aFileXML);
+        $this->render();
+    }
+
 
 /**
  *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher
@@ -111,6 +147,8 @@ class QcusController extends QuestionsController implements iQuestions {
 
         $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');  
 
+        $this->layout = false;
+        $this->render(false);
     }
 
 /*
