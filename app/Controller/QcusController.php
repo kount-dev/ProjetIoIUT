@@ -79,7 +79,7 @@ class QcusController extends QuestionsController implements iQuestions {
         }
     }
 
-    public function saveQuestion($data){
+    public function saveQuestion(){
         var_dump($this->request->data);
         //$this->Session->setFlash(__('We pass saveQuestion'));
         parent::saveQuestion();
@@ -91,26 +91,22 @@ class QcusController extends QuestionsController implements iQuestions {
 *
 **/
     public function generationXML($aDAta = array()){
-        $nId = 3; //$aData['id'];
-        $sAuthor = "AuteurTest"; //$aData['author']
+        $nId = 50; //$aData['id'];
+        $sAuthor = "quentin"; //$aData['author']
         $nDifficulty = 3; //$aData['difficulty']
         $sTextQuestion = "2+2 = ?"; //$aData['text']
         $aChoice = array("0" => "test", "1" => "test2", "2" => "test3", "3" => 4); //$aData['Choice']
         $nAnswer = 3; //$aData['Rep']
         $nPoints = 1; //$aData['points']
+        $aDisciplines = array("0" => "1", "1" => "2");
 
         $domDocument = new DomDocument('1.0', "UTF-8");
         $domDocument->formatOutput = true;
         $eQuestion = $domDocument->createElement('question');
         $eQuestionType = $domDocument->createAttribute('type');
-        $eQuestionType->value = "choixUnique";
+        $eQuestionType->value = "qcu";
         $domDocument->appendChild($eQuestion);
         $eQuestion->appendChild($eQuestionType);
-
-        $eId = $domDocument->createElement('id');
-        $eIdText = $domDocument->createTextNode(trim($nId));
-        $eQuestion->appendChild($eId);
-        $eId->appendChild($eIdText);
 
         $eAuthor = $domDocument->createElement('author');
         $eAuthorText = $domDocument->createTextNode(trim($sAuthor));
@@ -126,6 +122,17 @@ class QcusController extends QuestionsController implements iQuestions {
         $eTextQuestionText = $domDocument->createCDATASection($sTextQuestion);
         $eQuestion->appendChild($eTextQuestion);
         $eTextQuestion->appendChild($eTextQuestionText);
+
+        $eDisciplines = $domDocument->createElement('disciplines');
+        $eQuestion->appendChild($eDisciplines);
+        foreach ($aDisciplines as $nCase => $nIdDisci) {
+            $eDiscipline = $domDocument->createElement('discipline');
+
+            $eDisciplineText = $domDocument->createTextNode($nIdDisci);
+
+            $eDisciplines->appendChild($eDiscipline);
+            $eDiscipline->appendChild($eDisciplineText);
+        }
 
         $eChoice = $domDocument->createElement('choice');
         $eQuestion->appendChild($eChoice);
