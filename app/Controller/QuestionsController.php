@@ -42,8 +42,6 @@ class QuestionsController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			var_dump($this->request->data);
-			die();
 			$this->Question->create();
 			if ($this->Question->save($this->request->data)) {
 				$this->Session->setFlash(__('The question has been saved'));
