@@ -43,7 +43,14 @@ class QcusController extends QuestionsController implements iQuestions {
                         $nCpt ++;
                     }
                 }
-                else{
+                else if("disciplines" == $ATTR){
+                    $nCpt = 0;
+                    foreach ($VAL as $DISCIPLINE => $VALUE) {
+                        $this->aFileXML['question']['disciplines'][$nCpt] = (string)$VALUE;
+                        $nCpt ++;
+                    }
+                }
+                else {
                     $this->aFileXML['question'][(string)$ATTR] = (string)$VAL;
                 }
             }

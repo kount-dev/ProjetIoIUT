@@ -79,8 +79,8 @@ class QuestionsController extends AppController {
 		            }
 		           	else if("disciplines" == $ATTR){
 	                    $nCpt = 0;
-    	                foreach ($VAL as $OPTION => $CHOICE) {
-        	            	$aDataTmp['Discipline']["Discipline"][$nCpt] = (string)$CHOICE;
+    	                foreach ($VAL as $DISCIPLINE => $VALUE) {
+        	            	$aDataTmp['Discipline']["Discipline"][$nCpt] = (string)$VALUE;
                     	    $nCpt ++;
 		           		}
 	            	}
