@@ -92,6 +92,8 @@ class QcusController extends QuestionsController implements iQuestions {
         $this->loadModel('User');
         parent::saveQuestion($theQuestion);
 
+        var_dump($theQuestion);
+
         $data = array();
         $data['id'] = $this->Question->id;
         $data['author'] = $this->User->field('username', array('id' => $theQuestion['Question']['user_id']));
@@ -100,6 +102,7 @@ class QcusController extends QuestionsController implements iQuestions {
         $data['choices'] = $theQuestion['content']['choices'];
         $data['rep'] = $theQuestion['content']['answer'];
         $data['points'] = $theQuestion['Question']['points'];
+        $data['disciplines'] = $theQuestion['Discipline'];
 
         QcusController::generationXML($data);
 
@@ -122,6 +125,7 @@ class QcusController extends QuestionsController implements iQuestions {
         $aChoice =  $aData['choices'];
         $nAnswer = $aData['rep'];
         $nPoints = $aData['points'];
+        $aDisciplines = $aData['disciplines'];
 
         $domDocument = new DomDocument('1.0', "UTF-8");
         $domDocument->formatOutput = true;
