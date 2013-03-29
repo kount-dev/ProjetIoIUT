@@ -19,7 +19,7 @@ function addQuestionType(elt){
 	var fieldset = $(elt).parent().parent().attr('id');
 	$.ajax({
 	    type: "post",
-	    url: "../"+ typeQuestion +"s/generation",
+	    url: "../"+ typeQuestion +"/generation",
 	    data: {f:fieldset},
 	    success: function(res) {
 	    	$("#"+fieldset+" .typeQuestion").html(res);

@@ -79,25 +79,40 @@ class QcusController extends QuestionsController implements iQuestions {
         }
     }
 
-    public function saveQuestion($data){
-        var_dump($this->request->data);
-        //$this->Session->setFlash(__('We pass saveQuestion'));
-        parent::saveQuestion();
+    public function saveQuestion($theQuestion){
+        $this->loadModel('Question');
+        $this->loadModel('User');
+        parent::saveQuestion($theQuestion);
+
+        $data = array();
+        $data['id'] = $this->Question->id;
+        $data['author'] = $this->User->field('username', array('id' => $theQuestion['Question']['user_id']));
+        $data['difficulty'] = $theQuestion['Question']['difficulty'];
+        $data['text'] = $theQuestion['content']['question'];
+        $data['choices'] = $theQuestion['content']['choices'];
+        $data['rep'] = $theQuestion['content']['answer'];
+        $data['points'] = $theQuestion['Question']['points'];
+
+        QcusController::generationXML($data);
+
+        $this->Question->saveField('namefile', 'qcu_'.$data['id'].'_'.date("Y-m-d").'.xml');
+        $this->layout = false;
         $this->render(false);
+
     }
 
 /**
 *
 *
 **/
-    public function generationXML($aDAta = array()){
-        $nId = 3; //$aData['id'];
-        $sAuthor = "AuteurTest"; //$aData['author']
-        $nDifficulty = 3; //$aData['difficulty']
-        $sTextQuestion = "2+2 = ?"; //$aData['text']
-        $aChoice = array("0" => "test", "1" => "test2", "2" => "test3", "3" => 4); //$aData['Choice']
-        $nAnswer = 3; //$aData['Rep']
-        $nPoints = 1; //$aData['points']
+    public function generationXML($aData = array()){
+        $nId = $aData['id'];
+        $sAuthor = $aData['author'];
+        $nDifficulty = $aData['difficulty'];
+        $sTextQuestion = $aData['text'];
+        $aChoice =  $aData['choices'];
+        $nAnswer = $aData['rep'];
+        $nPoints = $aData['points'];
 
         $domDocument = new DomDocument('1.0', "UTF-8");
         $domDocument->formatOutput = true;

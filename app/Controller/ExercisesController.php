@@ -125,15 +125,16 @@ class ExercisesController extends AppController {
  */
 public function generation(){
 	if ($this->request->is('post')) {
-		var_dump($this->request->data);
 
-		$this->loadModel('Question');
-		$this->Question->create();
+		$this->loadModel('QuestionType');
+
 		$this->Exercise->create();
-
-		if ($this->Exercise->save($this->request->data['Exercise']) &&
-			$this->Question->saveAll($this->request->data['Question']))
+		if ($this->Exercise->save($this->request->data['Exercise']))
 		{
+			foreach ($this->request->data['Question'] as $theQuestion) {
+				$controller = $this->QuestionType->field('controller', array('id = ' => $theQuestion['Question']['question_type_id']))."Controller";
+				$controller::saveQuestion($theQuestion);
+			}
 			$this->Session->setFlash(__('The exercise has been saved'));
 			$this->redirect(array('action' => 'index'));
 		} else {

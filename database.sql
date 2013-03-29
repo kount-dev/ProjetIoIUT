@@ -202,7 +202,7 @@ CREATE TABLE `question_types` (
 
 /*Data for the table `question_types` */
 
-insert  into `question_types`(`id`,`name`,`controller`,`created`,`modified`) values (1,'Question Ã  choix unique','Qcu','2013-03-22 15:23:03','2013-03-22 15:23:03'),(2,'Question ouverte','Qo','2013-03-22 15:23:49','2013-03-22 15:23:49');
+insert  into `question_types`(`id`,`name`,`controller`,`created`,`modified`) values (1,'Question Ã  choix unique','Qcus','2013-03-22 15:23:03','2013-03-22 15:23:03'),(2,'Question ouverte','Qos','2013-03-22 15:23:49','2013-03-22 15:23:49');
 
 /*Table structure for table `questions` */
 

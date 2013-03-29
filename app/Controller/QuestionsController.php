@@ -129,10 +129,9 @@ class QuestionsController extends AppController {
     	}
     }
 
-    public function saveQuestion(){
-    	$this->Session->setFlash(__('We pass Question.saveQuestion'));
+    public function saveQuestion($theQuestion){
     	$this->Question->create();
-		$this->Question->saveMany($this->request->data->Question);
+        $this->Question->save($theQuestion);
 	}
 }
 
