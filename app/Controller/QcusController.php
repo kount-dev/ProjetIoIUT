@@ -79,6 +79,7 @@ class QcusController extends QuestionsController implements iQuestions {
         }
     }
 
+
     public function saveQuestion($theQuestion){
         $this->loadModel('Question');
         $this->loadModel('User');
@@ -105,6 +106,7 @@ class QcusController extends QuestionsController implements iQuestions {
 *
 *
 **/
+
     public function generationXML($aData = array()){
         $nId = $aData['id'];
         $sAuthor = $aData['author'];
@@ -118,14 +120,9 @@ class QcusController extends QuestionsController implements iQuestions {
         $domDocument->formatOutput = true;
         $eQuestion = $domDocument->createElement('question');
         $eQuestionType = $domDocument->createAttribute('type');
-        $eQuestionType->value = "choixUnique";
+        $eQuestionType->value = "qcu";
         $domDocument->appendChild($eQuestion);
         $eQuestion->appendChild($eQuestionType);
-
-        $eId = $domDocument->createElement('id');
-        $eIdText = $domDocument->createTextNode(trim($nId));
-        $eQuestion->appendChild($eId);
-        $eId->appendChild($eIdText);
 
         $eAuthor = $domDocument->createElement('author');
         $eAuthorText = $domDocument->createTextNode(trim($sAuthor));
@@ -141,6 +138,17 @@ class QcusController extends QuestionsController implements iQuestions {
         $eTextQuestionText = $domDocument->createCDATASection($sTextQuestion);
         $eQuestion->appendChild($eTextQuestion);
         $eTextQuestion->appendChild($eTextQuestionText);
+
+        $eDisciplines = $domDocument->createElement('disciplines');
+        $eQuestion->appendChild($eDisciplines);
+        foreach ($aDisciplines as $nCase => $nIdDisci) {
+            $eDiscipline = $domDocument->createElement('discipline');
+
+            $eDisciplineText = $domDocument->createTextNode($nIdDisci);
+
+            $eDisciplines->appendChild($eDiscipline);
+            $eDiscipline->appendChild($eDisciplineText);
+        }
 
         $eChoice = $domDocument->createElement('choice');
         $eQuestion->appendChild($eChoice);

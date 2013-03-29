@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<question type="qcu">
+  <author>quentin</author>
+  <difficulty>3</difficulty>
+  <text><![CDATA[2+2 = ?]]></text>
+  <disciplines>
+    <discipline>1</discipline>
+    <discipline>4</discipline>
+  </disciplines>
+  <choice>
+    <option num="0"><![CDATA[test]]></option>
+    <option num="1"><![CDATA[test2]]></option>
+    <option num="2"><![CDATA[test3]]></option>
+    <option num="3"><![CDATA[4]]></option>
+  </choice>
+  <answer>3</answer>
+  <points>1</points>
+</question>
