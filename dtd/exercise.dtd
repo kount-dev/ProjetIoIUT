@@ -1,8 +1,22 @@
-<!ELEMENT exercise (author, name, minimum_points, disciplines, opening_date, closing_date)>
+<!ELEMENT exercise (author, name, minimum_points, disciplines, opening_date, closing_date, questions)>
 <!ELEMENT disciplines (discipline+)>
+<!ELEMENT questions (question+)>
+
+<!ELEMENT question ANY>
 <!ELEMENT author (#PCDATA)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT minimum_points (#PCDATA)>
 <!ELEMENT discipline (#PCDATA)>
 <!ELEMENT opening_date (#PCDATA)>
 <!ELEMENT closing_date (#PCDATA)>
+
+
+<!ELEMENT difficulty (#PCDATA)>
+<!ELEMENT text (#PCDATA)>
+<!ELEMENT option (#PCDATA)>
+<!ELEMENT answer (#PCDATA)>
+<!ELEMENT points (#PCDATA)>
+<!ELEMENT choice (option+)>
+
+<!ATTLIST option num CDATA #IMPLIED>
+<!ATTLIST question type CDATA #IMPLIED> 

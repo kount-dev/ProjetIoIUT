@@ -152,7 +152,7 @@ public function upload(){
 	if ($this->request->is('post') && isset($this->request->data['Exercise']['xmlFile'])) {
 		$file = $this->request->data['Exercise']['xmlFile']['tmp_name'];
 
-		// if($this->Xml->XMLIsValide('exercise', $file, "../../dtd/exercise.dtd")){
+		if($this->Xml->XMLIsValide('exercise', $file, "../../dtd/exercise.dtd")){
 			$oXml = new XMLReader();
 			$oXml->open($file);
 
@@ -180,11 +180,10 @@ public function upload(){
 
 			// Enregistrement total
 			if($VarTmp){
+				
+				$nIdLastQuestion = $this->Exercise->Question->field('id',array(), 'created DESC');
 				for($i = 1; $i < $nCtp; $i++){
-					$aDataTmp['Question']["Question"][$i-1] = $this->Exercise->Question->field('id',array(), 'created DESC')+1;
-					if(!$Question->saveUploadQuestion('../../uploads/QuestionTemporaire'.$i.'.xml', true)){	
-						$VarTmp = false;
-					}
+					$aDataTmp['Question']["Question"][$i-1] = $nIdLastQuestion+$i;
 				}
 
 				try{$oFileXML = simplexml_load_file($file);}
@@ -206,18 +205,28 @@ public function upload(){
 	   			$this->loadModel('User');
 
 		        $aDataTmp['Exercise']['user_id'] = $this->User->field('id', array('username' => $aDataTmp['Exercise']['author']));
-		        sleep(0.5);
 
 				$this->Exercise->create();
-				if ($this->Exercise->save($aDataTmp) && $VarTmp){
-					$this->Session->setFlash(__('The exercise has been saved'));
-					$this->redirect(array('action' => 'index'));
+				if ($this->Exercise->save($aDataTmp)){
+					
+					for($i = 1; $i < $nCtp; $i++){
+						if(!$Question->saveUploadQuestion('../../uploads/QuestionTemporaire'.$i.'.xml', true)){	
+							$VarTmp = false;
+						}
+					}
+					if($VarTmp){
+						$this->Session->setFlash(__('The exercise has been saved'));
+						$this->redirect(array('action' => 'index'));
+					}
+					else{
+						$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
+					}
 				}
 				else{
-					$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
+					$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
 				}
 			}
-		// }	
+		}	
 	}
 }
 

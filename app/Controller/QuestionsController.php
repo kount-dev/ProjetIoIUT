@@ -180,7 +180,6 @@ class QuestionsController extends AppController {
 		$this->Session->setFlash(__('Question was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-
 /**
  *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher
  *pour la generation
