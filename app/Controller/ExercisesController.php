@@ -1,6 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('QcusController', 'Controller');
+App::uses('QuestionsController', 'Controller');
 /**
  * Exercises Controller
  *
@@ -132,7 +133,7 @@ public function generation(){
 		if ($this->Exercise->save($this->request->data['Exercise']))
 		{
 			foreach ($this->request->data['Question'] as $theQuestion) {
-				$controller = $this->QuestionType->field('controller', array('id = ' => $theQuestion['Question']['question_type_id']))."Controller";
+				$controller = $this->QuestionType->field('controller', array('id = ' => $theQuestion['Question']['question_type_id']))."sController";
 				$controller::saveQuestion($theQuestion);
 			}
 			$this->Session->setFlash(__('The exercise has been saved'));
@@ -145,6 +146,79 @@ public function generation(){
 	$disciplines = $this->Exercise->Discipline->find('list');
 	$author = $this->Auth->user('id');
 	$this->set(compact('disciplines', 'author'));
+}
+
+public function upload(){
+	if ($this->request->is('post') && isset($this->request->data['Exercise']['xmlFile'])) {
+		$file = $this->request->data['Exercise']['xmlFile']['tmp_name'];
+
+		// if($this->Xml->XMLIsValide('exercise', $file, "../../dtd/exercise.dtd")){
+			$oXml = new XMLReader();
+			$oXml->open($file);
+
+			// Récupération des Questions
+			$nCtp = 0;
+		 	while ($oXml->read()) {
+		 		if($oXml->name == "question" && $oXml->nodeType == XMLReader::ELEMENT){
+			 		$test = new XMLWriter();
+			 		$nCtp++;
+		 			$test->openURI('../../uploads/QuestionTemporaire'.$nCtp.'.xml');
+		 			$test->writeRaw($oXml->readOuterXML());
+		 		}
+			}
+			$VarTmp = true;
+			$aDataTmp= array();
+			$Question = new QuestionsController();
+
+			// Validation des questions
+			for($i = 1; $i < $nCtp; $i++){
+				$aData = $Question->getQuestionType('../../uploads/QuestionTemporaire'.$i.'.xml');
+				if(!$this->Xml->XMLIsValide('question','../../uploads/QuestionTemporaire'.$i.'.xml','../../dtd/'.$aData['type'].'.dtd')){	
+					$VarTmp = false;
+				}
+			}
+
+			// Enregistrement total
+			if($VarTmp){
+				for($i = 1; $i < $nCtp; $i++){
+					$aDataTmp['Question']["Question"][$i-1] = $this->Exercise->Question->field('id',array(), 'created DESC')+1;
+					if(!$Question->saveUploadQuestion('../../uploads/QuestionTemporaire'.$i.'.xml', true)){	
+						$VarTmp = false;
+					}
+				}
+
+				try{$oFileXML = simplexml_load_file($file);}
+		        catch(Exception $e){return "Erreur de chargement du fichier";}
+
+		        foreach ($oFileXML as $ATTR => $VAL) {
+		            if("disciplines" != $ATTR && "questions" != $ATTR){
+		            	$aDataTmp['Exercise'][(string)$ATTR] = (string)$VAL;
+		            }
+		           	else if("disciplines" == $ATTR){
+		                $nCpt = 0;
+		                foreach ($VAL as $DISCIPLINE => $VALUE) {
+			            	$aDataTmp['Discipline']["Discipline"][$nCpt] = (string)$VALUE;
+		            	    $nCpt ++;
+		           		}
+		        	}
+		        }
+	   			
+	   			$this->loadModel('User');
+
+		        $aDataTmp['Exercise']['user_id'] = $this->User->field('id', array('username' => $aDataTmp['Exercise']['author']));
+		        sleep(0.5);
+
+				$this->Exercise->create();
+				if ($this->Exercise->save($aDataTmp) && $VarTmp){
+					$this->Session->setFlash(__('The exercise has been saved'));
+					$this->redirect(array('action' => 'index'));
+				}
+				else{
+					$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
+				}
+			}
+		// }	
+	}
 }
 
 /**

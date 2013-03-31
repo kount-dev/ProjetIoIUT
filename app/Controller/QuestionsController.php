@@ -7,7 +7,6 @@ App::uses('AppController', 'Controller');
  * @property Question $Question
  */
 class QuestionsController extends AppController {
-	public $components = array('Xml');
 
 	// protected $oFileXMLImport;
 /**
@@ -59,51 +58,77 @@ class QuestionsController extends AppController {
 
 	public function upload(){
 		if ($this->request->is('post') && isset($this->request->data['Question']['xmlFile'])) {
-			$aData = array();
-            try{
-                $oFileXML = simplexml_load_file($this->request->data['Question']['xmlFile']['tmp_name']);
-            	foreach ($oFileXML->attributes() as $TYPE => $TYPEVAL) {
-	                $aData[(string)$TYPE] = (string)$TYPEVAL;
+			if($this->saveUploadQuestion($this->request->data['Question']['xmlFile']['tmp_name'], false)){			
+				$this->Session->setFlash(__('The question has been saved'));
+				$this->redirect(array('action' => 'index'));
+			}
+			else{
+				$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
+			}
+		}
+	}
+
+	public function getQuestionType($sNameFile){
+		$aData = array();
+		try{
+            $oFileXML = simplexml_load_file($sNameFile);
+        	foreach ($oFileXML->attributes() as $TYPE => $TYPEVAL) {
+                $aData[(string)$TYPE] = (string)$TYPEVAL;
+            }
+        	return $aData;
+        }
+        catch(Exception $e){
+            return "Erreur de chargement du fichier";
+        }
+	}
+
+	public function checkDtdUpload($sNameFile, $sType){
+		return $this->Xml->XMLIsValide('question',$sNameFile,'../../dtd/'.$sType.'.dtd');	
+	}
+
+	public function saveUploadQuestion($sNameFile, $ifTestDtd){
+		$aData = $this->getQuestionType($sNameFile);
+		
+        if($ifTestDtd || $this->checkDtdUpload($sNameFile,$aData['type'])){	
+
+        	try{$oFileXML = simplexml_load_file($sNameFile);}
+	        catch(Exception $e){return "Erreur de chargement du fichier";}
+
+			$aDataTmp = array();
+			$this->loadModel('User');
+	        $this->loadModel('QuestionType');
+	        $this->loadModel('Question');
+
+	        foreach ($oFileXML as $ATTR => $VAL) {
+	            if("author" == $ATTR || "points" == $ATTR || "difficulty" == $ATTR){
+	            	$aDataTmp['Question'][(string)$ATTR] = (string)$VAL;
 	            }
-            }
-            catch(Exception $e){
-                return "Erreur de chargement du fichier";
-            }
-            if($this->Xml->XMLIsValide($this->request->data['Question']['xmlFile']['tmp_name'],'../../dtd/'.$aData['type'].'.dtd')){
+	           	else if("disciplines" == $ATTR){
+	                $nCpt = 0;
+	                foreach ($VAL as $DISCIPLINE => $VALUE) {
+		            	$aDataTmp['Discipline']["Discipline"][$nCpt] = (string)$VALUE;
+	            	    $nCpt ++;
+	           		}
+	        	}
+	        }
+   
+	        $nUser = $this->User->field('id', array('username' => $aDataTmp['Question']['author']));
+	        $nQuestionTypes = $this->QuestionType->field('id', array('controller' => $aData['type']));
+	        sleep(0.5);
+	        $nIdNew = $this->Question->field('id',array(), 'created DESC')+1;
+			
+			$aDataTmp['Question']['namefile'] = $aData['type']."_".$nIdNew."_".date("Y-m-d").".xml";
+			$aDataTmp['Question']['user_id'] = $nUser;
+			$aDataTmp['Question']['question_type_id'] = $nQuestionTypes;
 
-            	$aDataTmp = array();
 
-	            foreach ($oFileXML as $ATTR => $VAL) {
-		            if("author" == $ATTR || "points" == $ATTR || "difficulty" == $ATTR){
-		            	$aDataTmp['Question'][(string)$ATTR] = (string)$VAL;
-		            }
-		           	else if("disciplines" == $ATTR){
-	                    $nCpt = 0;
-    	                foreach ($VAL as $DISCIPLINE => $VALUE) {
-        	            	$aDataTmp['Discipline']["Discipline"][$nCpt] = (string)$VALUE;
-                    	    $nCpt ++;
-		           		}
-	            	}
-	            }
-
-		        $nUser = $this->Question->User->field('id', array('username' => $aDataTmp['Question']['author']));
-		        $nQuestionTypes = $this->Question->QuestionType->field('id', array('controller' => $aData['type']));
-		        $nIdNew = $this->Question->field('id',array(), 'created DESC')+1;
-				
-				// $aDataTmp['Question']['name'] = $nIdNew;
-				$aDataTmp['Question']['namefile'] = $aData['type']."_".$nIdNew."_".date("Y-m-d").".xml";
-				$aDataTmp['Question']['user_id'] = $nUser;
-				$aDataTmp['Question']['question_type_id'] = $nQuestionTypes;
-				
-				$this->Question->create();
-				if ($this->Question->save($aDataTmp)) {
-					$this->Session->setFlash(__('The question has been saved'));
-					move_uploaded_file($this->request->data['Question']['xmlFile']['tmp_name'], "../../uploads/questions/".$aData['type']."_".$nIdNew."_".date("Y-m-d").".xml");
-					$this->redirect(array('action' => 'index'));
-				} else {
-					$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
-				}	
-            }
+			$this->Question->create();
+			if ($this->Question->save($aDataTmp)) {
+				rename($sNameFile, "../../uploads/questions/".$aData['type']."_".$nIdNew."_".date("Y-m-d").".xml");
+				return true;
+			} else {
+				return false;
+			}	
 		}
 	}
 /**

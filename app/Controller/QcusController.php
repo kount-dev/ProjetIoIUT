@@ -3,8 +3,7 @@ App::uses('QuestionsController', 'Controller');
 App::uses('iQuestions', 'Interfaces');
 
 class QcusController extends QuestionsController implements iQuestions {
-    public $component = array('Xml');
-
+    public $uses = array();
     protected $aFileXML = null;
 /**
  * index method
@@ -61,7 +60,7 @@ class QcusController extends QuestionsController implements iQuestions {
  *@desc Cette fonction permet l'affichage d'une question
  */
     public function displayXmlToHtml($sPath_fileXML = ""){
-        $this->load('../../uploads/questions/qcu_3_2013-03-25.xml');
+        $this->load('../../uploads/questions/qcu_12_2013-03-28.xml');
         if ($this->request->is('post')){
             var_dump('Submit QCU');
         }

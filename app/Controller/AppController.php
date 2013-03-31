@@ -40,7 +40,8 @@ class AppController extends Controller {
                 'Actions' => array('actionPath' => 'controllers')
             )
         ),
-        'Session'
+        'Session',
+        'Xml'
     );
     public $helpers = array('Html', 'Form', 'Session');
 
