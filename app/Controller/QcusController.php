@@ -91,11 +91,7 @@ class QcusController extends QuestionsController implements iQuestions {
         $this->loadModel('User');
         parent::saveQuestion($theQuestion);
 
-<<<<<<< HEAD
-        var_dump($theQuestion);
-=======
         // var_dump($theQuestion);
->>>>>>> Merge
 
         $data = array();
         $data['id'] = $this->Question->id;
