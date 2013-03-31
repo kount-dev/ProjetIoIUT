@@ -1,0 +1,8 @@
+<!ELEMENT exercise (author, name, minimum_points, disciplines, opening_date, closing_date)>
+<!ELEMENT disciplines (discipline+)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT minimum_points (#PCDATA)>
+<!ELEMENT discipline (#PCDATA)>
+<!ELEMENT opening_date (#PCDATA)>
+<!ELEMENT closing_date (#PCDATA)>
