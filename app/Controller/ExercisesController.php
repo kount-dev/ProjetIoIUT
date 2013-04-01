@@ -230,6 +230,12 @@ public function upload(){
 	}
 }
 
+
+public function displayXp(){
+	$this->loadModel('User');
+	$this->Exercise->recursive = 0;
+	$this->set('exercises', $this->paginate(array('minimum_points <=' => $this->User->field('xp', array('id' => $this->Auth->user('id'))))));
+}
 /**
  *@desc cette fonction valide le module a partir des paramètres passés
  *@param array $param ('reponses'=>array(), 'path'=>string)
