@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('QcusController', 'Controller');
 
 /**
  * Questions Controller
@@ -129,6 +130,22 @@ class QuestionsController extends AppController {
 			} else {
 				return false;
 			}	
+		}
+	}
+
+	public function display($id = null){
+		if (!$this->Question->exists($id)) {
+			throw new NotFoundException(__('Invalid question'));
+		}
+		else{
+			$sNamefile = $this->Question->field('namefile', array('id' => $id));
+
+			$this->loadModel('QuestionType');
+			$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $id))))."sController";
+			$Question = new $sType();
+			$_HTML = $Question->displayXmlToHtml($sNamefile);
+			var_dump($_HTML);
+			$this->set('HTML', $_HTML);
 		}
 	}
 /**

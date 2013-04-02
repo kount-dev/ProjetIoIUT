@@ -236,6 +236,22 @@ public function displayXp(){
 	$this->Exercise->recursive = 0;
 	$this->set('exercises', $this->paginate(array('minimum_points <=' => $this->User->field('xp', array('id' => $this->Auth->user('id'))))));
 }
+
+public function display($id = null){
+	if (!$this->Exercise->exists($id)) {
+		throw new NotFoundException(__('Invalid exercise'));
+	}
+	else{
+		$this->loadModel('ExercisesQuestion');
+		$listQuestion = $this->ExercisesQuestion->find('list', array('fields' => array('question_id'),'conditions' => array('exercise_id' => $id)));
+		$_HTML = "";
+		foreach ($listQuestion as $value) {
+			$Question = new QuestionsController();
+			$_HTML .= $Question->display($value);	
+		}
+		$this->set('HTML', $_HTML);
+	}
+}
 /**
  *@desc cette fonction valide le module a partir des paramètres passés
  *@param array $param ('reponses'=>array(), 'path'=>string)
