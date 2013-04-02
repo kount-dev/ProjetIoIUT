@@ -115,13 +115,12 @@ class QuestionsController extends AppController {
    
 	        $nUser = $this->User->field('id', array('username' => $aDataTmp['Question']['author']));
 	        $nQuestionTypes = $this->QuestionType->field('id', array('controller' => $aData['type']));
-	        sleep(0.5);
+	        sleep(1);
 	        $nIdNew = $this->Question->field('id',array(), 'created DESC')+1;
 			
 			$aDataTmp['Question']['namefile'] = $aData['type']."_".$nIdNew."_".date("Y-m-d").".xml";
 			$aDataTmp['Question']['user_id'] = $nUser;
 			$aDataTmp['Question']['question_type_id'] = $nQuestionTypes;
-
 
 			$this->Question->create();
 			if ($this->Question->save($aDataTmp)) {
@@ -142,10 +141,12 @@ class QuestionsController extends AppController {
 
 			$this->loadModel('QuestionType');
 			$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $id))))."sController";
-			$Question = new $sType();
+			$Question = new QcusController();
 			$_HTML = $Question->displayXmlToHtml($sNamefile);
 			var_dump($_HTML);
 			$this->set('HTML', $_HTML);
+			// $this->layout= false;
+			// $this->render(false);
 		}
 	}
 /**
