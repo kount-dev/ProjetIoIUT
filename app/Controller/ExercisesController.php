@@ -1,6 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-App::uses('QcusController', 'Controller');
+App::uses('Folder', 'Question');
 /**
  * Exercises Controller
  *
@@ -111,12 +111,21 @@ class ExercisesController extends AppController {
  *@return true|false en fonction du succès ou non du chargement
  */
     public function load($aParam){}
+
 /**
- *@desc Cette fonction permet d'executer un module, elle doit retourner l'HTML a afficher
- *pour l'execution
- *@return le contenu HTML dans un string
+ *@desc Cette fonction permet l'affichage d'une question
  */
-    public function executeToHTML(){}
+    public function displayXmlToHtml($idExercise){
+
+        $exercice = $this->Exercise->find('all', array('conditions' => array('id ==' => $idExercise)));
+  //      	var_dump($exercise);
+		// $questions = $this->Exercise->find('all');
+
+  //       $this->set('data',$this->aFileXML);
+  //       $this->set(compact('exercice', 'questions'));
+        $this->render(false);
+    }
+
 
 /**
  *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher
@@ -141,7 +150,7 @@ public function generation(){
 			$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
 		}
 	}
-
+	//var_dump(App::objects('Controller'));
 	$disciplines = $this->Exercise->Discipline->find('list');
 	$author = $this->Auth->user('id');
 	$this->set(compact('disciplines', 'author'));
