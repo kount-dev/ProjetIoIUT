@@ -107,6 +107,17 @@ class QcusController extends QuestionsController implements iQuestions {
 
     }
 
+    public function addChoice(){
+        if ($this->request->is('post')){
+            $tab = split('_',$this->request->data['f']);
+            $num_question = $tab[1];
+            $nb_choice = $this->request->data['n'];
+            $this->set(compact('nb_choice','num_question'));
+            $this->layout = false;
+            $this->render();
+        }
+    }
+
 /**
 *
 *
