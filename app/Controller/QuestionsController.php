@@ -189,8 +189,12 @@ class QuestionsController extends AppController {
 		if (!$this->Question->exists()) {
 			throw new NotFoundException(__('Invalid question'));
 		}
+		$namefile = $this->Question->field('namefile', array('id' => $id));
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Question->delete()) {
+			if(file_exists('../../uploads/questions/'.$namefile)){
+				unlink('../../uploads/questions/'.$namefile);
+			}
 			$this->Session->setFlash(__('Question deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
