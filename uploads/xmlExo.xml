@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+	<author>quentin</author>
+	<name>Exdsgfdghfedfgfdhfd sfcxbvcsdsfgdssiddfdsse </name>
+	<minimum_points>34</minimum_points>
+	<disciplines>
+		<discipline>2</discipline>
+		<discipline>4</discipline>
+	</disciplines>
+	<opening_date>2013-03-30 15:20:00</opening_date>
+	<closing_date>2013-04-15 15:20:00</closing_date>
+	<questions>
+		<question type="qcu">
+		  <author>quentin</author>
+		  <difficulty>3</difficulty>
+		  <text><![CDATA[2+2 = ?]]></text>
+		  <disciplines>
+		    <discipline>1</discipline>
+		    <discipline>4</discipline>
+		  </disciplines>
+		  <choice>
+		    <option num="0"><![CDATA[test]]></option>
+		    <option num="1"><![CDATA[test2]]></option>
+		    <option num="2"><![CDATA[test3]]></option>
+		    <option num="3"><![CDATA[4]]></option>
+		  </choice>
+		  <answer>3</answer>
+		  <points>1</points>
+		</question>
+		<question type="qcu">
+		  <author>quentin</author>
+		  <difficulty>3</difficulty>
+		  <text><![CDATA[2+2 = ?]]></text>
+		  <disciplines>
+		    <discipline>2</discipline>
+		    <discipline>4</discipline>
+		  </disciplines>
+		  <choice>
+		    <option num="0"><![CDATA[test]]></option>
+		    <option num="1"><![CDATA[test2]]></option>
+		    <option num="2"><![CDATA[test3]]></option>
+		    <option num="3"><![CDATA[4]]></option>
+		  </choice>
+		  <answer>3</answer>
+		  <points>1</points>
+		</question>
+		<question type="qcu">
+		  <author>quentin</author>
+		  <difficulty>3</difficulty>
+		  <text><![CDATA[2+2 = ?]]></text>
+		  <disciplines>
+		    <discipline>3</discipline>
+		    <discipline>4</discipline>
+		  </disciplines>
+		  <choice>
+		    <option num="0"><![CDATA[test]]></option>
+		    <option num="1"><![CDATA[test2]]></option>
+		    <option num="2"><![CDATA[test3]]></option>
+		    <option num="3"><![CDATA[4]]></option>
+		  </choice>
+		  <answer>3</answer>
+		  <points>1</points>
+		</question>
+		<question></question>
+	</questions>
+</exercise>
