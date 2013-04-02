@@ -11,23 +11,3 @@
     echo "<input class='add_choice' value='Add choice' type='button' onclick='javascript:addChoice(this);'>";
 ?>
 </fieldset>
-<script type="text/javascript">
-$(document).ready(function(){
-
-	// $('.add_choice').click(function(){
-	// 	var nb_choice = $(this).parent().find('.nb_choice').val();
-	// 	var fieldset = $(this).parent().attr('id');
-	// 	console.log(nb_choice);
-	// 	$.ajax({
-	// 	    type: "post",
-	// 	    url: "../qcus/addChoice",
-	// 	    data: {n: nb_choice, f: fieldset},
-	// 	    success: function(res) {
-	// 	        $('.add_choice').before(res);
-	// 	        $('.nb_choice').val(parseInt(nb_choice)+1);
-	// 	    }
-	// 	});
-	// });
-});
-
-</script>
