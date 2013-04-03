@@ -1,8 +1,8 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('Folder', 'Question');
-//App::import('QuestionsController', 'Controller');
-//App::import('Controller/Question', 'QcusController');
+App::import('QuestionsController', 'Controller');
+App::import('Controller/Question', 'QcusController');
 
 /**
  * Exercises Controller
@@ -255,13 +255,27 @@ public function display($id = null){
 	}
 	else{
 		$this->loadModel('ExercisesQuestion');
-		$listQuestion = $this->ExercisesQuestion->find('list', array('fields' => array('question_id'),'conditions' => array('exercise_id' => $id)));
-		$_HTML = "";
-		foreach ($listQuestion as $value) {
-			$Question = new QuestionsController();
-			$_HTML .= $Question->display($value);
+		$this->loadModel('Question');
+		$this->loadModel('QuestionType');
+
+		$alistQuestion = $this->ExercisesQuestion->find('list', array('fields' => array('question_id'),'conditions' => array('exercise_id' => $id)));
+		
+		$s_HTML = "";
+		foreach ($alistQuestion as $nId) {
+			if (!$this->Question->exists($nId)) {
+				throw new NotFoundException(__('Invalid question'));
+			}
+			else{
+				$sNamefile = $this->Question->field('namefile', array('id' => $nId));
+				$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $nId))))."sController";
+				$Question = new $sType();
+				$oFileXML = $Question->displayXmlToHtml($sNamefile);
+				$this->set('data', $oFileXML);
+				$s_HTML .= $this->render('../qcus/display_xml_to_html',false);
+			}
 		}
-		$this->set('HTML', $_HTML);
+		$this->set(compact('s_HTML'));
+		$this->render('display');
 	}
 }
 /**

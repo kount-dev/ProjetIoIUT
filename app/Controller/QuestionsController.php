@@ -135,24 +135,7 @@ class QuestionsController extends AppController {
 			}
 		}
 	}
-
-	public function display($id = null){
-		if (!$this->Question->exists($id)) {
-			throw new NotFoundException(__('Invalid question'));
-		}
-		else{
-			$sNamefile = $this->Question->field('namefile', array('id' => $id));
-
-			$this->loadModel('QuestionType');
-			$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $id))))."sController";
-			$Question = new QcusController();
-			$_HTML = $Question->displayXmlToHtml($sNamefile);
-			var_dump($_HTML);
-			$this->set('HTML', $_HTML);
-			// $this->layout= false;
-			// $this->render(false);
-		}
-	}
+		
 /**
  * edit method
  *
@@ -233,7 +216,6 @@ class QuestionsController extends AppController {
     }
 
     public function saveQuestion($theQuestion){
-    	        var_dump($this);
     	$this->Question->create();
         $this->Question->save($theQuestion);
 	}

@@ -1,2 +1,4 @@
+<?php 
 
-<?php echo $HTML; ?>
+echo $s_HTML;
+?>
