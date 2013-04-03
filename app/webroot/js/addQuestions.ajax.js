@@ -26,3 +26,18 @@ function addQuestionType(elt){
 	    }
 	});
 }
+
+function addChoice(elt){
+	var nb_choice = $(elt).parent().find('.nb_choice').attr('value');
+	var fieldset = $(elt).parent().attr('id');
+	var tab = fieldset.split('_');
+	$.ajax({
+	    type: "post",
+	    url: "../"+tab[0]+"s/addChoice",
+	    data: {n: nb_choice, f: fieldset},
+	    success: function(res) {
+	        $('.add_choice').before(res);
+	        $('.nb_choice').val(parseInt(nb_choice)+1);
+	    }
+	});
+}
