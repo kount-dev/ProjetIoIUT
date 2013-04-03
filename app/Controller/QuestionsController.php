@@ -1,6 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-App::uses('QcusController', 'Controller');
+App::uses('Folder', 'Question');
 
 /**
  * Questions Controller
@@ -19,6 +19,10 @@ class QuestionsController extends AppController {
 		$this->Question->recursive = 0;
 		$this->set('questions', $this->paginate());
 	}
+
+	public function beforeFilter() {
+        parent::beforeFilter();
+    }
 
 /**
  * view method
@@ -59,7 +63,7 @@ class QuestionsController extends AppController {
 
 	public function upload(){
 		if ($this->request->is('post') && isset($this->request->data['Question']['xmlFile'])) {
-			if($this->saveUploadQuestion($this->request->data['Question']['xmlFile']['tmp_name'], false)){			
+			if($this->saveUploadQuestion($this->request->data['Question']['xmlFile']['tmp_name'], false)){
 				$this->Session->setFlash(__('The question has been saved'));
 				$this->redirect(array('action' => 'index'));
 			}
@@ -84,13 +88,13 @@ class QuestionsController extends AppController {
 	}
 
 	public function checkDtdUpload($sNameFile, $sType){
-		return $this->Xml->XMLIsValide('question',$sNameFile,'../../dtd/'.$sType.'.dtd');	
+		return $this->Xml->XMLIsValide('question',$sNameFile,'../../dtd/'.$sType.'.dtd');
 	}
 
 	public function saveUploadQuestion($sNameFile, $ifTestDtd){
 		$aData = $this->getQuestionType($sNameFile);
-		
-        if($ifTestDtd || $this->checkDtdUpload($sNameFile,$aData['type'])){	
+
+        if($ifTestDtd || $this->checkDtdUpload($sNameFile,$aData['type'])){
 
         	try{$oFileXML = simplexml_load_file($sNameFile);}
 	        catch(Exception $e){return "Erreur de chargement du fichier";}
@@ -112,12 +116,12 @@ class QuestionsController extends AppController {
 	           		}
 	        	}
 	        }
-   
+
 	        $nUser = $this->User->field('id', array('username' => $aDataTmp['Question']['author']));
 	        $nQuestionTypes = $this->QuestionType->field('id', array('controller' => $aData['type']));
 	        sleep(0.5);
 	        $nIdNew = $this->Question->field('id',array(), 'created DESC')+1;
-			
+
 			$aDataTmp['Question']['namefile'] = $aData['type']."_".$nIdNew."_".date("Y-m-d").".xml";
 			$aDataTmp['Question']['user_id'] = $nUser;
 			$aDataTmp['Question']['question_type_id'] = $nQuestionTypes;
@@ -129,7 +133,7 @@ class QuestionsController extends AppController {
 				return true;
 			} else {
 				return false;
-			}	
+			}
 		}
 	}
 
@@ -224,6 +228,7 @@ class QuestionsController extends AppController {
     }
 
     public function saveQuestion($theQuestion){
+    	        var_dump($this);
     	$this->Question->create();
         $this->Question->save($theQuestion);
 	}

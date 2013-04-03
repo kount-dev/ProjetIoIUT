@@ -1,7 +1,8 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('Folder', 'Question');
-App::uses('QuestionsController', 'Controller');
+//App::import('QuestionsController', 'Controller');
+//App::import('Controller/Question', 'QcusController');
 
 /**
  * Exercises Controller
@@ -144,7 +145,8 @@ public function generation(){
 		{
 			foreach ($this->request->data['Question'] as $theQuestion) {
 				$controller = $this->QuestionType->field('controller', array('id = ' => $theQuestion['Question']['question_type_id']))."sController";
-				$controller::saveQuestion($theQuestion);
+				$Question = new $controller();
+				$Question->saveQuestion($theQuestion);
 			}
 			$this->Session->setFlash(__('The exercise has been saved'));
 			$this->redirect(array('action' => 'index'));
@@ -152,7 +154,7 @@ public function generation(){
 			$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
 		}
 	}
-	//var_dump(App::objects('Controller'));
+
 	$disciplines = $this->Exercise->Discipline->find('list');
 	$author = $this->Auth->user('id');
 	$this->set(compact('disciplines', 'author'));
