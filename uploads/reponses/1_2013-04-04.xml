@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<answers>
+  <user>quentin</user>
+  <questions>
+    <questionAnswer IdQuestion="1">
+      <answer><![CDATA[2]]></answer>
+    </questionAnswer>
+    <questionAnswer IdQuestion="4">
+      <answer><![CDATA[8]]></answer>
+    </questionAnswer>
+    <questionAnswer IdQuestion="3">
+      <answer><![CDATA[1]]></answer>
+      <answer><![CDATA[2]]></answer>
+      <answer><![CDATA[3]]></answer>
+    </questionAnswer>
+    <questionAnswer IdQuestion="2">
+      <answer><![CDATA[ehjbds]]></answer>
+    </questionAnswer>
+  </questions>
+</answers>

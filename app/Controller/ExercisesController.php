@@ -1,6 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-App::import('QuestionsController', 'Controller');
+App::uses('QuestionsController', 'Controller');
 
 /**
  * Exercises Controller
@@ -240,7 +240,10 @@ public function upload(){
 public function displayXp(){
 	$this->loadModel('User');
 	$this->Exercise->recursive = 0;
-	$this->set('exercises', $this->paginate(array('minimum_points <=' => $this->User->field('xp', array('id' => $this->Auth->user('id'))))));
+	$nXpUser = $this->User->field('xp', array('id' => $this->Auth->user('id')));
+	$this->set('exercises', $this->paginate(array(
+				'minimum_points <= '.$nXpUser.' AND ((`opening_date` = `closing_date) OR (NOW() BETWEEN `opening_date` AND `closing_date))' 
+				)));
 }
 
 public function display($id = null){
@@ -262,11 +265,12 @@ public function display($id = null){
 			}
 			else{
 				$sNamefile = $this->Question->field('namefile', array('id' => $nId));
-				$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $nId))))."sController";
-				$Question = new $sType();
+				$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $nId))));
+				$sController = $sType."sController";
+				$Question = new $sController();
 				$oData = $Question->displayXmlToHtml($sNamefile);
 				$this->set(compact('oData', 'nId'));
-				$s_HTML .= $this->render('../qcus/display_xml_to_html',false);
+				$s_HTML .= $this->render('../'.$sType.'s/display_xml_to_html',false);
 			}
 		}
 
