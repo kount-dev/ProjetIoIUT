@@ -86,8 +86,6 @@ class QcusController extends QuestionsController implements iQuestions {
         $this->loadModel('User');
         parent::saveQuestion($theQuestion);
 
-        // var_dump($theQuestion);
-
         $data = array();
         $data['id'] = $this->Question->id;
         $data['author'] = $this->User->field('username', array('id' => $theQuestion['Question']['user_id']));
@@ -98,12 +96,9 @@ class QcusController extends QuestionsController implements iQuestions {
         $data['points'] = $theQuestion['Question']['points'];
         $data['disciplines'] = $theQuestion['Discipline'];
 
-        QcusController::generationXML($data);
+        $this->generationXML($data);
 
         $this->Question->saveField('namefile', 'qcu_'.$data['id'].'_'.date("Y-m-d").'.xml');
-        $this->layout = false;
-        $this->render(false);
-
     }
 
     public function addChoice(){
@@ -192,9 +187,6 @@ class QcusController extends QuestionsController implements iQuestions {
         $ePoints->appendChild($ePointsText);
 
         $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');
-
-        $this->layout = false;
-        $this->render(false);
     }
 
 /*

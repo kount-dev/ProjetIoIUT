@@ -121,11 +121,6 @@ class ExercisesController extends AppController {
     public function displayXmlToHtml($idExercise){
 
         $exercice = $this->Exercise->find('all', array('conditions' => array('id ==' => $idExercise)));
-  //      	var_dump($exercise);
-		// $questions = $this->Exercise->find('all');
-
-  //       $this->set('data',$this->aFileXML);
-  //       $this->set(compact('exercice', 'questions'));
         $this->render(false);
     }
 
@@ -259,7 +254,7 @@ public function display($id = null){
 		$this->loadModel('QuestionType');
 
 		$alistQuestion = $this->ExercisesQuestion->find('list', array('fields' => array('question_id'),'conditions' => array('exercise_id' => $id)));
-		
+
 		$s_HTML = "";
 		foreach ($alistQuestion as $nId) {
 			if (!$this->Question->exists($nId)) {
