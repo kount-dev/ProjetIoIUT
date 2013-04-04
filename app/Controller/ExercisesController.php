@@ -240,7 +240,10 @@ public function upload(){
 public function displayXp(){
 	$this->loadModel('User');
 	$this->Exercise->recursive = 0;
-	$this->set('exercises', $this->paginate(array('minimum_points <=' => $this->User->field('xp', array('id' => $this->Auth->user('id'))))));
+	$nXpUser = $this->User->field('xp', array('id' => $this->Auth->user('id')));
+	$this->set('exercises', $this->paginate(array(
+				'minimum_points <= '.$nXpUser.' AND ((`opening_date` = `closing_date) OR (NOW() BETWEEN `opening_date` AND `closing_date))' 
+				)));
 }
 
 public function display($id = null){
