@@ -1,6 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-App::import('QuestionsController', 'Controller');
+App::uses('QuestionsController', 'Controller');
 
 /**
  * Exercises Controller
@@ -265,11 +265,12 @@ public function display($id = null){
 			}
 			else{
 				$sNamefile = $this->Question->field('namefile', array('id' => $nId));
-				$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $nId))))."sController";
-				$Question = new $sType();
+				$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $nId))));
+				$sController = $sType."sController";
+				$Question = new $sController();
 				$oData = $Question->displayXmlToHtml($sNamefile);
 				$this->set(compact('oData', 'nId'));
-				$s_HTML .= $this->render('../qcus/display_xml_to_html',false);
+				$s_HTML .= $this->render('../'.$sType.'s/display_xml_to_html',false);
 			}
 		}
 
