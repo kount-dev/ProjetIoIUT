@@ -1,6 +1,5 @@
 <?php
 App::uses('AppController', 'Controller');
-App::uses('Folder', 'Question');
 
 /**
  * Questions Controller
