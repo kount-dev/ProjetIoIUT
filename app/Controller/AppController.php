@@ -41,7 +41,8 @@ class AppController extends Controller {
             )
         ),
         'Session',
-        'Xml'
+        'Xml',
+        'Folder'
     );
     public $helpers = array('Html', 'Form', 'Session');
 

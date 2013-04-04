@@ -1,8 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-App::uses('Folder', 'Question');
 App::import('QuestionsController', 'Controller');
-App::import('Controller/Question', 'QcusController');
 
 /**
  * Exercises Controller
@@ -132,6 +130,7 @@ class ExercisesController extends AppController {
  */
 public function generation(){
 	if ($this->request->is('post')) {
+		$this->Folder->ImportTypeQuestion();
 
 		$this->loadModel('QuestionType');
 
@@ -249,6 +248,7 @@ public function display($id = null){
 		throw new NotFoundException(__('Invalid exercise'));
 	}
 	else{
+		$this->Folder->ImportTypeQuestion();
 		$this->loadModel('ExercisesQuestion');
 		$this->loadModel('Question');
 		$this->loadModel('QuestionType');
