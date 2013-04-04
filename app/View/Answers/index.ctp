@@ -1,37 +1,35 @@
-<div class="resultats index">
-	<h2><?php echo __('Resultats'); ?></h2>
+<div class="answers index">
+	<h2><?php echo __('Answers'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('namefile'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('exercise_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('numero_tentative'); ?></th>
-			<th><?php echo $this->Paginator->sort('date_envoie'); ?></th>
-			<th><?php echo $this->Paginator->sort('taux_reussite'); ?></th>
+			<th><?php echo $this->Paginator->sort('attempt_number'); ?></th>
+			<th><?php echo $this->Paginator->sort('success_rate'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
-	<?php foreach ($resultats as $resultat): ?>
+	<?php foreach ($answers as $answer): ?>
 	<tr>
-		<td><?php echo h($resultat['Resultat']['id']); ?>&nbsp;</td>
-		<td><?php echo h($resultat['Resultat']['namefile']); ?>&nbsp;</td>
+		<td><?php echo h($answer['Answer']['id']); ?>&nbsp;</td>
+		<td><?php echo h($answer['Answer']['namefile']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($resultat['User']['id'], array('controller' => 'users', 'action' => 'view', $resultat['User']['id'])); ?>
+			<?php echo $this->Html->link($answer['User']['id'], array('controller' => 'users', 'action' => 'view', $answer['User']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($resultat['Exercise']['name'], array('controller' => 'exercises', 'action' => 'view', $resultat['Exercise']['id'])); ?>
+			<?php echo $this->Html->link($answer['Exercise']['name'], array('controller' => 'exercises', 'action' => 'view', $answer['Exercise']['id'])); ?>
 		</td>
-		<td><?php echo h($resultat['Resultat']['numero_tentative']); ?>&nbsp;</td>
-		<td><?php echo h($resultat['Resultat']['date_envoie']); ?>&nbsp;</td>
-		<td><?php echo h($resultat['Resultat']['taux_reussite']); ?>&nbsp;</td>
-		<td><?php echo h($resultat['Resultat']['created']); ?>&nbsp;</td>
-		<td><?php echo h($resultat['Resultat']['modified']); ?>&nbsp;</td>
+		<td><?php echo h($answer['Answer']['attempt_number']); ?>&nbsp;</td>
+		<td><?php echo h($answer['Answer']['success_rate']); ?>&nbsp;</td>
+		<td><?php echo h($answer['Answer']['created']); ?>&nbsp;</td>
+		<td><?php echo h($answer['Answer']['modified']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $resultat['Resultat']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $resultat['Resultat']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $resultat['Resultat']['id']), null, __('Are you sure you want to delete # %s?', $resultat['Resultat']['id'])); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $answer['Answer']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $answer['Answer']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $answer['Answer']['id']), null, __('Are you sure you want to delete # %s?', $answer['Answer']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -53,7 +51,7 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Resultat'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New Answer'), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Exercises'), array('controller' => 'exercises', 'action' => 'index')); ?> </li>

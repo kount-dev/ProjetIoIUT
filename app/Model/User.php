@@ -8,7 +8,7 @@ App::uses('AuthComponent', 'Controller/Component');
 * @property Group $Group
 * @property Exercise $Exercise
 * @property GroupList $GroupList
-* @property Resultat $Resultat
+* @property Answer $Answer
 */
 class User extends AppModel {
 
@@ -112,8 +112,8 @@ class User extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'Resultat' => array(
-			'className' => 'Resultat',
+		'Answer' => array(
+			'className' => 'Answer',
 			'foreignKey' => 'user_id',
 			'dependent' => false,
 			'conditions' => '',

@@ -241,7 +241,7 @@ CREATE TABLE `questions_disciplines` (
 
 DROP TABLE IF EXISTS `resultats`;
 
-CREATE TABLE `resultats` (
+CREATE TABLE `answers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `namefile` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -253,7 +253,7 @@ CREATE TABLE `resultats` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `resultats` */
+/*Data for the table `answers` */
 
 /*Table structure for table `users` */
 

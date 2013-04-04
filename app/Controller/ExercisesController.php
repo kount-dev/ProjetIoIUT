@@ -264,12 +264,18 @@ public function display($id = null){
 				$sNamefile = $this->Question->field('namefile', array('id' => $nId));
 				$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $nId))))."sController";
 				$Question = new $sType();
-				$oFileXML = $Question->displayXmlToHtml($sNamefile);
-				$this->set('data', $oFileXML);
+				$oData = $Question->displayXmlToHtml($sNamefile);
+				$this->set(compact('oData', 'nId'));
 				$s_HTML .= $this->render('../qcus/display_xml_to_html',false);
 			}
 		}
-		$this->set(compact('s_HTML'));
+
+		//$disciplines = $this->Exercise->Discipline->find('list');
+		$s_personCo = $this->Auth->user('id');
+		$s_exerciseName = $this->Exercise->field('name', array('id' => $id));
+		$n_exerciseId = $id;
+
+		$this->set(compact('s_HTML', 's_personCo', 's_exerciseName', 'n_exerciseId'));
 		$this->render('display');
 	}
 }

@@ -4,7 +4,7 @@ App::uses('AppModel', 'Model');
  * Exercise Model
  *
  * @property User $User
- * @property Resultat $Resultat
+ * @property Answer $Answer
  * @property Discipline $Discipline
  * @property Question $Question
  */
@@ -71,8 +71,8 @@ class Exercise extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Resultat' => array(
-			'className' => 'Resultat',
+		'Answer' => array(
+			'className' => 'Answer',
 			'foreignKey' => 'exercise_id',
 			'dependent' => false,
 			'conditions' => '',
