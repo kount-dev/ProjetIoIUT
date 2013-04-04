@@ -36,8 +36,8 @@ function addChoice(elt){
 	    url: "../"+tab[0]+"s/addChoice",
 	    data: {n: nb_choice, f: fieldset},
 	    success: function(res) {
-	        $('.add_choice').before(res);
-	        $('.nb_choice').val(parseInt(nb_choice)+1);
+	        $(elt).before(res);
+	        $(elt).parent().find('.nb_choice').val(parseInt(nb_choice)+1);
 	    }
 	});
 }
