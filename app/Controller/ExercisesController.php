@@ -248,6 +248,7 @@ public function display($id = null){
 		throw new NotFoundException(__('Invalid exercise'));
 	}
 	else{
+		$this->Folder->ImportTypeQuestion();
 		$this->loadModel('ExercisesQuestion');
 		$this->loadModel('Question');
 		$this->loadModel('QuestionType');
