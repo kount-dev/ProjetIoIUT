@@ -104,12 +104,19 @@ class AnswersController extends AppController {
 
 	public function saveAnswer(){
 		if ($this->request->is('post')) {
-			var_dump($this->request->data);
-			//TODO save Answer
-		}
-		else {
-			$this->Session->setFlash(__('Pas de variables posts'));
-			var_dump('Pas de variables posts');
+			$answer = $this->request->data['Answer']['Answer'];
+			$answer['attempt_number'] = $this->Answer->find('count', array('user_id' => $this->request->data['Answer']['user_id'], 'exercise_id' => $this->request->data['Answer']['exercise_id'])) + 1;
+			$answer['success_rate'] = 0;
+
+			$this->Answer->create();
+			if ($this->Answer->save($answer))
+			{
+				$this->Answer->saveField('namefile', $this->Answer->id.'_'.date("Y-m-d").'.xml');
+				$this->Session->setFlash(__('The answer has been saved'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The answer could not be saved. Please, try again.'));
+			}
 		}
 	}
 }
