@@ -3,9 +3,7 @@ App::uses('QuestionsController', 'Controller');
 App::uses('iQuestions', 'Interfaces');
 
 class QcusController extends QuestionsController implements iQuestions {
-    public $component = array('Xml');
-
-    protected $aFileXML = null;
+    public $uses = array();
 /**
  * index method
  *
@@ -19,47 +17,50 @@ class QcusController extends QuestionsController implements iQuestions {
  *@param string $sPath_fileXML
  */
     public function load($sPath_fileXML){
-        if($this->aFileXML === null){
-            $this->aFileXML = array();
-            set_error_handler(function(){throw new Exception('fichier inexistant');});
-            try{
-                $oFileXML = simplexml_load_file($sPath_fileXML);
-            }
-            catch(Exception $e){
-                return "Erreur de chargement du fichier";
-            }
+        $aFileXML = array();
+        set_error_handler(function(){throw new Exception('fichier inexistant');});
+        try{
+            $oFileXML = simplexml_load_file($sPath_fileXML);
+        }
+        catch(Exception $e){
+            return "Erreur de chargement du fichier";
+        }
 
-            foreach ($oFileXML->attributes() as $TYPE => $TYPEVAL) {
-                $this->aFileXML['question'][(string)$TYPE] = (string)$TYPEVAL ;
-            }
+        foreach ($oFileXML->attributes() as $TYPE => $TYPEVAL) {
+            $aFileXML['question'][(string)$TYPE] = (string)$TYPEVAL ;
+        }
 
-            foreach ($oFileXML as $ATTR => $VAL) {
-                if("choice" == $ATTR){
-                    $nCpt = 0;
-                    foreach ($VAL as $OPTION => $CHOICE) {
-                        foreach ($CHOICE->attributes() as $NUM => $NUMVAL) {
-                            $this->aFileXML['question']["option"][(string)$NUMVAL] = (string)$CHOICE;                        
-                        }
-                        $nCpt ++;
+        foreach ($oFileXML as $ATTR => $VAL) {
+            if("choice" == $ATTR){
+                $nCpt = 0;
+                foreach ($VAL as $OPTION => $CHOICE) {
+                    foreach ($CHOICE->attributes() as $NUM => $NUMVAL) {
+                        $aFileXML['question']["option"][(string)$NUMVAL] = (string)$CHOICE;
                     }
+                    $nCpt ++;
                 }
-                else{
-                    $this->aFileXML['question'][(string)$ATTR] = (string)$VAL;
+            }
+            else if("disciplines" == $ATTR){
+                $nCpt = 0;
+                foreach ($VAL as $DISCIPLINE => $VALUE) {
+                    $aFileXML['question']['disciplines'][$nCpt] = (string)$VALUE;
+                    $nCpt ++;
                 }
+            }
+            else {
+                $aFileXML['question'][(string)$ATTR] = (string)$VAL;
             }
         }
+        return $aFileXML;
     }
 
 /**
  *@desc Cette fonction permet l'affichage d'une question
  */
     public function displayXmlToHtml($sPath_fileXML = ""){
-        $this->load('../../uploads/questions/qcu_3_2013-03-25.xml');
-        if ($this->request->is('post')){
-            var_dump('Submit QCU');
-        }
-        $this->set('data',$this->aFileXML);
-        $this->render();
+        $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
+        return $aFileXML;
+
     }
 
 
@@ -79,31 +80,60 @@ class QcusController extends QuestionsController implements iQuestions {
         }
     }
 
+
+    public function saveQuestion($theQuestion){
+        $this->loadModel('Question');
+        $this->loadModel('User');
+        parent::saveQuestion($theQuestion);
+
+        $data = array();
+        $data['id'] = $this->Question->id;
+        $data['author'] = $this->User->field('username', array('id' => $theQuestion['Question']['user_id']));
+        $data['difficulty'] = $theQuestion['Question']['difficulty'];
+        $data['text'] = $theQuestion['content']['question'];
+        $data['choices'] = $theQuestion['content']['choices'];
+        $data['rep'] = $theQuestion['content']['answer'];
+        $data['points'] = $theQuestion['Question']['points'];
+        $data['disciplines'] = $theQuestion['Discipline'];
+
+        $this->generationXML($data);
+
+        $this->Question->saveField('namefile', 'qcu_'.$data['id'].'_'.date("Y-m-d").'.xml');
+    }
+
+    public function addChoice(){
+        if ($this->request->is('post')){
+            $tab = split('_',$this->request->data['f']);
+            $num_question = $tab[1];
+            $nb_choice = $this->request->data['n'];
+            $this->set(compact('nb_choice','num_question'));
+            $this->layout = false;
+            $this->render();
+        }
+    }
+
 /**
 *
 *
 **/
-    public function generationXML($aDAta = array()){
-        $nId = 3; //$aData['id'];
-        $sAuthor = "AuteurTest"; //$aData['author']
-        $nDifficulty = 3; //$aData['difficulty']
-        $sTextQuestion = "2+2 = ?"; //$aData['text']
-        $aChoice = array("0" => "test", "1" => "test2", "2" => "test3", "3" => 4); //$aData['Choice']
-        $nAnswer = 3; //$aData['Rep']
-        $nPoints = 1; //$aData['points']
+
+    public function generationXML($aData = array()){
+        $nId = $aData['id'];
+        $sAuthor = $aData['author'];
+        $nDifficulty = $aData['difficulty'];
+        $sTextQuestion = $aData['text'];
+        $aChoice =  $aData['choices'];
+        $nAnswer = $aData['rep'];
+        $nPoints = $aData['points'];
+        $aDisciplines = $aData['disciplines'];
 
         $domDocument = new DomDocument('1.0', "UTF-8");
         $domDocument->formatOutput = true;
         $eQuestion = $domDocument->createElement('question');
         $eQuestionType = $domDocument->createAttribute('type');
-        $eQuestionType->value = "choixUnique";
+        $eQuestionType->value = "qcu";
         $domDocument->appendChild($eQuestion);
         $eQuestion->appendChild($eQuestionType);
-        
-        $eId = $domDocument->createElement('id');
-        $eIdText = $domDocument->createTextNode(trim($nId));
-        $eQuestion->appendChild($eId);
-        $eId->appendChild($eIdText);
 
         $eAuthor = $domDocument->createElement('author');
         $eAuthorText = $domDocument->createTextNode(trim($sAuthor));
@@ -120,13 +150,24 @@ class QcusController extends QuestionsController implements iQuestions {
         $eQuestion->appendChild($eTextQuestion);
         $eTextQuestion->appendChild($eTextQuestionText);
 
+        $eDisciplines = $domDocument->createElement('disciplines');
+        $eQuestion->appendChild($eDisciplines);
+        foreach ($aDisciplines as $nCase => $nIdDisci) {
+            $eDiscipline = $domDocument->createElement('discipline');
+
+            $eDisciplineText = $domDocument->createTextNode($nIdDisci);
+
+            $eDisciplines->appendChild($eDiscipline);
+            $eDiscipline->appendChild($eDisciplineText);
+        }
+
         $eChoice = $domDocument->createElement('choice');
         $eQuestion->appendChild($eChoice);
         foreach ($aChoice as $nNum => $sTextOption) {
             $eOption = $domDocument->createElement('option');
-            
+
             $eOptionText = $domDocument->createCDATASection($sTextOption);
-            
+
             $eOptionNum = $domDocument->createAttribute('num');
             $eOptionNum->value = $nNum;
 
@@ -145,10 +186,7 @@ class QcusController extends QuestionsController implements iQuestions {
         $eQuestion->appendChild($ePoints);
         $ePoints->appendChild($ePointsText);
 
-        $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');  
-
-        $this->layout = false;
-        $this->render(false);
+        $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');
     }
 
 /*

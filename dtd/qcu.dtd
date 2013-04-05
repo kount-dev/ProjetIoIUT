@@ -1,10 +1,11 @@
-<!ELEMENT question (id, author, difficulty, text, choice, answer, points)>
+<!ELEMENT question (author, difficulty, text, disciplines, choice, answer, points)>
+<!ELEMENT disciplines (discipline+)>
 <!ELEMENT choice (option+)>
 
-<!ELEMENT id (#PCDATA)>
 <!ELEMENT author (#PCDATA)>
 <!ELEMENT difficulty (#PCDATA)>
 <!ELEMENT text (#PCDATA)>
+<!ELEMENT discipline (#PCDATA)>
 <!ELEMENT option (#PCDATA)>
 <!ELEMENT answer (#PCDATA)>
 <!ELEMENT points (#PCDATA)>

@@ -1,5 +1,9 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('Folder', 'Question');
+App::import('QuestionsController', 'Controller');
+App::import('Controller/Question', 'QcusController');
+
 /**
  * Exercises Controller
  *
@@ -110,12 +114,16 @@ class ExercisesController extends AppController {
  *@return true|false en fonction du succès ou non du chargement
  */
     public function load($aParam){}
+
 /**
- *@desc Cette fonction permet d'executer un module, elle doit retourner l'HTML a afficher
- *pour l'execution
- *@return le contenu HTML dans un string
+ *@desc Cette fonction permet l'affichage d'une question
  */
-    public function executeToHTML(){}
+    public function displayXmlToHtml($idExercise){
+
+        $exercice = $this->Exercise->find('all', array('conditions' => array('id ==' => $idExercise)));
+        $this->render(false);
+    }
+
 
 /**
  *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher
@@ -124,29 +132,147 @@ class ExercisesController extends AppController {
  */
 public function generation(){
 	if ($this->request->is('post')) {
-		//$this->Exercise->create();
-		var_dump($this->request->data);
-		//$this->Exercise->save($this->request->data->Exercise);
-		//$this->Question->save($this->request->data->Question);
-			//if ($this->Exercise->save($this->request->data)) {
-			//$this->Session->setFlash(__('The exercise has been saved'));
-			// if ($this->Question->save($this->request->data)){
-			// 	$this->Session->setFlash(__('The question has been saved'));
-			// 	$this->redirect(array('action' => 'index'));
-			// }
-		// } else {
-		// 	$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
-		// }
+
+		$this->loadModel('QuestionType');
+
+		$this->Exercise->create();
+		if ($this->Exercise->save($this->request->data['Exercise']))
+		{
+			foreach ($this->request->data['Question'] as $theQuestion) {
+				$controller = $this->QuestionType->field('controller', array('id = ' => $theQuestion['Question']['question_type_id']))."sController";
+				$Question = new $controller();
+				$Question->saveQuestion($theQuestion);
+			}
+			$this->Session->setFlash(__('The exercise has been saved'));
+			$this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
+		}
 	}
 
 	$disciplines = $this->Exercise->Discipline->find('list');
 	$author = $this->Auth->user('id');
 	$this->set(compact('disciplines', 'author'));
-
-	//$this->layout = false;
-	//		$this->render(false);
 }
 
+public function upload(){
+	if ($this->request->is('post') && isset($this->request->data['Exercise']['xmlFile'])) {
+		$file = $this->request->data['Exercise']['xmlFile']['tmp_name'];
+
+		if($this->Xml->XMLIsValide('exercise', $file, "../../dtd/exercise.dtd")){
+			$oXml = new XMLReader();
+			$oXml->open($file);
+
+			// Récupération des Questions
+			$nCtp = 0;
+		 	while ($oXml->read()) {
+		 		if($oXml->name == "question" && $oXml->nodeType == XMLReader::ELEMENT){
+			 		$test = new XMLWriter();
+			 		$nCtp++;
+		 			$test->openURI('../../uploads/QuestionTemporaire'.$nCtp.'.xml');
+		 			$test->writeRaw($oXml->readOuterXML());
+		 		}
+			}
+			$VarTmp = true;
+			$aDataTmp= array();
+			$Question = new QuestionsController();
+
+			// Validation des questions
+			for($i = 1; $i < $nCtp; $i++){
+				$aData = $Question->getQuestionType('../../uploads/QuestionTemporaire'.$i.'.xml');
+				if(!$this->Xml->XMLIsValide('question','../../uploads/QuestionTemporaire'.$i.'.xml','../../dtd/'.$aData['type'].'.dtd')){
+					$VarTmp = false;
+				}
+			}
+
+			// Enregistrement total
+			if($VarTmp){
+
+				$nIdLastQuestion = $this->Exercise->Question->field('id',array(), 'created DESC');
+				for($i = 1; $i < $nCtp; $i++){
+					$aDataTmp['Question']["Question"][$i-1] = $nIdLastQuestion+$i;
+				}
+
+				try{$oFileXML = simplexml_load_file($file);}
+		        catch(Exception $e){return "Erreur de chargement du fichier";}
+
+		        foreach ($oFileXML as $ATTR => $VAL) {
+		            if("disciplines" != $ATTR && "questions" != $ATTR){
+		            	$aDataTmp['Exercise'][(string)$ATTR] = (string)$VAL;
+		            }
+		           	else if("disciplines" == $ATTR){
+		                $nCpt = 0;
+		                foreach ($VAL as $DISCIPLINE => $VALUE) {
+			            	$aDataTmp['Discipline']["Discipline"][$nCpt] = (string)$VALUE;
+		            	    $nCpt ++;
+		           		}
+		        	}
+		        }
+
+	   			$this->loadModel('User');
+
+		        $aDataTmp['Exercise']['user_id'] = $this->User->field('id', array('username' => $aDataTmp['Exercise']['author']));
+
+				$this->Exercise->create();
+				if ($this->Exercise->save($aDataTmp)){
+
+					for($i = 1; $i < $nCtp; $i++){
+						if(!$Question->saveUploadQuestion('../../uploads/QuestionTemporaire'.$i.'.xml', true)){
+							$VarTmp = false;
+						}
+					}
+					if($VarTmp){
+						$this->Session->setFlash(__('The exercise has been saved'));
+						$this->redirect(array('action' => 'index'));
+					}
+					else{
+						$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
+					}
+				}
+				else{
+					$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
+				}
+			}
+		}
+	}
+}
+
+
+public function displayXp(){
+	$this->loadModel('User');
+	$this->Exercise->recursive = 0;
+	$this->set('exercises', $this->paginate(array('minimum_points <=' => $this->User->field('xp', array('id' => $this->Auth->user('id'))))));
+}
+
+public function display($id = null){
+	if (!$this->Exercise->exists($id)) {
+		throw new NotFoundException(__('Invalid exercise'));
+	}
+	else{
+		$this->loadModel('ExercisesQuestion');
+		$this->loadModel('Question');
+		$this->loadModel('QuestionType');
+
+		$alistQuestion = $this->ExercisesQuestion->find('list', array('fields' => array('question_id'),'conditions' => array('exercise_id' => $id)));
+
+		$s_HTML = "";
+		foreach ($alistQuestion as $nId) {
+			if (!$this->Question->exists($nId)) {
+				throw new NotFoundException(__('Invalid question'));
+			}
+			else{
+				$sNamefile = $this->Question->field('namefile', array('id' => $nId));
+				$sType = $this->QuestionType->field('controller', array('id' => $this->Question->field('question_type_id', array('id' => $nId))))."sController";
+				$Question = new $sType();
+				$oFileXML = $Question->displayXmlToHtml($sNamefile);
+				$this->set('data', $oFileXML);
+				$s_HTML .= $this->render('../qcus/display_xml_to_html',false);
+			}
+		}
+		$this->set(compact('s_HTML'));
+		$this->render('display');
+	}
+}
 /**
  *@desc cette fonction valide le module a partir des paramètres passés
  *@param array $param ('reponses'=>array(), 'path'=>string)

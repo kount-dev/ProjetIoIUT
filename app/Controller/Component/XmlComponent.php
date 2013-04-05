@@ -10,10 +10,10 @@ class XmlComponent extends Component{
     *@param string $DTD_path le chemin de la DTD sur laquelle verifier
     *@return boolean true|false en fonction de la validation
     */
-    public function XMLIsValide($XML_path, $DTD_path){
-        $root = 'question';
+    public function XMLIsValide($typeXML, $XML_path, $DTD_path){
+        $root = $typeXML;
         $old = new DOMDocument;
-        set_error_handler(function(){throw new Exception('fichier inexistant');});
+        // set_error_handler(function(){throw new Exception('fichier inexistant');});
         try{$old->load($XML_path);}catch(Exception $e){return false;}
         $creator = new DOMImplementation;
         $doctype = $creator->createDocumentType($root, null, $DTD_path);
