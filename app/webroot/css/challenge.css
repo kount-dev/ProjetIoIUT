@@ -1,0 +1,158 @@
+
+/******************************************************/
+/*					CHALLENGE						  */
+/******************************************************/
+
+/* ----------- Tabs ----------- */
+#challenge_tab{
+	background: url(../img/red_stripes.gif);
+	font-weight: bold;
+}
+
+/* ----------- Filters ----------- */
+
+
+#filters{
+	position: absolute;
+	width: 30%;
+	min-width: 165px;
+	max-width: 400px;
+	height: 100%;
+	overflow: hidden;
+}
+
+#filter_list{
+	position: absolute;
+	width: 100%;
+	top: 100px;
+	bottom: 0;
+	overflow-y: scroll;
+}
+
+#search_question{
+	margin: 20px;
+	line-height: 13px;
+	font-size: 0.8em;
+	color: white;
+	height: 20px;
+	padding-left: 25px;
+	max-width: 170px;
+	min-width: 100px;
+	background: url(../img/search.png) no-repeat left;
+	background-size: 20px;
+	border: none;
+	border-bottom: 1px solid rgba(255,30,0,0.6);
+	outline: none;
+}
+
+.filter{
+	margin: 15px 20px;
+	padding: 6px;
+	padding-left: 10px;
+	text-transform: uppercase;
+	color: white;
+	cursor: pointer;
+	-webkit-transition: border bounce .3s;
+}
+
+.filter:hover,
+.filter.selected{
+	background: url(../img/dark_stripes.gif);
+}
+.filter.selected{
+	padding-left: 7px;
+	border-left: 3px solid rgba(255,30,0,0.6);
+}
+
+/* ----------- List ----------- */
+
+#question_list{
+	position: absolute;
+	left: 30%;
+	width: 70%;
+	height: 100%;
+	overflow-y: scroll;
+
+	box-shadow: inset 0px 11px 8px -10px #111,
+	        	inset 0px -11px 8px -10px #111; 
+}
+
+#question_list .btn{
+	display: block;
+	opacity: 0;
+	margin: 0;
+	margin-bottom: 5px;
+	padding: 2px 30px;
+	padding-bottom: 0;
+	-webkit-transition: opacity linear .3s;
+}
+
+.question{
+	margin: 0 30px;
+	padding: 30px 15px;
+	font-family: sans-serif;
+}
+
+.question:not(:last-child){
+	border-bottom: 1px solid #999;
+}
+
+.question .infos{
+	float: right;
+	color: rgba(255,30,0,0.7);
+	font-size: 0.7em;
+}
+
+.question .title{
+	max-width: 400px;
+	padding-bottom: 10px;
+	color: white;
+	font-size: 1.2em;
+}
+
+.question .descr{
+	max-width: 400px;
+	color: #ccc;
+	font-size: 0.8em;
+}
+
+.actions{
+	float: right;
+}
+
+#question_list .question:hover .btn{
+	opacity: 1;
+}
+
+/* ----------- Generation ----------- */
+
+.generation legend{
+	padding:15px 30px;
+	color: rgba(255,30,0,0.7);
+	font-size: 1.5em;
+}
+
+.generation input{
+	margin-left: 30px;
+
+}
+
+#exercises_base{
+	position: absolute;
+	width: 40%;
+	min-width: 400px;
+	max-width: 600px;
+	height: 100%;
+	overflow: hidden;
+}
+
+fieldset:not['#exercises_base']{
+	position: absolute;
+	left: 40%;
+	width: 60%;
+	height: 100%;
+	overflow-y: scroll;
+
+	box-shadow: inset 0px 11px 8px -10px #111,
+	        	inset 0px -11px 8px -10px #111; 
+}
