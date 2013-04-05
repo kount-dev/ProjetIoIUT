@@ -7,7 +7,7 @@ $(document).ready(function(){
 		    url: "../questions/generation",
 		    data: {n: nb_question},
 		    success: function(res) {
-		        $('#add_question').before(res);
+		        $('#exercises_questions').prepend(res);
 		        $('#ExerciseNbQuestion').val(parseInt(nb_question)+1);
 		    }
 		});

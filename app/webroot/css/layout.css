@@ -50,7 +50,8 @@
 
 input[type="text"],
 input[type="number"],
-input[type="password"]{
+input[type="password"],
+select{
 	padding: 5px 10px;
 	width: 300px;
 	color: white;
@@ -66,7 +67,8 @@ input[type="password"]{
 
 input[type="text"]:focus,
 input[type="number"]:focus,
-input[type="password"]:focus{
+input[type="password"]:focus,
+select{
 	outline: none;
 	border-color: rgba(255,30,0,0.6);
 	box-shadow: inset 0px 0px 5px #000;

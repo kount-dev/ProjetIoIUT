@@ -132,21 +132,28 @@
 	font-size: 1.5em;
 }
 
-.generation input{
+.generation input,
+.generation select,
+.generation label{
 	margin-left: 30px;
+}
 
+.generation label{
+	color: #aaa;
+	display: block;
 }
 
 #exercises_base{
+	box-sizing: border-box;
 	position: absolute;
 	width: 40%;
 	min-width: 400px;
 	max-width: 600px;
 	height: 100%;
-	overflow: hidden;
+	overflow-y: scroll;
 }
 
-fieldset:not['#exercises_base']{
+#exercises_questions{
 	position: absolute;
 	left: 40%;
 	width: 60%;
@@ -155,4 +162,8 @@ fieldset:not['#exercises_base']{
 
 	box-shadow: inset 0px 11px 8px -10px #111,
 	        	inset 0px -11px 8px -10px #111; 
+}
+
+fieldset.question{
+	padding: 15px 0;
 }
