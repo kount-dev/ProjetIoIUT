@@ -105,13 +105,16 @@ class AnswersController extends AppController {
 	public function saveAnswer(){
 		if ($this->request->is('post')) {
 			$answer = $this->request->data['Answer']['Answer'];
-			$answer['attempt_number'] = $this->Answer->find('count', array('user_id' => $this->request->data['Answer']['user_id'], 'exercise_id' => $this->request->data['Answer']['exercise_id'])) + 1;
-			$answer['success_rate'] = 0;
+			$user_id = $answer['user_id'];
+			$answer['attempt_number'] = $this->Answer->find('count', array('user_id' => $user_id, 'exercise_id' => $this->request->data['Answer']['exercise_id'])) + 1;
+			$answer['success_rate'] = $this->successRate();
 
 			$this->Answer->create();
 			if ($this->Answer->save($answer))
 			{
 				$this->Answer->saveField('namefile', $this->Answer->id.'_'.date("Y-m-d").'.xml');
+				$data = array('id' => $this->Answer->id, 'user' => $user_id, 'Answers' => $this->request->data['Answer']['Questions']);
+				$this->generationXML($data);
 				$this->Session->setFlash(__('The answer has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -120,17 +123,17 @@ class AnswersController extends AppController {
 		}
 	}
 
-	public function generationXML($aData = array()){
-        $nId = 1;//$aData['id']; // Id de la réponse
-        $sUser = 'quentin';//$aData['user']; // Nom du "Répondeur"
-        $aAnswers = array('Qcus' => array('1' => "2", '4' => "8"), 'Qcms' => array('3' => array('1', '2', '3'), '2' => array('ehjbds', 'dsbfd', 'jkdfd', 'jkdf'), '2' => array('ehjbds')));  //$aData['Answers']; 
-        /* $aData['Answers'] = array( 'typeQuestion' => 
-        								array( 'IdQuestion' =>
-        									array('1', '2')
-        										ou
-        									string "1"))
+	private function successRate(){
+        //TODO
+		return 0;
+	}
 
-		*/
+	public function generationXML($aData = array()){
+        $nId = $aData['id']; // Id de la réponse
+        $sUser = $aData['user']; // Id du "Répondeur"
+        $aAnswers =  $aData['Answers']; // array( 'typeQuestion' => array( 'IdQuestion' => array('1', '2') 	ou string "1"))
+
+
 
         $domDocument = new DomDocument('1.0', "UTF-8");
         $domDocument->formatOutput = true;
@@ -148,10 +151,10 @@ class AnswersController extends AppController {
       		foreach ($aArray as $nIdQuestion => $mAnswer) {
 
       			$eQuestionAnswer = $domDocument->createElement('questionAnswer');
-      			
+
       			$eQuestionId = $domDocument->createAttribute('IdQuestion');
            		$eQuestionId->value = $nIdQuestion;
-           	
+
            		$eQuestions->appendChild($eQuestionAnswer);
 	            $eQuestionAnswer->appendChild($eQuestionId);
 
