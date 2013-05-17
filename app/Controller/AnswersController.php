@@ -180,7 +180,7 @@ class AnswersController extends AppController {
         $domDocument->save('../../uploads/reponses/'.$nId.'_'.date("Y-m-d").'.xml');
     }
 
-    public function feedback($nIdExercise = null){
+    public function feedback($nIdExercise = null, $nIdAnswer = null){
     	$this->loadModel('Exercise');
     	$this->loadModel('Question');
     	$this->loadModel('QuestionType');
@@ -189,9 +189,9 @@ class AnswersController extends AppController {
 
     	$aFileXML = array();
 
-    	if ($this->Exercise->exists($nIdExercise)) {
+    	if ($this->Exercise->exists($nIdExercise) && $this->Answer->exists($nIdAnswer)) {
     	
-    		$sNameFile = $this->Answer->field('namefile', array('exercise_id' => $nIdExercise, 'user_id' => $this->Auth->user('id')));
+    		$sNameFile = $this->Answer->field('namefile', array('id' => $nIdAnswer, 'exercise_id' => $nIdExercise, 'user_id' => $this->Auth->user('id')));
 
     		$aFileXML = array();
 	    
