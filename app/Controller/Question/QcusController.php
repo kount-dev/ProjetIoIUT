@@ -12,6 +12,9 @@ class QcusController extends QuestionsController implements iQuestions {
     public function index() {
     }
 
+
+
+
 /**
  *@desc Cette fonction permet de charger un fichier xml pour une question à choix unique
  *@param string $sPath_fileXML
@@ -58,8 +61,41 @@ class QcusController extends QuestionsController implements iQuestions {
  *@desc Cette fonction permet l'affichage d'une question
  */
     public function displayXmlToHtml($sPath_fileXML = ""){
+        
+        return $this->load("../../uploads/questions/".$sPath_fileXML);
+
+    }
+
+
+    public function displayWithReponses($aData, $sPath_fileXML){
+
         $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
-        return $aFileXML;
+
+        $sHTML = '<div><p>' . $aFileXML['question']['text'] . '</p>';
+        
+        $sHTML .= '<ul>';
+
+        foreach ($aFileXML['question']['option'] as $key => $value) {
+                
+            $sHTML .= '<li>' . $value;
+
+            if($aData[0] == $key && $aFileXML['question']['answer'] == $key){
+                $sHTML .= "    <==== La bonne réponse et également votre réponse";
+            }
+            else if($aData[0] == $key){
+                $sHTML .= "    <==== Votre réponse";
+            }
+            else if($aFileXML['question']['answer'] == $key){
+                $sHTML .= "    <==== La bonne réponse";
+            }
+
+            $sHTML .= '</li>';
+
+        } 
+
+        $sHTML .= '</ul></div><br/>';
+
+        return $sHTML;
 
     }
 

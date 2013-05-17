@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('QuestionsController', 'Controller');
+
 /**
  * Answers Controller
  *
@@ -176,6 +178,83 @@ class AnswersController extends AppController {
       	}
 
         $domDocument->save('../../uploads/reponses/'.$nId.'_'.date("Y-m-d").'.xml');
+    }
+
+    public function feedback($nIdExercise = null){
+    	$this->loadModel('Exercise');
+    	$this->loadModel('Question');
+    	$this->loadModel('QuestionType');
+
+    	$this->Folder->ImportTypeQuestion();
+
+    	$aFileXML = array();
+
+    	if ($this->Exercise->exists($nIdExercise)) {
+    	
+    		$sNameFile = $this->Answer->field('namefile', array('exercise_id' => $nIdExercise, 'user_id' => $this->Auth->user('id')));
+
+    		$aFileXML = array();
+	    
+	        set_error_handler(function(){throw new Exception('fichier inexistant');});
+	    
+	        try{
+	    
+	            $oFileXML = simplexml_load_file('../../uploads/reponses/' . $sNameFile);
+        
+        	}
+        
+        	catch(Exception $e){
+        
+        	    return "Erreur de chargement du fichier";
+    	
+    	    }
+
+		 	foreach ($oFileXML as $ATTR => $VAL) {
+
+		 		if("questions" == $ATTR){
+
+					foreach ($VAL as $QUESTION => $QUESTIONVAL) {
+
+			            if("questionAnswer" == $QUESTION){
+
+			            	$IDQuestion = '';
+
+					        foreach ($QUESTIONVAL->attributes() as $ID => $IDVAL) {
+					           
+					        	$IDQuestion = (int)$IDVAL;
+					        
+					        }
+
+			                foreach ($QUESTIONVAL as $ANSWER => $ANSWERVAL) {
+			                    
+			                	$aFileXML['question'][$IDQuestion][] = (int)$ANSWERVAL;
+
+			                }
+			            }
+			        }
+			    }
+		    }
+		 	
+		 	$_html = '';
+
+		 	foreach ($aFileXML['question'] as $key => $value) {
+		 		
+		 		$sNameFile = $this->Question->field('namefile', array('id' => $key));
+
+		 		$nIdTypeQuestion = $this->Question->field('question_type_id', array('id' => $key));
+
+		 		$controller = $this->QuestionType->field('controller', array('id = ' => $nIdTypeQuestion))."sController";
+		 		
+		 		$Question = new $controller();
+
+		 		$_html .= $Question->displayWithReponses($value,$sNameFile);
+				
+		 	}
+
+		 	$this->set(array('html'=> $_html));
+		 	
+	    }
+
     }
 
 }
