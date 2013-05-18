@@ -47,11 +47,23 @@ you can see the documentation at http://book.cakephp.org/2.0/fr/development/rout
     Router::connect('/challenge/feedback/*', array('controller' => 'answers', 'action' => 'displayByIdExercise'));
 
     /* Admin */
+    Router::connect('/admin/challenges/feedback', array('controller' => 'answers'));
+    Router::connect('/admin/challenges/feedback/:action/*', array('controller' => 'answers'));
+
     Router::connect('/admin/challenges', array('controller' => 'exercises'));
+    Router::connect('/admin/challenges/:action/*', array('controller' => 'exercises'));
+
     Router::connect('/admin/users', array('controller' => 'users'));
+    Router::connect('/admin/users/:action/*', array('controller' => 'users'));
+
     Router::connect('/admin/questions', array('controller' => 'questions'));
+    Router::connect('/admin/questions/:action/*', array('controller' => 'questions'));
+
     Router::connect('/admin/disciplines', array('controller' => 'disciplines'));
+    Router::connect('/admin/disciplines/:action/*', array('controller' => 'disciplines'));
+
     Router::connect('/admin/questionTypes', array('controller' => 'questionTypes'));
+    Router::connect('/admin/questionTypes/:action/*', array('controller' => 'questionTypes'));
 
 
 /**
