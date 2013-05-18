@@ -319,10 +319,10 @@ class AnswersController extends AppController {
 		 	
 	    }
 
-	    return $fPourcentage;
-
 	    $this->layout = false;
 	    $this->render(false);
+	    
+	    return $fPourcentage;
 
     }
 

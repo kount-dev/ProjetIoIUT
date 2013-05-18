@@ -119,7 +119,7 @@ class QcusController extends QuestionsController implements iQuestions {
         $aRes['max_points'] = $aFileXML['question']['points'];
 
         return $aRes;
-        
+
     }
 
 /**
@@ -247,22 +247,5 @@ class QcusController extends QuestionsController implements iQuestions {
         $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');
     }
 
-/*
- *@desc cette fonction valide le module a partir des paramètres passés
- *@param array $param ('reponses'=>array(), 'path'=>string)
- *@return boolean true | false en fonction de s il est bon
- */
-    public function valider($param){}
-/**
- *@desc cette fonction est celle qui gère l'ajout en base de données et création
- *éventuelle des fichiers
- *@param array $param ('infos'=>array) (infos est en fait la variable POST)
- *@return boolean true|false en fonction du succès ou non de la sauvegarde
- */
-    public function saveFromPost($param){}
-/**
- *@desc Cette fonction va sauvegarder en base l'instance chargée
- */
-    public function saveInstance(){}
 }
 ?>
