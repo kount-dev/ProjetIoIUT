@@ -33,6 +33,27 @@ Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
+/*Personal connections for this application. For any informations,
+you can see the documentation at http://book.cakephp.org/2.0/fr/development/routing.html */
+
+    /* Accueil */
+    Router::connect('/challenges', array('controller' => 'exercises', 'action' => 'listByUser'));
+    Router::connect('/profile/*', array('controller' => 'users', 'action' => 'view'));
+    Router::connect('/leaderboard', array('controller' => 'users', 'action' => 'leaderboard'));
+    Router::connect('/administration', array('controller' => 'users', 'action' => 'admin'));
+
+    /* Challenge */
+    Router::connect('/challenge/*', array('controller' => 'exercises', 'action' => 'display'));
+    Router::connect('/challenge/feedback/*', array('controller' => 'answers', 'action' => 'displayByIdExercise'));
+
+    /* Admin */
+    Router::connect('/admin/challenges', array('controller' => 'exercises'));
+    Router::connect('/admin/users', array('controller' => 'users'));
+    Router::connect('/admin/questions', array('controller' => 'questions'));
+    Router::connect('/admin/disciplines', array('controller' => 'disciplines'));
+    Router::connect('/admin/questionTypes', array('controller' => 'questionTypes'));
+
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
