@@ -17,12 +17,27 @@ class AnswersController extends AppController {
 	public function index() {
 		$this->Answer->recursive = 0;
 		$this->set('answers', $this->paginate());
+		$this->render('display_user');
 	}
 
 	public function displayUser(){
 		$this->loadModel('User');
 		$this->Answer->recursive = 0;
 		$this->set('answers', $this->paginate(array('Answer.user_id = ' . $this->Auth->user('id'))));
+	}
+
+	public function displayByExercise($nIdExercise){
+		$this->loadModel('User');
+		$this->Answer->recursive = 0;
+		$this->set('answers', $this->paginate(array('Answer.exercise_id =' . $nIdExercise)));
+		$this->render('display_user');
+	}
+
+	public function displayByUser($nIdUser){
+		$this->loadModel('User');
+		$this->Answer->recursive = 0;
+		$this->set('answers', $this->paginate(array('Answer.user_id = ' . $nIdUser)));
+		$this->render('display_user');
 	}
 
 /**
