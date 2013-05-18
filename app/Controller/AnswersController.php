@@ -17,27 +17,27 @@ class AnswersController extends AppController {
 	public function index() {
 		$this->Answer->recursive = 0;
 		$this->set('answers', $this->paginate());
-		$this->render('display_user');
 	}
 
-	public function displayUser(){
+	public function displayUserLog(){
 		$this->loadModel('User');
 		$this->Answer->recursive = 0;
 		$this->set('answers', $this->paginate(array('Answer.user_id = ' . $this->Auth->user('id'))));
+		$this->render('index');
 	}
 
-	public function displayByExercise($nIdExercise){
+	public function displayByIdExercise($nIdExercise){
 		$this->loadModel('User');
 		$this->Answer->recursive = 0;
 		$this->set('answers', $this->paginate(array('Answer.exercise_id =' . $nIdExercise)));
-		$this->render('display_user');
+		$this->render('index');
 	}
 
-	public function displayByUser($nIdUser){
+	public function displayByIdUser($nIdUser){
 		$this->loadModel('User');
 		$this->Answer->recursive = 0;
 		$this->set('answers', $this->paginate(array('Answer.user_id = ' . $nIdUser)));
-		$this->render('display_user');
+		$this->render('index');
 	}
 
 /**
@@ -202,7 +202,7 @@ class AnswersController extends AppController {
         $domDocument->save('../../uploads/reponses/'.$nId.'_'.date("Y-m-d").'.xml');
     }
 
-    public function readAnswer($nIdExercise = null, $nIdAnswer = null){
+    public function readXMLAnswer($nIdExercise = null, $nIdAnswer = null){
     	$this->loadModel('Exercise');
     	$this->loadModel('Question');
     	$this->loadModel('QuestionType');
@@ -267,7 +267,7 @@ class AnswersController extends AppController {
 	}
 
 	public function feedback($nIdExercise = null, $nIdAnswer = null){
-		$aFileXML = $this->readAnswer($nIdExercise, $nIdAnswer);
+		$aFileXML = $this->readXMLAnswer($nIdExercise, $nIdAnswer);
 
 		if($aFileXML !== false){
 
@@ -303,7 +303,7 @@ class AnswersController extends AppController {
     public function successRate($nIdExercise = null, $nIdAnswer = null){
     	$this->loadModel('Answer');
 
-    	$aFileXML = $this->readAnswer($nIdExercise, $nIdAnswer);
+    	$aFileXML = $this->readXMLAnswer($nIdExercise, $nIdAnswer);
 
     	$fPourcentage = 0;
 

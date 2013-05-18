@@ -237,7 +237,7 @@ public function upload(){
 }
 
 
-public function displayXp(){
+public function listByUser(){
 	$this->loadModel('User');
 	$this->Exercise->recursive = 0;
 	$nXpUser = $this->User->field('xp', array('id' => $this->Auth->user('id')));
