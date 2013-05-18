@@ -19,6 +19,14 @@ class AnswersController extends AppController {
 		$this->set('answers', $this->paginate());
 	}
 
+	public function displayUser(){
+		$this->loadModel('User');
+		$this->Answer->recursive = 0;
+		$this->Auth->user('id');
+		$this->set('answers', $this->paginate(array('Answer.user_id = ' . $this->Auth->user('id'))));
+		$this->render('index');
+	}
+
 /**
  * view method
  *
@@ -45,7 +53,8 @@ class AnswersController extends AppController {
 			if ($this->Answer->save($this->request->data)) {
 				$this->Session->setFlash(__('The answer has been saved'));
 				$this->redirect(array('action' => 'index'));
-			} else {
+			}
+			else{
 				$this->Session->setFlash(__('The answer could not be saved. Please, try again.'));
 			}
 		}
@@ -120,7 +129,6 @@ class AnswersController extends AppController {
 
 				$successRatePourcentage = $this->successRate($this->request->data['Answer']['exercise_id'], $this->Answer->id);
 
-
 				$this->Answer->updateAll(
 				    array('Answer.success_rate' => $successRatePourcentage),
 				    array('Answer.id =' => (int)$this->Answer->id)
@@ -137,8 +145,6 @@ class AnswersController extends AppController {
         $nId = $aData['id']; // Id de la réponse
         $sUser = $aData['user']; // Id du "Répondeur"
         $aAnswers =  $aData['Answers']; // array( 'typeQuestion' => array( 'IdQuestion' => array('1', '2') 	ou string "1"))
-
-
 
         $domDocument = new DomDocument('1.0', "UTF-8");
         $domDocument->formatOutput = true;
@@ -187,7 +193,6 @@ class AnswersController extends AppController {
     	$this->loadModel('Exercise');
     	$this->loadModel('Question');
     	$this->loadModel('QuestionType');
-
     	$this->Folder->ImportTypeQuestion();
 
     	$aFileXML = array();
@@ -288,7 +293,7 @@ class AnswersController extends AppController {
     	$aFileXML = $this->readAnswer($nIdExercise, $nIdAnswer);
 
     	$fPourcentage = 0;
-    	
+
 		if($aFileXML !== false){
 
 			$nTotal_Exercise = 0;

@@ -28,7 +28,7 @@
 		</dd>
 		<dt><?php echo __('Success Rate'); ?></dt>
 		<dd>
-			<?php echo h($answer['Answer']['success_rate']); ?>
+			<?php echo h($answer['Answer']['success_rate']) . "%"; ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
