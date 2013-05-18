@@ -154,7 +154,7 @@ public function generation(){
 	$this->set(compact('disciplines', 'author'));
 }
 
-public function upload(){
+public function import(){
 	if ($this->request->is('post') && isset($this->request->data['Exercise']['xmlFile'])) {
 		$file = $this->request->data['Exercise']['xmlFile']['tmp_name'];
 

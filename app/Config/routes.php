@@ -40,7 +40,7 @@ you can see the documentation at http://book.cakephp.org/2.0/fr/development/rout
     Router::connect('/challenges', array('controller' => 'exercises', 'action' => 'listByUser'));
     Router::connect('/profile/*', array('controller' => 'users', 'action' => 'view'));
     Router::connect('/leaderboard', array('controller' => 'users', 'action' => 'leaderboard'));
-    Router::connect('/administration', array('controller' => 'users', 'action' => 'admin'));
+    Router::connect('/admin', array('controller' => 'users', 'action' => 'admin'));
 
     /* Challenge */
     Router::connect('/challenge/*', array('controller' => 'exercises', 'action' => 'display'));

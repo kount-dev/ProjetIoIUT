@@ -60,7 +60,7 @@ class QuestionsController extends AppController {
 	}
 
 
-	public function upload(){
+	public function import(){
 		if ($this->request->is('post') && isset($this->request->data['Question']['xmlFile'])) {
 			if($this->saveUploadQuestion($this->request->data['Question']['xmlFile']['tmp_name'], false)){
 				$this->Session->setFlash(__('The question has been saved'));
