@@ -99,6 +99,28 @@ class QcusController extends QuestionsController implements iQuestions {
 
     }
 
+    public function correction($aData, $sPath_fileXML){
+
+        $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
+
+        $aRes = array();
+
+        if($aData[0] == $aFileXML['question']['answer']){
+
+            $aRes['points_user'] = $aFileXML['question']['points'];
+
+        } 
+        else{
+
+            $aRes['points_user'] = 0;
+
+        }
+
+        $aRes['max_points'] = $aFileXML['question']['points'];
+
+        return $aRes;
+        
+    }
 
 /**
  *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher

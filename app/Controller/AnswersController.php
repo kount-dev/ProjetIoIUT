@@ -109,7 +109,6 @@ class AnswersController extends AppController {
 			$answer = $this->request->data['Answer']['Answer'];
 			$user_id = $answer['user_id'];
 			$answer['attempt_number'] = $this->Answer->find('count', array('user_id' => $user_id, 'exercise_id' => $this->request->data['Answer']['exercise_id'])) + 1;
-			$answer['success_rate'] = $this->successRate();
 
 			$this->Answer->create();
 			if ($this->Answer->save($answer))
@@ -118,16 +117,20 @@ class AnswersController extends AppController {
 				$data = array('id' => $this->Answer->id, 'user' => $user_id, 'Answers' => $this->request->data['Answer']['Questions']);
 				$this->generationXML($data);
 				$this->Session->setFlash(__('The answer has been saved'));
+
+				$successRatePourcentage = $this->successRate($this->request->data['Answer']['exercise_id'], $this->Answer->id);
+
+
+				$this->Answer->updateAll(
+				    array('Answer.success_rate' => $successRatePourcentage),
+				    array('Answer.id =' => (int)$this->Answer->id)
+				);
+
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The answer could not be saved. Please, try again.'));
 			}
 		}
-	}
-
-	private function successRate(){
-        //TODO
-		return 0;
 	}
 
 	public function generationXML($aData = array()){
@@ -180,7 +183,7 @@ class AnswersController extends AppController {
         $domDocument->save('../../uploads/reponses/'.$nId.'_'.date("Y-m-d").'.xml');
     }
 
-    public function feedback($nIdExercise = null, $nIdAnswer = null){
+    public function readAnswer($nIdExercise = null, $nIdAnswer = null){
     	$this->loadModel('Exercise');
     	$this->loadModel('Question');
     	$this->loadModel('QuestionType');
@@ -234,7 +237,22 @@ class AnswersController extends AppController {
 			        }
 			    }
 		    }
-		 	
+
+		    return $aFileXML;
+
+		}
+		else{
+
+			return false;
+		
+		}
+	}
+
+	public function feedback($nIdExercise = null, $nIdAnswer = null){
+		$aFileXML = $this->readAnswer($nIdExercise, $nIdAnswer);
+
+		if($aFileXML !== false){
+
 		 	$_html = '';
 
 		 	foreach ($aFileXML['question'] as $key => $value) {
@@ -254,6 +272,54 @@ class AnswersController extends AppController {
 		 	$this->set(array('html'=> $_html));
 		 	
 	    }
+	    else{
+
+	    	$_html = 'Mauvaise informations';
+
+	    	$this->set(array('html'=> $_html));
+
+	    }
+
+    }
+
+    public function successRate($nIdExercise = null, $nIdAnswer = null){
+    	$this->loadModel('Answer');
+
+    	$aFileXML = $this->readAnswer($nIdExercise, $nIdAnswer);
+
+    	$fPourcentage = 0;
+    	
+		if($aFileXML !== false){
+
+			$nTotal_Exercise = 0;
+			$nTotal_User = 0;
+
+		 	foreach ($aFileXML['question'] as $key => $value) {
+		 		
+		 		$sNameFile = $this->Question->field('namefile', array('id' => $key));
+
+		 		$nIdTypeQuestion = $this->Question->field('question_type_id', array('id' => $key));
+
+		 		$controller = $this->QuestionType->field('controller', array('id = ' => $nIdTypeQuestion))."sController";
+		 		
+		 		$Question = new $controller();
+
+		 		$aRes = $Question->correction($value,$sNameFile);
+				
+				$nTotal_Exercise += $aRes['max_points'];
+
+				$nTotal_User += $aRes['points_user'];
+
+		 	}
+
+		 	$fPourcentage = ($nTotal_User / $nTotal_Exercise) * 100;
+		 	
+	    }
+
+	    return $fPourcentage;
+
+	    $this->layout = false;
+	    $this->render(false);
 
     }
 
