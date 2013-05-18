@@ -9,7 +9,6 @@
 			<th><?php echo $this->Paginator->sort('attempt_number'); ?></th>
 			<th><?php echo $this->Paginator->sort('success_rate'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($answers as $answer): ?>
@@ -25,11 +24,11 @@
 		<td><?php echo h($answer['Answer']['attempt_number']); ?>&nbsp;</td>
 		<td><?php echo h($answer['Answer']['success_rate']) . "%"; ?>&nbsp;</td>
 		<td><?php echo h($answer['Answer']['created']); ?>&nbsp;</td>
-		<td><?php echo h($answer['Answer']['modified']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $answer['Answer']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $answer['Answer']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $answer['Answer']['id']), null, __('Are you sure you want to delete # %s?', $answer['Answer']['id'])); ?>
+			<?php 
+
+				echo $this->Html->link('FeedBack', array('action' => 'feedback', $answer['Exercise']['id'],$answer['Answer']['id'])); 
+			?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -47,14 +46,4 @@
 		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Answer'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Exercises'), array('controller' => 'exercises', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Exercise'), array('controller' => 'exercises', 'action' => 'add')); ?> </li>
-	</ul>
 </div>
