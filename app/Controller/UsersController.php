@@ -189,6 +189,10 @@ class UsersController extends AppController {
 		}
 	}
 
+	public function admin(){
+		
+	}
+
 	// public function beforeFilter() {
 	//     parent::beforeFilter();
 	//     $this->Auth->allow('initDB'); // Nous pouvons supprimer cette ligne après avoir fini
