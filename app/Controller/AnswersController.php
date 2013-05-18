@@ -22,7 +22,6 @@ class AnswersController extends AppController {
 	public function displayUser(){
 		$this->loadModel('User');
 		$this->Answer->recursive = 0;
-		$this->Auth->user('id');
 		$this->set('answers', $this->paginate(array('Answer.user_id = ' . $this->Auth->user('id'))));
 	}
 
