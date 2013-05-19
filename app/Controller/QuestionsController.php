@@ -38,28 +38,6 @@ class QuestionsController extends AppController {
 		$this->set('question', $this->Question->find('first', $options));
 	}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Question->create();
-			if ($this->Question->save($this->request->data)) {
-				$this->Session->setFlash(__('The question has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
-			}
-		}
-		$users = $this->Question->User->find('list');
-		$questionTypes = $this->Question->QuestionType->find('list');
-		$disciplines = $this->Question->Discipline->find('list');
-		$this->set(compact('users', 'questionTypes', 'disciplines'));
-	}
-
-
 	public function import(){
 		if ($this->request->is('post') && isset($this->request->data['Question']['xmlFile'])) {
 			if($this->saveUploadQuestion($this->request->data['Question']['xmlFile']['tmp_name'], false)){
@@ -193,7 +171,7 @@ class QuestionsController extends AppController {
  *pour la generation
  *@return le contenu HTML dans un string
  */
-    public function generation(){
+    public function add(){
     	if ($this->request->is('post')){
 			$question_types_name_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'name')));
 			$question_types_controller_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'controller')));

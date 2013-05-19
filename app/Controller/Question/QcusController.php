@@ -127,7 +127,7 @@ class QcusController extends QuestionsController implements iQuestions {
  *pour la generation
  *@return le contenu HTML dans un string
  */
-    public function generation(){
+    public function add(){
         if ($this->request->is('post')){
             $author = $this->Auth->user('id');
             $tab = split('_',$this->request->data['f']);

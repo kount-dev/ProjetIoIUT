@@ -34,26 +34,6 @@ class ExercisesController extends AppController {
 		$this->set('exercise', $this->Exercise->find('first', $options));
 	}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Exercise->create();
-			if ($this->Exercise->save($this->request->data)) {
-				$this->Session->setFlash(__('The exercise has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
-			}
-		}
-		$users = $this->Exercise->User->find('list');
-		$disciplines = $this->Exercise->Discipline->find('list');
-		$questions = $this->Exercise->Question->find('list');
-		$this->set(compact('users', 'disciplines', 'questions'));
-	}
 
 /**
  * edit method
@@ -128,7 +108,7 @@ class ExercisesController extends AppController {
  *pour la generation
  *@return le contenu HTML dans un string
  */
-public function generation(){
+public function add(){
 	if ($this->request->is('post')) {
 		$this->Folder->ImportTypeQuestion();
 

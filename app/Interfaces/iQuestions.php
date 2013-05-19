@@ -32,7 +32,7 @@ interface iQuestions {
  *pour la generation
  *@return le contenu HTML dans un string
  */
-    public function generation();
+    public function add();
 
 
 /**

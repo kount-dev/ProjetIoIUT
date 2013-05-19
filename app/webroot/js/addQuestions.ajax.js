@@ -4,7 +4,7 @@ $(document).ready(function(){
 		var nb_question = $('#ExerciseNbQuestion').val();
 		$.ajax({
 		    type: "post",
-		    url: "../questions/generation",
+		    url: "../questions/add",
 		    data: {n: nb_question},
 		    success: function(res) {
 		        $('#add_question').before(res);
@@ -19,7 +19,7 @@ function addQuestionType(elt){
 	var fieldset = $(elt).parent().parent().attr('id');
 	$.ajax({
 	    type: "post",
-	    url: "../"+ typeQuestion +"s/generation",
+	    url: "../"+ typeQuestion +"s/add",
 	    data: {f:fieldset},
 	    success: function(res) {
 	    	$("#"+fieldset+" .typeQuestion").html(res);

@@ -24,7 +24,7 @@ class QosController extends AppController{
  *pour la generation
  *@return le contenu HTML dans un string
  */
-    public function generation(){
+    public function add(){
 
     }
 
