@@ -1,3 +1,13 @@
+<?php 
+
+if($num_question == -1){
+	$num_question = 1;
+	echo 'tetsthgsqdjlslhfjhkfhd';
+	echo $this->Html->script('addQuestions.ajax');
+} 
+
+?>
+
 <?php echo '<fieldset id="question_'.$num_question.'">'; ?>
     <legend><?php echo __('Question'); ?></legend>
 <?php
@@ -13,7 +23,10 @@
                                   'options' => $question_types_list,
                                   'onchange' => "javascript:addQuestionType(this);"));
     echo $this->Form->hidden('Question.'.$num_question.'.Question.user_id', array('value' => $author));
-    echo $this->Form->hidden('Question.'.$num_question.'.Exercise.0', array('value' => $exerciseId));
+   	
+   	if(isset($exerciseId) || !empty($exerciseId)){
+    	echo $this->Form->hidden('Question.'.$num_question.'.Exercise.0', array('value' => $exerciseId));
+    }
 ?>
     <div class="questions typeQuestion generation">
     </div>

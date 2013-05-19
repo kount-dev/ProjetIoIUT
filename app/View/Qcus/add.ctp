@@ -1,4 +1,4 @@
-<?php echo "<fieldset id='qcu_".$num_question."'>"; ?>
+<?php echo "<fieldset id='Qcu_".$num_question."'>"; ?>
     <legend><?php echo __('QCU'); ?></legend>
 <?php
     echo $this->Form->input('Question.'.$num_question.'.content.question');

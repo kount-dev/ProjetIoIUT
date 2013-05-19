@@ -172,23 +172,30 @@ class QuestionsController extends AppController {
  *@return le contenu HTML dans un string
  */
     public function add(){
-    	if ($this->request->is('post')){
-			$question_types_name_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'name')));
-			$question_types_controller_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'controller')));
-			$question_types_list = array();
-			foreach ($question_types_name_list as $key => $val) {
-    			$question_types_list[$key] = array('value' => $key,'name' =>$question_types_name_list[$key], 'questiontype' => $question_types_controller_list[$key]);
-			}
+    	$this->loadModel('Exercise');
+    	
+    	$question_types_name_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'name')));
+		$question_types_controller_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'controller')));
+		$question_types_list = array();
+		foreach ($question_types_name_list as $key => $val) {
+    		$question_types_list[$key] = array('value' => $key,'name' =>$question_types_name_list[$key], 'questiontype' => $question_types_controller_list[$key]);
+		}
 
-			$author = $this->Auth->user('id');
-			$disciplines = $this->Question->Discipline->find('list');
+		$author = $this->Auth->user('id');
+		$disciplines = $this->Question->Discipline->find('list');
+
+    	if ($this->request->is('post')){
+			
 			$num_question = (int)$this->request->data['n'];
-			$this->loadModel('Exercise');
 			$exerciseId = $this->Exercise->field('id', array(), 'created DESC') + 1;
 			$this->set(compact('disciplines','question_types_list', 'author','num_question', 'exerciseId'));
 
 	    	$this->layout = false;
 			$this->render();
+    	}
+    	else{
+    		$num_question = -1;
+			$this->set(compact('disciplines','question_types_list', 'author', 'num_question'));
     	}
     }
 

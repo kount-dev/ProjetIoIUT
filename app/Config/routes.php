@@ -67,6 +67,7 @@ you can see the documentation at http://book.cakephp.org/2.0/fr/development/rout
 
     Router::connect('/admin/Qcus', array('controller' => 'qcus'));
     Router::connect('/admin/Qcus/:action/*', array('controller' => 'qcus'));
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
