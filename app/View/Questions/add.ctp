@@ -2,7 +2,6 @@
 
 if($num_question == -1){
 	$num_question = 1;
-	echo 'tetsthgsqdjlslhfjhkfhd';
 	echo $this->Html->script('addQuestions.ajax');
 } 
 
