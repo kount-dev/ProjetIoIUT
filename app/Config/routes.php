@@ -44,29 +44,28 @@ you can see the documentation at http://book.cakephp.org/2.0/fr/development/rout
 
     /* Challenge */
     Router::connect('/challenge/*', array('controller' => 'exercises', 'action' => 'display'));
-    Router::connect('/challenge/feedback/*', array('controller' => 'answers', 'action' => 'displayByIdExercise'));
+    Router::connect('/feedback/challenge/*', array('controller' => 'answers', 'action' => 'displayByIdExercise'));
 
     /* Admin */
-    Router::connect('/admin/challenges/feedback', array('controller' => 'answers'));
-    Router::connect('/admin/challenges/feedback/:action/*', array('controller' => 'answers'));
+    Router::connect('/admin/feedbacks', array('controller' => 'answers'));
+    Router::connect('/admin/feedback/user/*', array('controller' => 'answers', 'action' => 'displayByIdUser'));
+    Router::connect('/admin/feedback/challenge/*', array('controller' => 'answers', 'action' => 'displayByIdExercise'));
 
     Router::connect('/admin/challenges', array('controller' => 'exercises'));
-    Router::connect('/admin/challenges/:action/*', array('controller' => 'exercises'));
+    Router::connect('/admin/challenge/:action/*', array('controller' => 'exercises'));
 
     Router::connect('/admin/users', array('controller' => 'users'));
-    Router::connect('/admin/users/:action/*', array('controller' => 'users'));
+    Router::connect('/admin/user/:action/*', array('controller' => 'users'));
 
     Router::connect('/admin/questions', array('controller' => 'questions'));
-    Router::connect('/admin/questions/:action/*', array('controller' => 'questions'));
+    Router::connect('/admin/question/:action/*', array('controller' => 'questions'));
 
     Router::connect('/admin/disciplines', array('controller' => 'disciplines'));
-    Router::connect('/admin/disciplines/:action/*', array('controller' => 'disciplines'));
+    Router::connect('/admin/discipline/:action/*', array('controller' => 'disciplines'));
 
     Router::connect('/admin/questionTypes', array('controller' => 'questionTypes'));
-    Router::connect('/admin/questionTypes/:action/*', array('controller' => 'questionTypes'));
+    Router::connect('/admin/questionType/:action/*', array('controller' => 'questionTypes'));
 
-    Router::connect('/admin/Qcus', array('controller' => 'qcus'));
-    Router::connect('/admin/Qcus/:action/*', array('controller' => 'qcus'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
