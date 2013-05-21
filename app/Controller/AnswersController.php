@@ -359,7 +359,7 @@ class AnswersController extends AppController {
     		$nNbAnswer -= 1;
     	}
 
-	 	return (($nTaux * $nNbAnswer) * ($nTotal_Exercise * ($fPourcentage / 100))) + $this->User->field('xp', array('id' => $this->Auth->user('id')));
+	 	return ((($nTaux * $nNbAnswer)/$nNbAnswer) * ($nTotal_Exercise * ($fPourcentage / 100))) + $this->User->field('xp', array('id' => $this->Auth->user('id')));
    
     }
 
