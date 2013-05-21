@@ -211,23 +211,23 @@ class AnswersController extends AppController {
     	$aFileXML = array();
 
     	if ($this->Exercise->exists($nIdExercise) && $this->Answer->exists($nIdAnswer)) {
-    	
+
     		$sNameFile = $this->Answer->field('namefile', array('id' => $nIdAnswer, 'exercise_id' => $nIdExercise, 'user_id' => $this->Auth->user('id')));
 
     		$aFileXML = array();
-	    
+
 	        set_error_handler(function(){throw new Exception('fichier inexistant');});
-	    
+
 	        try{
-	    
+
 	            $oFileXML = simplexml_load_file('../../uploads/reponses/' . $sNameFile);
-        
+
         	}
-        
+
         	catch(Exception $e){
-        
+
         	    return "Erreur de chargement du fichier";
-    	
+
     	    }
 
 		 	foreach ($oFileXML as $ATTR => $VAL) {
@@ -241,13 +241,13 @@ class AnswersController extends AppController {
 			            	$IDQuestion = '';
 
 					        foreach ($QUESTIONVAL->attributes() as $ID => $IDVAL) {
-					           
+
 					        	$IDQuestion = (int)$IDVAL;
-					        
+
 					        }
 
 			                foreach ($QUESTIONVAL as $ANSWER => $ANSWERVAL) {
-			                    
+
 			                	$aFileXML['question'][$IDQuestion][] = (int)$ANSWERVAL;
 
 			                }
@@ -262,7 +262,7 @@ class AnswersController extends AppController {
 		else{
 
 			return false;
-		
+
 		}
 	}
 
@@ -274,21 +274,21 @@ class AnswersController extends AppController {
 		 	$_html = '';
 
 		 	foreach ($aFileXML['question'] as $key => $value) {
-		 		
+
 		 		$sNameFile = $this->Question->field('namefile', array('id' => $key));
 
 		 		$nIdTypeQuestion = $this->Question->field('question_type_id', array('id' => $key));
 
 		 		$controller = $this->QuestionType->field('controller', array('id = ' => $nIdTypeQuestion))."sController";
-		 		
+
 		 		$Question = new $controller();
 
 		 		$_html .= $Question->displayWithReponses($value,$sNameFile);
-				
+
 		 	}
 
 		 	$this->set(array('html'=> $_html));
-		 	
+
 	    }
 	    else{
 
@@ -314,13 +314,13 @@ class AnswersController extends AppController {
 			$nTotal_User = 0;
 
 		 	foreach ($aFileXML['question'] as $key => $value) {
-		 		
+
 		 		$sNameFile = $this->Question->field('namefile', array('id' => $key));
 
 		 		$nIdTypeQuestion = $this->Question->field('question_type_id', array('id' => $key));
 
 		 		$controller = $this->QuestionType->field('controller', array('id = ' => $nIdTypeQuestion))."sController";
-		 		
+
 		 		$Question = new $controller();
 
 		 		$aRes = $Question->correction($value,$sNameFile);
@@ -333,34 +333,51 @@ class AnswersController extends AppController {
 
 		 	$fPourcentage = ($nTotal_User / $nTotal_Exercise) * 100;
 
+            $nbRealisations = $this->Answer->find('count', array('fields' => 'Answer.id', 'conditions' => array('Answer.exercise_id' => $nIdExercise, 'Answer.user_id' => $this->Auth->user('id'))));
+            $nouvelleXP = $this->User->field('xp', array('id' => $this->Auth->user('id')) + scoreEnFonctionNbRealisations($nbRealisations);
+
+            // $this->calculPoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer)
 		 	$this->Answer->updateAll(
-			    array('User.xp' => $this->calculPoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer)),
+			    array('User.xp' => $nouvelleXP),
 			    array('User.id =' => $this->Auth->user('id'))
 			);
-		 	
+
 	    }
 
 	    $this->layout = false;
 	    $this->render(false);
-	    
+
 	    return $fPourcentage;
 
     }
 
-    public function calculPoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer){
-    	$this->loadModel('User');
-    	$this->loadModel('Answer');
+   //  public function calculPoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer){
+   //  	$this->loadModel('User');
+   //  	$this->loadModel('Answer');
 
-    	$nNbAnswer = $this->Answer->find('count', array('fields' => 'Answer.id', 'conditions' => array('Answer.exercise_id' => $nIdExercise, 'Answer.user_id' => $this->Auth->user('id'))));
+   //  	$nNbAnswer = $this->Answer->find('count', array('fields' => 'Answer.id', 'conditions' => array('Answer.exercise_id' => $nIdExercise, 'Answer.user_id' => $this->Auth->user('id'))));
 
-    	if($nNbAnswer == 1) $nTaux = 1;
-    	else {
-    		$nTaux = 0.8;
-    		$nNbAnswer -= 1;
-    	}
+   //  	if($nNbAnswer == 1) $nTaux = 1;
+   //  	else {
+   //  		$nTaux = 0.8;
+   //  		$nNbAnswer -= 1;
+   //  	}
 
-	 	return ((($nTaux * $nNbAnswer)/$nNbAnswer) * ($nTotal_Exercise * ($fPourcentage / 100))) + $this->User->field('xp', array('id' => $this->Auth->user('id')));
-   
-    }
+	 	// return ((($nTaux * $nNbAnswer)/$nNbAnswer) * ($nTotal_Exercise * ($fPourcentage / 100))) + $this->User->field('xp', array('id' => $this->Auth->user('id')));
 
+   //  }
+
+// }
+
+/**
+*@desc Cette fonction transforme un nombre de tentative et un nombre de points 'score' (degressif)
+*@param int $nbPoints
+*@param int $nbReussite
+*@return int $score
+*/
+public function scoreEnFonctionNbRealisations($nbReussite){
+    $pointsGagnesParExec = 10;
+    $malus = round(1/exp($nbReussi/2.5), 2);
+    $score = $pointsGagnesParExec * $malus;
+    return intval($score);
 }
