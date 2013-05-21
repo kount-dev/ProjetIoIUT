@@ -334,7 +334,7 @@ class AnswersController extends AppController {
 		 	$fPourcentage = ($nTotal_User / $nTotal_Exercise) * 100;
 
 		 	$this->Answer->updateAll(
-			    array('User.xp' => $this->calculePoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer)),
+			    array('User.xp' => $this->calculPoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer)),
 			    array('User.id =' => $this->Auth->user('id'))
 			);
 		 	
@@ -347,7 +347,7 @@ class AnswersController extends AppController {
 
     }
 
-    public function calculePoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer){
+    public function calculPoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer){
     	$this->loadModel('User');
     	$this->loadModel('Answer');
 
@@ -358,7 +358,7 @@ class AnswersController extends AppController {
     		$nTaux = 0.8;
     		$nNbAnswer -= 1;
     	}
-    	
+
 	 	return (($nTaux * $nNbAnswer) * ($nTotal_Exercise * ($fPourcentage / 100))) + $this->User->field('xp', array('id' => $this->Auth->user('id')));
    
     }
