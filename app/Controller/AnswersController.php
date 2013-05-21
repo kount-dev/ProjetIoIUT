@@ -302,6 +302,7 @@ class AnswersController extends AppController {
 
     public function successRate($nIdExercise = null, $nIdAnswer = null){
     	$this->loadModel('Answer');
+    	$this->loadModel('User');
 
     	$aFileXML = $this->readXMLAnswer($nIdExercise, $nIdAnswer);
 
@@ -323,7 +324,7 @@ class AnswersController extends AppController {
 		 		$Question = new $controller();
 
 		 		$aRes = $Question->correction($value,$sNameFile);
-				
+
 				$nTotal_Exercise += $aRes['max_points'];
 
 				$nTotal_User += $aRes['points_user'];
@@ -331,6 +332,11 @@ class AnswersController extends AppController {
 		 	}
 
 		 	$fPourcentage = ($nTotal_User / $nTotal_Exercise) * 100;
+
+		 	$this->Answer->updateAll(
+			    array('User.xp' => $this->calculePoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer)),
+			    array('User.id =' => $this->Auth->user('id'))
+			);
 		 	
 	    }
 
@@ -339,6 +345,12 @@ class AnswersController extends AppController {
 	    
 	    return $fPourcentage;
 
+    }
+
+    public function calculePoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer){
+
+	 	return ($nTotal_Exercise * ($fPourcentage / 100)) + $this->User->field('xp', array('id' => $this->Auth->user('id')));
+   
     }
 
 }
