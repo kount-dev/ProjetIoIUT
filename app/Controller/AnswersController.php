@@ -348,8 +348,18 @@ class AnswersController extends AppController {
     }
 
     public function calculePoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer){
+    	$this->loadModel('User');
+    	$this->loadModel('Answer');
 
-	 	return ($nTotal_Exercise * ($fPourcentage / 100)) + $this->User->field('xp', array('id' => $this->Auth->user('id')));
+    	$nNbAnswer = $this->Answer->find('count', array('fields' => 'Answer.id', 'conditions' => array('Answer.exercise_id' => $nIdExercise, 'Answer.user_id' => $this->Auth->user('id'))));
+
+    	if($nNbAnswer == 1) $nTaux = 1;
+    	else {
+    		$nTaux = 0.8;
+    		$nNbAnswer -= 1;
+    	}
+    	
+	 	return (($nTaux * $nNbAnswer) * ($nTotal_Exercise * ($fPourcentage / 100))) + $this->User->field('xp', array('id' => $this->Auth->user('id')));
    
     }
 
