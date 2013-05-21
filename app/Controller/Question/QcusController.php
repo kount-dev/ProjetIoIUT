@@ -61,7 +61,7 @@ class QcusController extends QuestionsController implements iQuestions {
  *@desc Cette fonction permet l'affichage d'une question
  */
     public function displayXmlToHtml($sPath_fileXML = ""){
-        
+
         return $this->load("../../uploads/questions/".$sPath_fileXML);
 
     }
@@ -72,11 +72,11 @@ class QcusController extends QuestionsController implements iQuestions {
         $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
 
         $sHTML = '<div><p>' . $aFileXML['question']['text'] . '</p>';
-        
+
         $sHTML .= '<ul>';
 
         foreach ($aFileXML['question']['option'] as $key => $value) {
-                
+
             $sHTML .= '<li>' . $value;
 
             if($aData[0] == $key && $aFileXML['question']['answer'] == $key){
@@ -91,7 +91,7 @@ class QcusController extends QuestionsController implements iQuestions {
 
             $sHTML .= '</li>';
 
-        } 
+        }
 
         $sHTML .= '</ul></div><br/>';
 
@@ -109,7 +109,7 @@ class QcusController extends QuestionsController implements iQuestions {
 
             $aRes['points_user'] = $aFileXML['question']['points'];
 
-        } 
+        }
         else{
 
             $aRes['points_user'] = 0;
@@ -146,7 +146,7 @@ class QcusController extends QuestionsController implements iQuestions {
 
         $data = array();
         $data['id'] = $this->Question->id;
-        $data['author'] = $this->User->field('username', array('id' => $theQuestion['Question']['user_id']));
+        $data['author'] = $this->User->field('name', array('id' => $theQuestion['Question']['user_id']));
         $data['difficulty'] = $theQuestion['Question']['difficulty'];
         $data['text'] = $theQuestion['content']['question'];
         $data['choices'] = $theQuestion['content']['choices'];

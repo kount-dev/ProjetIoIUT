@@ -261,7 +261,7 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `password` char(40) NOT NULL,
   `mail` varchar(100) NOT NULL,
   `xp` float DEFAULT NULL,
@@ -272,12 +272,12 @@ CREATE TABLE `users` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`username`,`password`,`mail`,`xp`,`actual_rank`,`last_rank`,`group_id`,`avatar_namefile`,`created`,`modified`) values (4,'quentin','aa26144053d99fcff013ff1e96c169d0f7a35401','',NULL,NULL,NULL,1,NULL,'2013-03-18 18:20:25','2013-03-18 18:20:25'),(5,'florian','ef3ce76a84fe7519453a613804375f66b9a7a118','',NULL,NULL,NULL,1,NULL,'2013-03-19 09:23:55','2013-03-19 09:23:55'),(6,'louis','b28d04149bc5151bfc258aa7c01f605d354f81ef','',NULL,NULL,NULL,1,NULL,'2013-03-19 09:24:06','2013-03-19 09:24:06');
+insert  into `users`(`id`,`name`,`password`,`mail`,`xp`,`actual_rank`,`last_rank`,`group_id`,`avatar_namefile`,`created`,`modified`) values (4,'quentin','aa26144053d99fcff013ff1e96c169d0f7a35401','',NULL,NULL,NULL,1,NULL,'2013-03-18 18:20:25','2013-03-18 18:20:25'),(5,'florian','ef3ce76a84fe7519453a613804375f66b9a7a118','',NULL,NULL,NULL,1,NULL,'2013-03-19 09:23:55','2013-03-19 09:23:55'),(6,'louis','b28d04149bc5151bfc258aa7c01f605d354f81ef','',NULL,NULL,NULL,1,NULL,'2013-03-19 09:24:06','2013-03-19 09:24:06');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

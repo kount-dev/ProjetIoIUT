@@ -94,7 +94,7 @@ class QuestionsController extends AppController {
 	        	}
 	        }
 
-	        $nUser = $this->User->field('id', array('username' => $aDataTmp['Question']['author']));
+	        $nUser = $this->User->field('id', array('name' => $aDataTmp['Question']['author']));
 	        $nQuestionTypes = $this->QuestionType->field('id', array('controller' => $aData['type']));
 	        sleep(1);
 	        $nIdNew = $this->Question->field('id',array(), 'created DESC')+1;
@@ -112,7 +112,7 @@ class QuestionsController extends AppController {
 			}
 		}
 	}
-		
+
 /**
  * edit method
  *
@@ -173,7 +173,7 @@ class QuestionsController extends AppController {
  */
     public function add(){
     	$this->loadModel('Exercise');
-    	
+
     	$question_types_name_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'name')));
 		$question_types_controller_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'controller')));
 		$question_types_list = array();
@@ -185,7 +185,7 @@ class QuestionsController extends AppController {
 		$disciplines = $this->Question->Discipline->find('list');
 
     	if ($this->request->is('post')){
-			
+
 			$num_question = (int)$this->request->data['n'];
 			$exerciseId = $this->Exercise->field('id', array(), 'created DESC') + 1;
 			$this->set(compact('disciplines','question_types_list', 'author','num_question', 'exerciseId'));

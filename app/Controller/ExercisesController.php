@@ -190,7 +190,7 @@ public function import(){
 
 	   			$this->loadModel('User');
 
-		        $aDataTmp['Exercise']['user_id'] = $this->User->field('id', array('username' => $aDataTmp['Exercise']['author']));
+		        $aDataTmp['Exercise']['user_id'] = $this->User->field('id', array('name' => $aDataTmp['Exercise']['author']));
 
 				$this->Exercise->create();
 				if ($this->Exercise->save($aDataTmp)){
@@ -222,7 +222,7 @@ public function listByUser(){
 	$this->Exercise->recursive = 0;
 	$nXpUser = $this->User->field('xp', array('id' => $this->Auth->user('id')));
 	$this->set('exercises', $this->paginate(array(
-				'minimum_points <= '.$nXpUser.' AND ((`opening_date` = `closing_date) OR (NOW() BETWEEN `opening_date` AND `closing_date`))' 
+				'minimum_points <= '.$nXpUser.' AND ((`opening_date` = `closing_date) OR (NOW() BETWEEN `opening_date` AND `closing_date`))'
 				)));
 }
 
