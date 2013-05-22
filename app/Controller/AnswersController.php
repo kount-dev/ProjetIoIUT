@@ -307,12 +307,10 @@ class AnswersController extends AppController {
     	$aFileXML = $this->readXMLAnswer($nIdExercise, $nIdAnswer);
 
     	$fPourcentage = 0;
-
 		if($aFileXML !== false){
 
 			$nTotal_Exercise = 0;
 			$nTotal_User = 0;
-
 		 	foreach ($aFileXML['question'] as $key => $value) {
 
 		 		$sNameFile = $this->Question->field('namefile', array('id' => $key));
@@ -333,12 +331,13 @@ class AnswersController extends AppController {
 
 		 	$fPourcentage = ($nTotal_User / $nTotal_Exercise) * 100;
 
-            $nbRealisations = $this->Answer->find('count', array('fields' => 'Answer.id', 'conditions' => array('Answer.exercise_id' => $nIdExercise, 'Answer.user_id' => $this->Auth->user('id'))));
-            $nouvelleXP = $this->User->field('xp', array('id' => $this->Auth->user('id')) + scoreEnFonctionNbRealisations($nbRealisations);
+            $nbRealisations = $this->Answer->find('count', array('fields' => array('Answer.id'), 'conditions' => array('Answer.exercise_id' => $nIdExercise, 'Answer.user_id' => $this->Auth->user('id'))));
 
-            // $this->calculPoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer)
+            $fNouvelleXP = $this->User->field('xp', array('id' => $this->Auth->user('id'))) + $this->scoreEnFonctionNbRealisations($nbRealisations, $nTotal_User);
+
+            // $this->calculPoints($fPourcentage, $nTotal_Exercise, $nIdExercise, $nIdAnswer);
 		 	$this->Answer->updateAll(
-			    array('User.xp' => $nouvelleXP),
+			    array('User.xp' => $fNouvelleXP),
 			    array('User.id =' => $this->Auth->user('id'))
 			);
 
@@ -366,18 +365,15 @@ class AnswersController extends AppController {
 	 	// return ((($nTaux * $nNbAnswer)/$nNbAnswer) * ($nTotal_Exercise * ($fPourcentage / 100))) + $this->User->field('xp', array('id' => $this->Auth->user('id')));
 
    //  }
-
-// }
-
-/**
-*@desc Cette fonction transforme un nombre de tentative et un nombre de points 'score' (degressif)
-*@param int $nbPoints
-*@param int $nbReussite
-*@return int $score
-*/
-public function scoreEnFonctionNbRealisations($nbReussite){
-    $pointsGagnesParExec = 10;
-    $malus = round(1/exp($nbReussi/2.5), 2);
-    $score = $pointsGagnesParExec * $malus;
-    return intval($score);
+    /**
+	*@desc Cette fonction transforme un nombre de tentative et un nombre de points 'score' (degressif)
+	*@param int $nbPoints
+	*@param int $nbReussite
+	*@return int $score
+	*/
+	public function scoreEnFonctionNbRealisations($nbReussite, $pointsGagnesParExec){
+	    $malus = round(1/exp($nbReussite/2.5), 2);
+	    $score = $pointsGagnesParExec * $malus;
+	    return $score;
+	}
 }
