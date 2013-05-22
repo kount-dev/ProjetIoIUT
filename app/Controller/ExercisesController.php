@@ -57,7 +57,7 @@ class ExercisesController extends AppController {
 			$options = array('conditions' => array('Exercise.' . $this->Exercise->primaryKey => $id));
 			$this->request->data = $this->Exercise->find('first', $options);
 		}
-		$users = $this->Exercise->User->find('list');
+		$users = $this->Exercise->User->find('list', array('fields' => array('id','username')));
 		$disciplines = $this->Exercise->Discipline->find('list');
 		$questions = $this->Exercise->Question->find('list');
 		$this->set(compact('users', 'disciplines', 'questions'));

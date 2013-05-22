@@ -71,7 +71,7 @@ class AnswersController extends AppController {
 				$this->Session->setFlash(__('The answer could not be saved. Please, try again.'));
 			}
 		}
-		$users = $this->Answer->User->find('list');
+		$users = $this->Answer->User->find('list', array('fields' => array('id','username')));
 		$exercises = $this->Answer->Exercise->find('list');
 		$this->set(compact('users', 'exercises'));
 	}
@@ -98,7 +98,7 @@ class AnswersController extends AppController {
 			$options = array('conditions' => array('Answer.' . $this->Answer->primaryKey => $id));
 			$this->request->data = $this->Answer->find('first', $options);
 		}
-		$users = $this->Answer->User->find('list');
+		$users = $this->Answer->User->find('list', array('fields' => array('id','username')));
 		$exercises = $this->Answer->Exercise->find('list');
 		$this->set(compact('users', 'exercises'));
 	}

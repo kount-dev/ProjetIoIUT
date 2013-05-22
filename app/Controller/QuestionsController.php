@@ -135,7 +135,7 @@ class QuestionsController extends AppController {
 			$options = array('conditions' => array('Question.' . $this->Question->primaryKey => $id));
 			$this->request->data = $this->Question->find('first', $options);
 		}
-		$users = $this->Question->User->find('list');
+		$users = $this->Question->User->find('list', array('fields' => array('id','username')));
 		$questionTypes = $this->Question->QuestionType->find('list');
 		$disciplines = $this->Question->Discipline->find('list');
 		$this->set(compact('users', 'questionTypes', 'disciplines'));
