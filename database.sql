@@ -239,7 +239,7 @@ CREATE TABLE `questions_disciplines` (
 
 /*Table structure for table `resultats` */
 
-DROP TABLE IF EXISTS `resultats`;
+DROP TABLE IF EXISTS `answers`;
 
 CREATE TABLE `answers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
