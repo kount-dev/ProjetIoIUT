@@ -134,11 +134,12 @@ class QuestionsController extends AppController {
 		} else {
 			$options = array('conditions' => array('Question.' . $this->Question->primaryKey => $id));
 			$this->request->data = $this->Question->find('first', $options);
+			$this->Folder->ImportTypeQuestion();
 		}
 		$users = $this->Question->User->find('list', array('fields' => array('id','username')));
 		$questionTypes = $this->Question->QuestionType->find('list');
 		$disciplines = $this->Question->Discipline->find('list');
-		$this->set(compact('users', 'questionTypes', 'disciplines'));
+		$this->set(compact('users', 'questionTypes', 'disciplines', '_HtmlQuestionType'));
 	}
 
 /**

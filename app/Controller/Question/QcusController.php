@@ -138,6 +138,14 @@ class QcusController extends QuestionsController implements iQuestions {
         }
     }
 
+    public function edit($namefile = null){
+
+        $aFileXML = $this->load('../../uploads/questions/' . $namefile);
+        $this->set(compact('aFileXML'));
+        $this->layout = false;
+        
+    }
+
 
     public function saveQuestion($theQuestion){
         $this->loadModel('Question');

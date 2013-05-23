@@ -1,0 +1,17 @@
+<?php echo "<fieldset id='Qcu'>"; ?>
+    <legend><?php echo __('QCU'); ?></legend>
+<?php
+	
+    echo $this->Form->input('Question.content.question', array('value' => $aFileXML['question']['text']));
+    
+
+    $aOptions = array();
+	foreach ($aFileXML['question']['option'] as $nNumChoice => $sValue) {
+	    $KEY = (int)($nNumChoice+1);
+	    $aOptions[$KEY] = $this->Form->input('Question.content.choices.' . $KEY, array('label' => 'Choice ' . $KEY, 'value' => $sValue));
+	}
+  
+    echo $this->Form->input('Question.content.answer', array('type' => 'radio', 'options' => $aOptions, 'value' => $aFileXML['question']['answer']));
+    //echo "<input class='add_choice' value='Add choice' type='button' onclick='javascript:addChoice(this);'>";
+?>
+</fieldset>
