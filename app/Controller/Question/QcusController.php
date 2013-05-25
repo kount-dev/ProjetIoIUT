@@ -154,7 +154,7 @@ class QcusController extends QuestionsController implements iQuestions {
 
         $data = array();
         $data['id'] = $this->Question->id;
-        $data['author'] = $this->User->field('name', array('id' => $theQuestion['Question']['user_id']));
+        $data['author'] = $this->User->field('username', array('id' => $theQuestion['Question']['user_id']));
         $data['difficulty'] = $theQuestion['Question']['difficulty'];
         $data['text'] = $theQuestion['content']['question'];
         $data['choices'] = $theQuestion['content']['choices'];
@@ -173,6 +173,15 @@ class QcusController extends QuestionsController implements iQuestions {
             $num_question = $tab[1];
             $nb_choice = $this->request->data['n'];
             $this->set(compact('nb_choice','num_question'));
+            $this->layout = false;
+            $this->render();
+        }
+    }
+
+     public function addEditChoice(){
+        if ($this->request->is('post')){
+            $nb_choice = $this->request->data['n'];
+            $this->set(compact('nb_choice'));
             $this->layout = false;
             $this->render();
         }

@@ -152,7 +152,7 @@ class UsersController extends AppController {
 			$aUsers[$nCpt]['ecart'] = $nEcartRank;
 			$aUsers[$nCpt]['actual_rank'] = $nCpt+1;
 			$aUsers[$nCpt]['xp'] = $aUserTab['User']['xp'];
-			$aUsers[$nCpt]['name'] = $aUserTab['User']['name'];
+			$aUsers[$nCpt]['username'] = $aUserTab['User']['username'];
 			$aUsers[$nCpt]['id'] = $aUserTab['User']['id'];
 			$nCpt++;
 		}
@@ -167,7 +167,7 @@ class UsersController extends AppController {
 
 		if ($this->request->is('post')){
 
-			$sOrder = ($this->request->data['t'] == 'xp_rank') ? "User.xp ".$this->request->data['s'] : "User.name ".$this->request->data['s'];
+			$sOrder = ($this->request->data['t'] == 'xp_rank') ? "User.xp ".$this->request->data['s'] : "User.username ".$this->request->data['s'];
 
 			$aLeaderboard = $this->User->find('all', array('conditions' => array('User.xp >' => '0'), 'order'=> $sOrder));
 
@@ -177,7 +177,7 @@ class UsersController extends AppController {
 				$aUsers[$nCpt]['ecart'] = -1*($aUserTab['User']['actual_rank'] - $aUserTab['User']['last_rank']);
 				$aUsers[$nCpt]['actual_rank'] = $aUserTab['User']['actual_rank'];
 				$aUsers[$nCpt]['xp'] = $aUserTab['User']['xp'];
-				$aUsers[$nCpt]['name'] = $aUserTab['User']['name'];
+				$aUsers[$nCpt]['username'] = $aUserTab['User']['username'];
 				$aUsers[$nCpt]['id'] = $aUserTab['User']['id'];
 				$nCpt++;
 			}

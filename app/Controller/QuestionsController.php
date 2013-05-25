@@ -94,7 +94,7 @@ class QuestionsController extends AppController {
 	        	}
 	        }
 
-	        $nUser = $this->User->field('id', array('name' => $aDataTmp['Question']['author']));
+	        $nUser = $this->User->field('id', array('username' => $aDataTmp['Question']['author']));
 	        $nQuestionTypes = $this->QuestionType->field('id', array('controller' => $aData['type']));
 	        sleep(1);
 	        $nIdNew = $this->Question->field('id',array(), 'created DESC')+1;

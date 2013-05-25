@@ -20,7 +20,7 @@
 $paging = isset($this->Paginator->options['url']) ? $this->Paginator->options['url'] : null;
 
 $formatted = array(
-	'user' => $user['User']['name'],
+	'user' => $user['User']['username'],
 	'list' => array(),
 	'paging' => $paging,
 );

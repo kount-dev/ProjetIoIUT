@@ -190,7 +190,7 @@ public function import(){
 
 	   			$this->loadModel('User');
 
-		        $aDataTmp['Exercise']['user_id'] = $this->User->field('id', array('name' => $aDataTmp['Exercise']['author']));
+		        $aDataTmp['Exercise']['user_id'] = $this->User->field('id', array('username' => $aDataTmp['Exercise']['author']));
 
 				$this->Exercise->create();
 				if ($this->Exercise->save($aDataTmp)){
