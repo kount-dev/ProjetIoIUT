@@ -261,7 +261,12 @@ class QcusController extends QuestionsController implements iQuestions {
         $eQuestion->appendChild($ePoints);
         $ePoints->appendChild($ePointsText);
 
-        $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');
+        if(isset($aData['namefile']) && !empty($aData['namefile'])){
+            $domDocument->save('../../uploads/questions/'.$aData['namefile']);
+        }
+        else{
+            $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');
+        }
     }
 
     /**
