@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var namefile = $('#QuestionNamefile').val();
 	var tab = namefile.split('_');
-	var url = '../../' + tab[0] + 's/edit/' + namefile;
+	var url = '../../../' + tab[0] + 's/edit/' + namefile;
 	$.ajax({
 	    type: "get",
 	    url: url,
@@ -15,7 +15,7 @@ function addEditChoice(elt){
 	var namefile = $('#QuestionNamefile').val();
 	var tab = namefile.split('_');
 	var nb_choice = $(elt).parent().find('.nb_choice').attr('value');
-	var url = '../../' + tab[0] + 's/addEditChoice';
+	var url = '../../../' + tab[0] + 's/addEditChoice';
 	$.ajax({
 	    type: "post",
 	    url: url,
