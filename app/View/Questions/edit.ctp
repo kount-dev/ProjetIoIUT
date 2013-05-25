@@ -8,6 +8,8 @@
 		echo $this->Form->input('namefile');
 		echo $this->Form->input('points');
 		echo $this->Form->input('difficulty');
+		echo $this->Form->hidden('user_id');
+		echo $this->Form->hidden('question_type_id');
 		echo $this->Form->input('Discipline');
 	?>
 	</fieldset>

@@ -126,6 +126,13 @@ class QuestionsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Question->save($this->request->data)) {
+				$this->Folder->ImportTypeQuestion();
+				$this->loadModel('QuestionType');
+				$theQuestion = $this->request->data;
+				$controller = $this->QuestionType->field('controller', array('id = ' => $theQuestion['Question']['question_type_id']))."sController";
+				$Question = new $controller();
+				$Question->saveEditQuestion($theQuestion);
+
 				$this->Session->setFlash(__('The question has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {

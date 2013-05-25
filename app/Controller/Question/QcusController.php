@@ -143,7 +143,7 @@ class QcusController extends QuestionsController implements iQuestions {
         $aFileXML = $this->load('../../uploads/questions/' . $namefile);
         $this->set(compact('aFileXML'));
         $this->layout = false;
-        
+
     }
 
 
@@ -161,10 +161,32 @@ class QcusController extends QuestionsController implements iQuestions {
         $data['rep'] = $theQuestion['content']['answer'];
         $data['points'] = $theQuestion['Question']['points'];
         $data['disciplines'] = $theQuestion['Discipline'];
+        if(isset($theQuestion['Question']['namefile']) && !empty($theQuestion['Question']['namefile'])){
+            $data['namefile'] = $theQuestion['Question']['namefile'];
+        }
 
         $this->generationXML($data);
 
         $this->Question->saveField('namefile', 'qcu_'.$data['id'].'_'.date("Y-m-d").'.xml');
+    }
+
+    public function saveEditQuestion($theQuestion){
+        $this->loadModel('Question');
+        $this->loadModel('User');
+        parent::saveQuestion($theQuestion);
+
+        $data = array();
+        $data['id'] = $this->Question->id;
+        $data['author'] = $this->User->field('username', array('id' => $theQuestion['Question']['user_id']));
+        $data['difficulty'] = $theQuestion['Question']['difficulty'];
+        $data['text'] = $theQuestion['Question']['content']['question'];
+        $data['choices'] = $theQuestion['Question']['content']['choices'];
+        $data['rep'] = $theQuestion['Question']['content']['answer'];
+        $data['points'] = $theQuestion['Question']['points'];
+        $data['disciplines'] = $theQuestion['Discipline']['Discipline'];
+        $data['namefile'] = $theQuestion['Question']['namefile'];
+
+        $this->generationXML($data);
     }
 
     public function addChoice(){
