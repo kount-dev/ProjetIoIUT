@@ -4,7 +4,7 @@ $(document).ready(function(){
 		var nb_question = $('#ExerciseNbQuestion').val();
 		$.ajax({
 		    type: "post",
-		    url: "../question/add",
+		    url: "../questions/add",
 		    data: {n: nb_question},
 		    success: function(res) {
 		        $('#add_question').before(res);
