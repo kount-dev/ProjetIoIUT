@@ -43,38 +43,3 @@
 		</dd>
 	</dl>
 </div>
-<div class="related">
-	<h3><?php echo __('Related Disciplines'); ?></h3>
-	<?php if (!empty($question['Discipline'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Name'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($question['Discipline'] as $discipline): ?>
-		<tr>
-			<td><?php echo $discipline['id']; ?></td>
-			<td><?php echo $discipline['name']; ?></td>
-			<td><?php echo $discipline['created']; ?></td>
-			<td><?php echo $discipline['modified']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'disciplines', 'action' => 'view', $discipline['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'disciplines', 'action' => 'edit', $discipline['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'disciplines', 'action' => 'delete', $discipline['id']), null, __('Are you sure you want to delete # %s?', $discipline['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Discipline'), array('controller' => 'disciplines', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
