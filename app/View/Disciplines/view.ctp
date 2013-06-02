@@ -23,17 +23,6 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Discipline'), array('action' => 'edit', $discipline['Discipline']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Discipline'), array('action' => 'delete', $discipline['Discipline']['id']), null, __('Are you sure you want to delete # %s?', $discipline['Discipline']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Disciplines'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Discipline'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Exercises'), array('controller' => 'exercises', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Exercise'), array('controller' => 'exercises', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
 <div class="related">
 	<h3><?php echo __('Related Exercises'); ?></h3>
 	<?php if (!empty($discipline['Exercise'])): ?>

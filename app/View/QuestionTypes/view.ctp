@@ -28,17 +28,6 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Question Type'), array('action' => 'edit', $questionType['QuestionType']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Question Type'), array('action' => 'delete', $questionType['QuestionType']['id']), null, __('Are you sure you want to delete # %s?', $questionType['QuestionType']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Question Types'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Question Type'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Questions'), array('controller' => 'questions', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Question'), array('controller' => 'questions', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
 <div class="related">
 	<h3><?php echo __('Related Questions'); ?></h3>
 	<?php if (!empty($questionType['Question'])): ?>
