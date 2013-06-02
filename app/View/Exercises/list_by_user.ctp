@@ -6,9 +6,6 @@
 
 	<div id="filters">
 
-		<div id="btn_bar">
-			<?php echo $this->Html->link(__('New Exercise'), array('action' => 'generation'), array('class' => 'btn view')); ?>
-		</div>
 		<input id="search_question" class="search" type="text" placeholder="Search..."/>
 		<ul id="filter_list">
 			<li class="filter">HTML</li>
