@@ -66,6 +66,9 @@ you can see the documentation at http://book.cakephp.org/2.0/fr/development/rout
     Router::connect('/admin/questionTypes', array('controller' => 'questionTypes'));
     Router::connect('/admin/questionType/:action/*', array('controller' => 'questionTypes'));
 
+    Router::connect('/admin/groups', array('controller' => 'groups'));
+    Router::connect('/admin/group/:action/*', array('controller' => 'groups'));
+
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

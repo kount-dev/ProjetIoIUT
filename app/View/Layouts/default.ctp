@@ -17,49 +17,58 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+	$title = "IoIUT";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $title_for_layout; ?>
+		<?php echo $title; ?>
 	</title>
 	<?php
-		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-
 		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
+		echo $this->Html->meta('icon');
+		echo $this->Html->css('reset');
+		echo $this->Html->css('layout');
 		echo $this->Html->script('jquery');
+		echo $this->fetch('css');
 	?>
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
-		</div>
+	<header>
+		<h1><?php echo $title; ?></h1>
+		<div id="status">This is a preview of the status bar/notif</div>
+		<div id="toolbar"></div>
+	</header>
+	<div id="wrapper">
+		<section id="terminal">
+			<div id="prompt">
+				<?php 
+					echo $this->fetch('term_view');
+				 ?>
+			</div>
+		</section>
+		<section id="main">
+			<ul id="tabBar">
+				<li id="challenge_tab" class="tab"><?php echo $this->Html->link(__('Challenges'), array('controller' => 'exercises','action' => 'listByUser')); ?></li>
+				<li id="profile_tab" class="tab"><?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view')); ?> </li>
+				<li id="leaderboard_tab" class="tab"><?php echo $this->Html->link(__('Leaderboard'), array('controller' => 'users', 'action' => 'leaderboard')); ?> </li>
+				<?php 
+					if(true/*condition si admin*/){
+						echo '<li id="admin_tab" class="tab">' . $this->Html->link(__('Administration'), array('controller' => 'users', 'action' => 'admin')) . '</li>'; 
+					}
+				?>
+			</ul>
+			<div id="tabContent">
+				<?php echo $this->fetch('content'); ?>
+			</div>
+		</section>
 	</div>
-	<?php echo $this->element('sql_dump');
-	echo $this->Js->writeBuffer();
-	?>
 </body>
+<?php
+	echo $this->Html->script('jquery');
+	echo $this->Html->script('layout');
+	echo $this->fetch('script');
+?>
 </html>
