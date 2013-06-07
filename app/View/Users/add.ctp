@@ -22,7 +22,7 @@
 		echo $this->Form->input('username');
 		echo $this->Form->input('password');
 		echo $this->Form->input('mail');
-		echo $this->Form->input('xp');
+		echo $this->Form->input('xp',array('value' => 0));
 		echo $this->Form->input('actual_rank');
 		echo $this->Form->input('last_rank');
 		echo $this->Form->input('group_id');
