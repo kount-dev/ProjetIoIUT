@@ -29,7 +29,7 @@ class AnswersController extends AppController {
 	public function displayByIdExercise($nIdExercise){
 		$this->loadModel('User');
 		$this->Answer->recursive = 0;
-		$this->set('answers', $this->paginate(array('Answer.exercise_id =' . $nIdExercise)));
+		$this->set('answers', $this->paginate(array('Answer.exercise_id =' . $nIdExercise, 'Answer.user_id = ' . $this->Auth->user('id'))));
 		$this->render('index');
 	}
 
@@ -130,7 +130,7 @@ class AnswersController extends AppController {
 		if ($this->request->is('post')) {
 			$answer = $this->request->data['Answer']['Answer'];
 			$user_id = $answer['user_id'];
-			$answer['attempt_number'] = $this->Answer->find('count', array('user_id' => $user_id, 'exercise_id' => $this->request->data['Answer']['exercise_id'])) + 1;
+			$answer['attempt_number'] = $this->Answer->find('count', array('user_id' => $user_id, 'exercise_id' => $this->request->data['Answer']['Answer']['exercise_id'])) + 1;
 
 			$this->Answer->create();
 			if ($this->Answer->save($answer))
@@ -140,14 +140,14 @@ class AnswersController extends AppController {
 				$this->generationXML($data);
 				$this->Session->setFlash(__('The answer has been saved'));
 
-				$successRatePourcentage = $this->successRate($this->request->data['Answer']['exercise_id'], $this->Answer->id);
+				$successRatePourcentage = $this->successRate($this->request->data['Answer']['Answer']['exercise_id'], $this->Answer->id);
 
 				$this->Answer->updateAll(
 				    array('Answer.success_rate' => $successRatePourcentage),
 				    array('Answer.id =' => (int)$this->Answer->id)
 				);
 
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'displayByIdUser', $user_id));
 			} else {
 				$this->Session->setFlash(__('The answer could not be saved. Please, try again.'));
 			}
@@ -279,9 +279,9 @@ class AnswersController extends AppController {
 
 		 		$nIdTypeQuestion = $this->Question->field('question_type_id', array('id' => $key));
 
-		 		$controller = $this->QuestionType->field('controller', array('id = ' => $nIdTypeQuestion))."sController";
+		 		$sController = $this->QuestionType->field('controller', array('id = ' => $nIdTypeQuestion))."sController";
 
-		 		$Question = new $controller();
+		 		$Question = new $sController();
 
 		 		$_html .= $Question->displayWithReponses($value,$sNameFile);
 

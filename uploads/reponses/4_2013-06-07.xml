@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <answers>
-  <user>quentin</user>
+  <user>4</user>
   <questions>
     <questionAnswer IdQuestion="1">
-      <answer><![CDATA[2]]></answer>
+      <answer><![CDATA[1]]></answer>
     </questionAnswer>
     <questionAnswer IdQuestion="2">
-      <answer><![CDATA[3]]></answer>
+      <answer><![CDATA[2]]></answer>
+    </questionAnswer>
+    <questionAnswer IdQuestion="3">
+      <answer><![CDATA[1]]></answer>
     </questionAnswer>
   </questions>
 </answers>

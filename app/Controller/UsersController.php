@@ -18,6 +18,7 @@ class UsersController extends AppController {
 		$this->set('users', $this->paginate());
 	}
 
+
 /**
  * view method
  *
@@ -102,10 +103,7 @@ class UsersController extends AppController {
 		$this->Session->setFlash(__('User was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-	public function beforeFilter() {
-	    parent::beforeFilter();
-	    $this->Auth->allow('index', 'view');
-	}
+
 	public function login() {
 		if ($this->Session->read('Auth.User')) {
 	        $this->Session->setFlash('Vous êtes connecté!');
@@ -193,18 +191,36 @@ class UsersController extends AppController {
 
 	}
 
-	// public function beforeFilter() {
-	//     parent::beforeFilter();
-	//     $this->Auth->allow('initDB'); // Nous pouvons supprimer cette ligne après avoir fini
-	// }
 
-	// public function initDB() {
-	//     $group = $this->User->Group;
-	//     //Allow admins to everything
-	//     $group->id = 1;
-	//     $this->Acl->allow($group, 'controllers');
+	public function beforeFilter() {
+	    parent::beforeFilter();
+	    $this->Auth->allow('index', 'view');
+	}
+// public function beforeFilter() {
+// 	parent::beforeFilter();
+// 	$this->Auth->allow('initDB'); // Nous pouvons supprimer cette ligne après avoir fini
+// }
 
-	//     echo "tout est ok";
-	//     exit;
-	// }
+public function initDB() {
+    $group = $this->User->Group;
+    //Allow admins to everything
+
+    $group->id = 1;
+    $this->Acl->allow($group, 'controllers');
+
+    //allow managers to posts and widgets
+    $group->id = 2;
+    $this->Acl->deny($group, 'controllers');
+    $this->Acl->allow($group, 'controllers/exercises/listByUser');
+    $this->Acl->allow($group, 'controllers/exercises/display');
+    $this->Acl->allow($group, 'controllers/answers/displayByIdExercise');
+    $this->Acl->allow($group, 'controllers/answers/feedback');
+    $this->Acl->allow($group, 'controllers/answers/saveAnswer');
+    $this->Acl->allow($group, 'controllers/users/leaderboard');
+    $this->Acl->allow($group, 'controllers/users/view');
+
+
+    echo "tout est ok";
+    exit;
+}
 }

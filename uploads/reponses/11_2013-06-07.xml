@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<answers>
+  <user>7</user>
+  <questions>
+    <questionAnswer IdQuestion="1">
+      <answer><![CDATA[]]></answer>
+    </questionAnswer>
+    <questionAnswer IdQuestion="2">
+      <answer><![CDATA[]]></answer>
+    </questionAnswer>
+    <questionAnswer IdQuestion="3">
+      <answer><![CDATA[]]></answer>
+    </questionAnswer>
+  </questions>
+</answers>
