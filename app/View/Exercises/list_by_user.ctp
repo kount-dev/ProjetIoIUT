@@ -34,7 +34,7 @@
 					echo $this->Html->link(__('Answer'), array('action' => 'display', $exercise['Exercise']['id']), array('class' => 'btn answer'));
 					?>
 					<?php
-					echo $this->Html->link(__('Feedback'), array('controller' => 'answers','action' => 'displayByIdExercise', $exercise['Exercise']['id']), array('class' => 'btn feedback'));
+					echo $this->Html->link(__('Feedback'), array('controller' => 'answers','action' => 'displayByIdExercise', $exercise['Exercise']['id'], -1), array('class' => 'btn feedback'));
 					?>
 				</div>
 				<p class="descr">Ceci est un qcm inutile mais qui est trop bien quand meme car il permet a Pikachu de se suicider sur un camion poubelle.</p>

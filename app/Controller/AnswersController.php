@@ -26,10 +26,14 @@ class AnswersController extends AppController {
 		$this->render('index');
 	}
 
-	public function displayByIdExercise($nIdExercise){
+	public function displayByIdExercise($nIdExercise,$nIdUser){
+		$aParams = array('Answer.exercise_id =' . $nIdExercise);
+		if($nIdUser == -1){
+			$aParams = array('Answer.exercise_id =' . $nIdExercise, 'Answer.user_id = ' . $this->Auth->user('id'));
+		}
 		$this->loadModel('User');
 		$this->Answer->recursive = 0;
-		$this->set('answers', $this->paginate(array('Answer.exercise_id =' . $nIdExercise, 'Answer.user_id = ' . $this->Auth->user('id'))));
+		$this->set('answers', $this->paginate($aParams));
 		$this->render('index');
 	}
 
