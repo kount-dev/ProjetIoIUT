@@ -60,7 +60,8 @@ class ExercisesController extends AppController {
 		$users = $this->Exercise->User->find('list', array('fields' => array('id','username')));
 		$disciplines = $this->Exercise->Discipline->find('list');
 		$questions = $this->Exercise->Question->find('list');
-		$this->set(compact('users', 'disciplines', 'questions'));
+		$iutgroups = $this->Exercise->IutGroup->find('list');
+		$this->set(compact('users', 'disciplines', 'questions', 'iutgroups'));
 	}
 
 /**
@@ -131,7 +132,8 @@ public function add(){
 
 	$disciplines = $this->Exercise->Discipline->find('list');
 	$author = $this->Auth->user('id');
-	$this->set(compact('disciplines', 'author'));
+	$iutgroups = $this->Exercise->IutGroup->find('list');
+	$this->set(compact('disciplines', 'author','iutgroups'));
 }
 
 public function import(){
@@ -176,16 +178,24 @@ public function import(){
 		        catch(Exception $e){return "Erreur de chargement du fichier";}
 
 		        foreach ($oFileXML as $ATTR => $VAL) {
-		            if("disciplines" != $ATTR && "questions" != $ATTR){
+		            if("disciplines" != $ATTR && "questions" != $ATTR && "groups_iut" != $ATTR){
 		            	$aDataTmp['Exercise'][(string)$ATTR] = (string)$VAL;
 		            }
-		           	else if("disciplines" == $ATTR){
+		            elseif("groups_iut" == $ATTR){
+		                $nCpt = 0;
+		                foreach ($VAL as $GROUPIUT => $VALUE) {
+			            	$aDataTmp['IutGroup']["IutGroup"][$nCpt] = (string)$VALUE;
+		            	    $nCpt ++;
+		           		}
+		        	}
+		           	elseif("disciplines" == $ATTR){
 		                $nCpt = 0;
 		                foreach ($VAL as $DISCIPLINE => $VALUE) {
 			            	$aDataTmp['Discipline']["Discipline"][$nCpt] = (string)$VALUE;
 		            	    $nCpt ++;
 		           		}
 		        	}
+		        	
 		        }
 
 	   			$this->loadModel('User');
@@ -219,11 +229,29 @@ public function import(){
 
 public function listByUser(){
 	$this->loadModel('User');
+	$this->loadModel('GroupList');
+	$this->loadModel('ExerciseGroupList');
 	$this->Exercise->recursive = 0;
 	$nXpUser = $this->User->field('xp', array('id' => $this->Auth->user('id')));
-	$this->set('exercises', $this->paginate(array(
-				'minimum_points <= '.$nXpUser.' AND ((`opening_date` = `closing_date) OR (NOW() BETWEEN `opening_date` AND `closing_date`))'
-				)));
+	$aExercises = $this->Exercise->find('all', array(
+							'fields' => 'DISTINCT(Exercise.id), *', 
+							'conditions' => 
+								'Exercise.id IN (
+									SELECT DISTINCT `Exo`.`id`
+									FROM `exercises` AS `Exo` 
+									LEFT JOIN `exercise_group_lists` AS ExoGrpL ON ExoGrpL.exercise_id = Exo.id 
+									LEFT JOIN `group_lists` AS `GroupL` ON (GroupL.iut_group_id = ExoGrpL.iut_group_id AND GroupL.user_id = 4)
+									WHERE minimum_points <= '.$nXpUser.'  
+									AND ((opening_date = closing_date) OR (NOW() BETWEEN opening_date AND closing_date))
+									ORDER BY Exo.id DESC)'
+			));
+
+	foreach ($aExercises as $key => $aExercise) {
+		$aResult[$key]['User']['username'] = $this->User->find('first', array('conditions' => array('User.id =' => $aExercise['Exercise']['user_id'])))['User']['username'];
+		$aResult[$key]['Exercise'] = $aExercise['Exercise'];
+	}
+
+	$this->set('exercises', $aResult);
 }
 
 public function display($id = null){

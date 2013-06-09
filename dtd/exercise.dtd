@@ -1,5 +1,6 @@
-<!ELEMENT exercise (author, name, minimum_points, disciplines, opening_date, closing_date, questions)>
+<!ELEMENT exercise (author, name, minimum_points, groups_iut, disciplines, opening_date, closing_date, questions)>
 <!ELEMENT disciplines (discipline+)>
+<!ELEMENT groups_iut (group+)>
 <!ELEMENT questions (question+)>
 
 <!ELEMENT question ANY>
@@ -7,6 +8,7 @@
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT minimum_points (#PCDATA)>
 <!ELEMENT discipline (#PCDATA)>
+<!ELEMENT group (#PCDATA)>
 <!ELEMENT opening_date (#PCDATA)>
 <!ELEMENT closing_date (#PCDATA)>
 

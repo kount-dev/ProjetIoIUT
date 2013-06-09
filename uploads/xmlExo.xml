@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exercise>
 	<author>quentin</author>
-	<name>Exercise 3</name>
+	<name>Exercise 5</name>
 	<minimum_points>0</minimum_points>
+	<groups_iut>
+		<group>1</group>
+	</groups_iut>
 	<disciplines>
 		<discipline>2</discipline>
 		<discipline>4</discipline>

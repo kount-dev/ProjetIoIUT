@@ -122,6 +122,21 @@ class Exercise extends AppModel {
 			'finderQuery' => '',
 			'deleteQuery' => '',
 			'insertQuery' => ''
+		),
+		'IutGroup' => array(
+		    'className' => 'IutGroup',
+			'joinTable' => 'exercise_group_lists',
+		    'foreignKey' => 'exercise_id',
+		    'associationForeignKey' => 'iut_group_id',
+		    'unique' => 'keepExisting',
+		    'conditions' => '',
+		    'fields' => '',
+		    'order' => '',
+		    'limit' => '',
+		    'offset' => '',
+		    'finderQuery' => '',
+		    'deleteQuery' => '',
+		    'insertQuery' => ''
 		)
 	);
 

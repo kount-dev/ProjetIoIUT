@@ -29,6 +29,11 @@
 		echo $this->Form->input('closing_date');
 		echo $this->Form->input('user_id');
 		echo $this->Form->input('Discipline');
+		echo $this->Form->input('IutGroup',
+                                array('label'=>'Groups IUT',
+                                      'type'=>'select',
+                                      'multiple'=>true,
+                                      'options' => $iutgroups));
 		echo $this->Form->input('Question');
 	?>
 	</fieldset>

@@ -16,7 +16,7 @@
         <li class="tab"><?php echo $this->Html->link(__('List Challenges'), array('controller' => 'exercises', 'action' => 'index')); ?> </li>
         <li class="tab"><?php echo $this->Html->link(__('List Answers'), array('controller' => 'answers', 'action' => 'index')); ?> </li>
     </ul>
-</div>
+</div>  
 <?php echo $this->Html->script('addQuestions.ajax'); ?>
 
 <div class="exercises generation form">
@@ -33,6 +33,11 @@
                                       'type'=>'select',
                                       'multiple'=>true,
                                       'options' => $disciplines));
+        echo $this->Form->input('Exercise.IutGroup',
+                                array('label'=>'Groups IUT',
+                                      'type'=>'select',
+                                      'multiple'=>true,
+                                      'options' => $iutgroups));
         echo $this->Form->hidden('Exercise.Exercise.user_id',
             array('value' => $author));
     ?>
