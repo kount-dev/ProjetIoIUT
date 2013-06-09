@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <answers>
-  <user>4</user>
+  <user>10</user>
   <questions>
     <questionAnswer IdQuestion="1">
       <answer><![CDATA[1]]></answer>
@@ -9,7 +9,7 @@
       <answer><![CDATA[2]]></answer>
     </questionAnswer>
     <questionAnswer IdQuestion="3">
-      <answer><![CDATA[1]]></answer>
+      <answer><![CDATA[0]]></answer>
     </questionAnswer>
   </questions>
 </answers>

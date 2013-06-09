@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Dim 09 Juin 2013 à 16:57
+-- Généré le: Dim 09 Juin 2013 à 19:34
 -- Version du serveur: 5.5.29
 -- Version de PHP: 5.4.10
 
@@ -206,24 +206,16 @@ CREATE TABLE `answers` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Contenu de la table `answers`
 --
 
 INSERT INTO `answers` (`id`, `namefile`, `user_id`, `exercise_id`, `attempt_number`, `success_rate`, `created`, `modified`) VALUES
-(5, '5_2013-06-07.xml', 4, 1, 1, 100, '2013-06-07 12:23:17', '2013-06-07 12:23:17'),
-(6, '6_2013-06-07.xml', 4, 1, 2, 100, '2013-06-07 12:23:39', '2013-06-07 12:23:39'),
-(7, '7_2013-06-07.xml', 4, 2, 3, 100, '2013-06-07 12:23:52', '2013-06-07 12:23:52'),
-(8, '8_2013-06-07.xml', 4, 3, 4, 33.3333, '2013-06-07 12:24:05', '2013-06-07 12:24:05'),
-(9, '9_2013-06-07.xml', 7, 1, 5, 100, '2013-06-07 12:32:58', '2013-06-07 12:32:58'),
-(10, '10_2013-06-07.xml', 7, 1, 6, 33.3333, '2013-06-07 12:33:00', '2013-06-07 12:33:00'),
-(11, '11_2013-06-07.xml', 7, 1, 7, 33.3333, '2013-06-07 12:33:03', '2013-06-07 12:33:03'),
-(12, '12_2013-06-07.xml', 7, 1, 8, 100, '2013-06-07 12:36:08', '2013-06-07 12:36:08'),
-(13, '13_2013-06-07.xml', 7, 1, 9, 100, '2013-06-07 12:37:05', '2013-06-07 12:37:05'),
-(14, '14_2013-06-07.xml', 7, 1, 10, 100, '2013-06-07 12:38:00', '2013-06-07 12:38:00'),
-(15, '15_2013-06-07.xml', 7, 2, 11, 100, '2013-06-07 12:42:46', '2013-06-07 12:42:46');
+(16, '16_2013-06-09.xml', 11, 1, 12, 100, '2013-06-09 19:29:06', '2013-06-09 19:29:06'),
+(17, '17_2013-06-09.xml', 10, 1, 13, 100, '2013-06-09 19:29:36', '2013-06-09 19:29:36'),
+(18, '18_2013-06-09.xml', 11, 1, 3, 100, '2013-06-09 19:33:48', '2013-06-09 19:33:48');
 
 -- --------------------------------------------------------
 
@@ -241,22 +233,24 @@ CREATE TABLE `aros` (
   `lft` int(10) DEFAULT NULL,
   `rght` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Contenu de la table `aros`
 --
 
 INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, 'Group', 1, NULL, 1, 14),
-(2, 1, 'User', 4, NULL, 2, 3),
-(3, NULL, 'Group', 2, NULL, 15, 18),
-(4, 3, 'User', 7, NULL, 16, 17),
-(5, 1, 'User', 8, NULL, 4, 5),
-(6, 1, 'User', 9, NULL, 6, 7),
-(7, 1, 'User', 10, NULL, 8, 9),
-(8, 1, 'User', 11, NULL, 10, 11),
-(9, 1, 'User', 12, NULL, 12, 13);
+(1, NULL, 'Group', 1, NULL, 1, 18),
+(3, NULL, 'Group', 2, NULL, 19, 22),
+(5, 1, 'User', 8, NULL, 2, 3),
+(6, 1, 'User', 9, NULL, 4, 5),
+(7, 1, 'User', 10, NULL, 6, 7),
+(8, 1, 'User', 11, NULL, 8, 9),
+(9, 1, 'User', 12, NULL, 10, 11),
+(10, 1, 'User', 8, NULL, 12, 13),
+(11, 1, 'User', 9, NULL, 14, 15),
+(12, 1, 'User', 10, NULL, 16, 17),
+(13, 3, 'User', 11, NULL, 20, 21);
 
 -- --------------------------------------------------------
 
@@ -337,7 +331,7 @@ CREATE TABLE `exercises` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `exercises`
@@ -362,7 +356,7 @@ CREATE TABLE `exercises_disciplines` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `exercises_disciplines`
@@ -390,7 +384,7 @@ CREATE TABLE `exercises_questions` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `exercises_questions`
@@ -421,7 +415,7 @@ CREATE TABLE `exercise_group_lists` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `exercise_group_lists`
@@ -470,15 +464,14 @@ CREATE TABLE `group_lists` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `group_lists`
 --
 
 INSERT INTO `group_lists` (`id`, `user_id`, `iut_group_id`, `created`, `modified`) VALUES
-(2, 12, 1, NULL, NULL),
-(3, 4, 1, NULL, NULL);
+(8, 11, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -520,14 +513,14 @@ CREATE TABLE `questions` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `questions`
 --
 
 INSERT INTO `questions` (`id`, `namefile`, `user_id`, `points`, `difficulty`, `question_type_id`, `created`, `modified`) VALUES
-(1, 'qcu_1_2013-06-07.xml', 4, 1, 3, 1, '2013-06-07 12:15:12', '2013-06-07 12:15:12'),
+(1, 'qcu_1_2013-06-07.xml', 4, 1, 3, 1, '2013-06-07 12:15:12', '2013-06-09 17:08:20'),
 (2, 'qcu_2_2013-06-07.xml', 4, 5, 3, 1, '2013-06-07 12:15:13', '2013-06-07 12:15:13'),
 (3, 'qcu_3_2013-06-07.xml', 4, 3, 3, 1, '2013-06-07 12:15:14', '2013-06-07 12:15:14'),
 (4, 'qcu_4_2013-06-07.xml', 4, 1, 3, 1, '2013-06-07 12:15:40', '2013-06-07 12:15:40'),
@@ -624,17 +617,17 @@ CREATE TABLE `users` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `mail`, `xp`, `actual_rank`, `last_rank`, `group_id`, `avatar_namefile`, `created`, `modified`) VALUES
-(4, 'quentin', '1c519d2ecb39efc0b05b21480b1ada1d1293ed1a', 'quentin@quentin.fr', 23.97, 1, 1, 1, NULL, '2013-03-18 18:20:25', '2013-06-09 14:37:39'),
-(5, 'florian', 'ef3ce76a84fe7519453a613804375f66b9a7a118', '', 0, NULL, NULL, 1, NULL, '2013-03-19 09:23:55', '2013-03-19 09:23:55'),
-(6, 'louis', 'b28d04149bc5151bfc258aa7c01f605d354f81ef', '', 0, NULL, NULL, 1, NULL, '2013-03-19 09:24:06', '2013-03-19 09:24:06'),
-(7, 'eleve', 'c7b15743ef49977b9164e2eb2bce1ced7bc1fcf0', 'eleve@eleve.fr', 18.18, 2, 2, 2, NULL, '2013-06-07 12:25:53', '2013-06-07 12:25:53');
+(8, 'florian', '51ba318570e3d416974b93511b0024512bf5dcb4', 'florian@florian.fr', 0, NULL, NULL, 1, NULL, '2013-06-09 19:16:59', '2013-06-09 19:18:03'),
+(9, 'louis', 'b28d04149bc5151bfc258aa7c01f605d354f81ef', 'louis@louis.fr', 0, NULL, NULL, 1, NULL, '2013-06-09 19:17:38', '2013-06-09 19:17:38'),
+(10, 'quentin', 'aa26144053d99fcff013ff1e96c169d0f7a35401', 'quentin@quentin.fr', 6.03, 1, 1, 1, NULL, '2013-06-09 19:17:56', '2013-06-09 19:17:56'),
+(11, 'eleve', 'c7b15743ef49977b9164e2eb2bce1ced7bc1fcf0', 'eleve@eleve.fr', 10.08, 2, 1, 2, NULL, '2013-06-09 19:26:10', '2013-06-09 19:26:10');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
