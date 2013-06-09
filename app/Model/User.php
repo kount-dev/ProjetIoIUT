@@ -127,6 +127,29 @@ public $hasMany = array(
   )
 );
  
+ /**
+ * hasAndBelongsToMany associations
+ *
+ * @var array
+ */
+  public $hasAndBelongsToMany = array(
+    'IutGroup' => array(
+      'className' => 'IutGroup',
+      'joinTable' => 'group_lists',
+      'foreignKey' => 'user_id',
+      'associationForeignKey' => 'iut_group_id',
+      'unique' => 'keepExisting',
+      'conditions' => '',
+      'fields' => '',
+      'order' => '',
+      'limit' => '',
+      'offset' => '',
+      'finderQuery' => '',
+      'deleteQuery' => '',
+      'insertQuery' => ''
+    )
+  );
+
     public function parentNode() {
        if (!$this->id && empty($this->data)) {
            return null;

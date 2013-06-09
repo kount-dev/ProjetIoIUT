@@ -53,7 +53,8 @@ class UsersController extends AppController {
 			}
 		}
 		$groups = $this->User->Group->find('list');
-		$this->set(compact('groups'));
+		$iutgroups = $this->User->IutGroup->find('list');
+		$this->set(compact('groups','iutgroups'));
 	}
 
 /**
@@ -79,7 +80,8 @@ class UsersController extends AppController {
 			$this->request->data = $this->User->find('first', $options);
 		}
 		$groups = $this->User->Group->find('list');
-		$this->set(compact('groups'));
+		$iutgroups = $this->User->IutGroup->find('list');
+		$this->set(compact('groups','iutgroups'));
 	}
 
 /**
