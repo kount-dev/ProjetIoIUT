@@ -216,7 +216,7 @@ class AnswersController extends AppController {
 
     	if ($this->Exercise->exists($nIdExercise) && $this->Answer->exists($nIdAnswer)) {
 
-    		$sNameFile = $this->Answer->field('namefile', array('id' => $nIdAnswer, 'exercise_id' => $nIdExercise, 'user_id' => $this->Auth->user('id')));
+    		$sNameFile = $this->Answer->field('namefile', array('id' => $nIdAnswer, 'exercise_id' => $nIdExercise));
 
     		$aFileXML = array();
 
