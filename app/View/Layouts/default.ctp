@@ -55,7 +55,7 @@
 				<li id="profile_tab" class="tab"><?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view')); ?> </li>
 				<li id="leaderboard_tab" class="tab"><?php echo $this->Html->link(__('Leaderboard'), array('controller' => 'users', 'action' => 'leaderboard')); ?> </li>
 				<?php 
-					if(true/*condition si admin*/){
+					if(isset($this->Session) && $this->Session->read('Auth.Admin') == 'Yes'){
 						echo '<li id="admin_tab" class="tab">' . $this->Html->link(__('Administration'), array('controller' => 'users', 'action' => 'admin')) . '</li>'; 
 					}
 				?>

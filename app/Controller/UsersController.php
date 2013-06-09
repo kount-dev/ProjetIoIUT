@@ -106,11 +106,17 @@ class UsersController extends AppController {
 
 	public function login() {
 		if ($this->Session->read('Auth.User')) {
+			if($this->User->field('group_id', array('id' => $this->Auth->user('id'))) == 1){
+				$this->Session->write('Auth.Admin', 'Yes');
+			}
 	        $this->Session->setFlash('Vous êtes connecté!');
 	        $this->redirect('/', null, false);
 	    }
 		else if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
+	        	if($this->User->field('group_id', array('id' => $this->Auth->user('id'))) == 1){
+					$this->Session->write('Auth.Admin', 'Yes');
+				}
 	            $this->redirect($this->Auth->redirect());
 	        } else {
 	            $this->Session->setFlash('Votre nom d\'user ou mot de passe sont incorrects.');
