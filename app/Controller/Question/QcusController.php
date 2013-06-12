@@ -13,11 +13,12 @@ class QcusController extends QuestionsController implements iQuestions {
     }
 
 
-
-
 /**
- *@desc Cette fonction permet de charger un fichier xml pour une question à choix unique
- *@param string $sPath_fileXML
+ * load method
+ *
+ * @desc Cette fonction permet de charger un fichier xml d'une question à choix unique
+ * @param string $sPath_fileXML
+ * @return void
  */
     public function load($sPath_fileXML){
         $aFileXML = array();
@@ -58,27 +59,32 @@ class QcusController extends QuestionsController implements iQuestions {
     }
 
 /**
- *@desc Cette fonction permet l'affichage d'une question
+ * displayXmlToHtml
+ *
+ * @desc Cette fonction permet l'affichage d'une question
+ * @param $sPath_fileXML (chemin du XML de la question)
+ * @return void
  */
     public function displayXmlToHtml($sPath_fileXML = ""){
-
         return $this->load("../../uploads/questions/".$sPath_fileXML);
-
     }
 
-
+/**
+ * displayWithReponses method
+ *
+ * @desc Cette fonction retourne le feedback d'une question
+ * @param array $aData, string $sPath_fileXML
+ * @return string $sHTML
+ */
     public function displayWithReponses($aData, $sPath_fileXML){
 
         $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
 
         $sHTML = '<div><p>' . $aFileXML['question']['text'] . '</p>';
-
         $sHTML .= '<ul>';
 
         foreach ($aFileXML['question']['option'] as $key => $value) {
-
             $sHTML .= '<li>' . $value;
-
             if($aData[0] == $key && $aFileXML['question']['answer'] == $key){
                 $sHTML .= "    <==== La bonne réponse et également votre réponse";
             }
@@ -88,17 +94,20 @@ class QcusController extends QuestionsController implements iQuestions {
             else if($aFileXML['question']['answer'] == $key){
                 $sHTML .= "    <==== La bonne réponse";
             }
-
             $sHTML .= '</li>';
-
         }
-
         $sHTML .= '</ul></div><br/>';
 
         return $sHTML;
 
     }
-
+/**
+ * correction method
+ *
+ * @desc cette fonction corrige une question
+ * @param array $aData, string $sPath_fileXML
+ * @return array $aRes (array de resultat)
+ */
     public function correction($aData, $sPath_fileXML){
 
         $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
@@ -106,14 +115,10 @@ class QcusController extends QuestionsController implements iQuestions {
         $aRes = array();
 
         if($aData[0] == $aFileXML['question']['answer']){
-
             $aRes['points_user'] = $aFileXML['question']['points'];
-
         }
         else{
-
             $aRes['points_user'] = 0;
-
         }
 
         $aRes['max_points'] = $aFileXML['question']['points'];
@@ -123,9 +128,10 @@ class QcusController extends QuestionsController implements iQuestions {
     }
 
 /**
- *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher
- *pour la generation
- *@return le contenu HTML dans un string
+ * add method
+ *
+ * @desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher pour la generation
+ * @return void
  */
     public function add(){
         if ($this->request->is('post')){
@@ -138,15 +144,26 @@ class QcusController extends QuestionsController implements iQuestions {
         }
     }
 
+/**
+ * edit method
+ *
+ * @desc Cette fonction permet d'éditer une question, elle doit retourner l'HTML a afficher pour l'edition
+ * @param string $namefile (nom du fichier de la question)
+ * @return void
+ */
     public function edit($namefile = null){
-
         $aFileXML = $this->load('../../uploads/questions/' . $namefile);
         $this->set(compact('aFileXML'));
         $this->layout = false;
-
     }
 
-
+/**
+ * saveQuestion method
+ *
+ * @param array $theQuestion
+ * @desc cette function sauvegarde l'ajout
+ * @return void
+ */
     public function saveQuestion($theQuestion){
         $this->loadModel('Question');
         $this->loadModel('User');
@@ -170,6 +187,13 @@ class QcusController extends QuestionsController implements iQuestions {
         $this->Question->saveField('namefile', 'qcu_'.$data['id'].'_'.date("Y-m-d").'.xml');
     }
 
+/**
+ * saveEditQuestion method
+ *
+ * @param array $theQuestion
+ * @desc cette fonction sauvegarde l'edition
+ * @return void
+ */
     public function saveEditQuestion($theQuestion){
         $this->loadModel('Question');
         $this->loadModel('User');
@@ -189,6 +213,12 @@ class QcusController extends QuestionsController implements iQuestions {
         $this->generationXML($data);
     }
 
+/**
+ * addChoice method
+ *
+ * @desc cette function fait appel la vue d'ajout choix
+ * @return void
+ */
     public function addChoice(){
         if ($this->request->is('post')){
             $tab = split('_',$this->request->data['f']);
@@ -200,6 +230,12 @@ class QcusController extends QuestionsController implements iQuestions {
         }
     }
 
+/**
+ * addEditChoice method
+ *
+ * @desc cette fonction fait appel la vue d'edition d'un choix
+ * @return void
+ */
      public function addEditChoice(){
         if ($this->request->is('post')){
             $nb_choice = $this->request->data['n'];
@@ -210,10 +246,12 @@ class QcusController extends QuestionsController implements iQuestions {
     }
 
 /**
-*
-*
-**/
-
+ * generationXML method
+ *
+ * @desc cette fonction génère le fichier XML de la question
+ * @param array $aData
+ * @return void
+ */
     public function generationXML($aData = array()){
         $nId = $aData['id'];
         $sAuthor = $aData['author'];
@@ -290,24 +328,5 @@ class QcusController extends QuestionsController implements iQuestions {
             $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');
         }
     }
-
-    /**
- *@desc cette fonction valide le module a partir des paramètres passés
- *@param array $param ('reponses'=>array(), 'path'=>string)
- *@return boolean true | false en fonctio de s'il est bon
- */
-    public function valider($param){}
-/**
- *@desc cette fonction est celle qui gère l'ajout en base de données et création
- *éventuelle des fichiers
- *@param array $param ('infos'=>array) (infos est en fait la variable POST)
- *@return boolean true|false en fonction du succès ou non de la sauvegarde
- */
-    public function saveFromPost($param){}
-/**
- *@desc Cette fonction va sauvegarder en base l'instance chargée
- */
-    public function saveInstance(){}
-
 }
 ?>
