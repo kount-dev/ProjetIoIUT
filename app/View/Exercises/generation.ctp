@@ -12,7 +12,28 @@ $(function() {
        $("#closeDatePicker").datetimepicker();
 });
 </script>
-<div class="exercises generation form" id="exercises_base">
+<div>
+    <ul id="tabBar">
+        <li id="admin_challenge_tab" class="tab"><?php echo $this->Html->link(__('Challenges'), array('controller' => 'exercises', 'action' => 'index')); ?></li>
+        <li id="admin_users_tab" class="tab"><?php echo $this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index')); ?></li>
+        <li id="admin_questions_tab" class="tab"><?php echo $this->Html->link(__('Questions'), array('controller' => 'questions', 'action' => 'index')); ?></li>
+        <li id="admin_disciplines_tab" class="tab"><?php echo $this->Html->link(__('Disciplines'), array('controller' => 'disciplines', 'action' => 'index')); ?></li>
+        <li id="admin_typequestions_tab" class="tab"><?php echo $this->Html->link(__('Questions Type'), array('controller' => 'questionTypes', 'action' => 'index')); ?></li>
+        <li id="admin_groupuser_tab" class="tab"><?php echo $this->Html->link(__('Groups User'), array('controller' => 'groups', 'action' => 'index')); ?></li>
+		<li id="admin_groupiut_tab" class="tab"><?php echo $this->Html->link(__('Groups IUT'), array('controller' => 'iutgroups', 'action' => 'index')); ?></li>		
+    </ul>
+</div>
+<div>
+    <ul>
+        <li class="tab"><?php echo $this->Html->link(__('New Challenge'), array('controller' => 'exercises', 'action' => 'add')); ?></li>
+        <li class="tab"><?php echo $this->Html->link(__('Import Challenge'), array('controller' => 'exercises', 'action' => 'import')); ?> </li>
+        <li class="tab"><?php echo $this->Html->link(__('List Challenges'), array('controller' => 'exercises', 'action' => 'index')); ?> </li>
+        <li class="tab"><?php echo $this->Html->link(__('List Answers'), array('controller' => 'answers', 'action' => 'index')); ?> </li>
+    </ul>
+</div>
+<?php echo $this->Html->script('addQuestions.ajax'); ?>
+
+<div class="exercises generation form">
 <?php echo $this->Form->create('Exercise'); ?>
     <fieldset>
         <legend><?php echo __('New Exercise'); ?></legend>

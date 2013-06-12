@@ -4,7 +4,7 @@ $(document).ready(function(){
 		var nb_question = $('#ExerciseNbQuestion').val();
 		$.ajax({
 		    type: "post",
-		    url: "../questions/generation",
+		    url: "../question/add",
 		    data: {n: nb_question},
 		    success: function(res) {
 		        $('#exercises_questions').prepend(res);
@@ -19,7 +19,7 @@ function addQuestionType(elt){
 	var fieldset = $(elt).parent().parent().attr('id');
 	$.ajax({
 	    type: "post",
-	    url: "../"+ typeQuestion +"s/generation",
+	    url: "../../"+ typeQuestion +"s/add",
 	    data: {f:fieldset},
 	    success: function(res) {
 	    	$("#"+fieldset+" .typeQuestion").html(res);
@@ -33,11 +33,11 @@ function addChoice(elt){
 	var tab = fieldset.split('_');
 	$.ajax({
 	    type: "post",
-	    url: "../"+tab[0]+"s/addChoice",
+	    url: "../../"+tab[0]+"s/addChoice",
 	    data: {n: nb_choice, f: fieldset},
 	    success: function(res) {
-	        $('.add_choice').before(res);
-	        $('.nb_choice').val(parseInt(nb_choice)+1);
+	        $(elt).before(res);
+	        $(elt).parent().find('.nb_choice').val(parseInt(nb_choice)+1);
 	    }
 	});
 }

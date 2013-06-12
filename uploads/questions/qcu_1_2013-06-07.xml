@@ -7,11 +7,11 @@
 		    <discipline>4</discipline>
 		  </disciplines>
 		  <choice>
-		    <option num="0"><![CDATA[test]]></option>
-		    <option num="1"><![CDATA[test2]]></option>
-		    <option num="2"><![CDATA[test3]]></option>
-		    <option num="3"><![CDATA[4]]></option>
+		    <option num="0"><![CDATA[2]]></option>
+		    <option num="1"><![CDATA[4]]></option>
+		    <option num="2"><![CDATA[6]]></option>
+		    <option num="3"><![CDATA[8]]></option>
 		  </choice>
-		  <answer>3</answer>
+		  <answer>1</answer>
 		  <points>1</points>
 		</question>

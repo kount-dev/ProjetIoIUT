@@ -1,0 +1,17 @@
+<question type="qcu">
+		  <author>quentin</author>
+		  <difficulty>3</difficulty>
+		  <text><![CDATA[WAMP, MAMP, LAMP : AMP = ?]]></text>
+		  <disciplines>
+		    <discipline>3</discipline>
+		    <discipline>4</discipline>
+		  </disciplines>
+		  <choice>
+		    <option num="0"><![CDATA[APACHE MYSQL PHP]]></option>
+		    <option num="1"><![CDATA[APACHE MICROSOFT PHP]]></option>
+		    <option num="2"><![CDATA[APACHE MYSQL PERL]]></option>
+		    <option num="3"><![CDATA[AEROSOL MUTANT PAPRIKA]]></option>
+		  </choice>
+		  <answer>0</answer>
+		  <points>3</points>
+		</question>

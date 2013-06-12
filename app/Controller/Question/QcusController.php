@@ -12,6 +12,9 @@ class QcusController extends QuestionsController implements iQuestions {
     public function index() {
     }
 
+
+
+
 /**
  *@desc Cette fonction permet de charger un fichier xml pour une question à choix unique
  *@param string $sPath_fileXML
@@ -58,18 +61,73 @@ class QcusController extends QuestionsController implements iQuestions {
  *@desc Cette fonction permet l'affichage d'une question
  */
     public function displayXmlToHtml($sPath_fileXML = ""){
-        $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
-        return $aFileXML;
+
+        return $this->load("../../uploads/questions/".$sPath_fileXML);
 
     }
 
+
+    public function displayWithReponses($aData, $sPath_fileXML){
+
+        $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
+
+        $sHTML = '<div><p>' . $aFileXML['question']['text'] . '</p>';
+
+        $sHTML .= '<ul>';
+
+        foreach ($aFileXML['question']['option'] as $key => $value) {
+
+            $sHTML .= '<li>' . $value;
+
+            if($aData[0] == $key && $aFileXML['question']['answer'] == $key){
+                $sHTML .= "    <==== La bonne réponse et également votre réponse";
+            }
+            else if($aData[0] == $key){
+                $sHTML .= "    <==== Votre réponse";
+            }
+            else if($aFileXML['question']['answer'] == $key){
+                $sHTML .= "    <==== La bonne réponse";
+            }
+
+            $sHTML .= '</li>';
+
+        }
+
+        $sHTML .= '</ul></div><br/>';
+
+        return $sHTML;
+
+    }
+
+    public function correction($aData, $sPath_fileXML){
+
+        $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
+
+        $aRes = array();
+
+        if($aData[0] == $aFileXML['question']['answer']){
+
+            $aRes['points_user'] = $aFileXML['question']['points'];
+
+        }
+        else{
+
+            $aRes['points_user'] = 0;
+
+        }
+
+        $aRes['max_points'] = $aFileXML['question']['points'];
+
+        return $aRes;
+
+    }
 
 /**
  *@desc Cette fonction permet de generer une question, elle doit retourner l'HTML a afficher
  *pour la generation
  *@return le contenu HTML dans un string
  */
-    public function generation(){
+    public function add(){
         if ($this->request->is('post')){
             $author = $this->Auth->user('id');
             $tab = split('_',$this->request->data['f']);
@@ -78,6 +136,14 @@ class QcusController extends QuestionsController implements iQuestions {
             $this->layout = false;
             $this->render();
         }
+    }
+
+    public function edit($namefile = null){
+
+        $aFileXML = $this->load('../../uploads/questions/' . $namefile);
+        $this->set(compact('aFileXML'));
+        $this->layout = false;
+
     }
 
 
@@ -95,10 +161,32 @@ class QcusController extends QuestionsController implements iQuestions {
         $data['rep'] = $theQuestion['content']['answer'];
         $data['points'] = $theQuestion['Question']['points'];
         $data['disciplines'] = $theQuestion['Discipline'];
+        if(isset($theQuestion['Question']['namefile']) && !empty($theQuestion['Question']['namefile'])){
+            $data['namefile'] = $theQuestion['Question']['namefile'];
+        }
 
         $this->generationXML($data);
 
         $this->Question->saveField('namefile', 'qcu_'.$data['id'].'_'.date("Y-m-d").'.xml');
+    }
+
+    public function saveEditQuestion($theQuestion){
+        $this->loadModel('Question');
+        $this->loadModel('User');
+        parent::saveQuestion($theQuestion);
+
+        $data = array();
+        $data['id'] = $this->Question->id;
+        $data['author'] = $this->User->field('username', array('id' => $theQuestion['Question']['user_id']));
+        $data['difficulty'] = $theQuestion['Question']['difficulty'];
+        $data['text'] = $theQuestion['Question']['content']['question'];
+        $data['choices'] = $theQuestion['Question']['content']['choices'];
+        $data['rep'] = $theQuestion['Question']['content']['answer'];
+        $data['points'] = $theQuestion['Question']['points'];
+        $data['disciplines'] = $theQuestion['Discipline']['Discipline'];
+        $data['namefile'] = $theQuestion['Question']['namefile'];
+
+        $this->generationXML($data);
     }
 
     public function addChoice(){
@@ -107,6 +195,15 @@ class QcusController extends QuestionsController implements iQuestions {
             $num_question = $tab[1];
             $nb_choice = $this->request->data['n'];
             $this->set(compact('nb_choice','num_question'));
+            $this->layout = false;
+            $this->render();
+        }
+    }
+
+     public function addEditChoice(){
+        if ($this->request->is('post')){
+            $nb_choice = $this->request->data['n'];
+            $this->set(compact('nb_choice'));
             $this->layout = false;
             $this->render();
         }
@@ -186,13 +283,18 @@ class QcusController extends QuestionsController implements iQuestions {
         $eQuestion->appendChild($ePoints);
         $ePoints->appendChild($ePointsText);
 
-        $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');
+        if(isset($aData['namefile']) && !empty($aData['namefile'])){
+            $domDocument->save('../../uploads/questions/'.$aData['namefile']);
+        }
+        else{
+            $domDocument->save('../../uploads/questions/qcu_'.$nId.'_'.date("Y-m-d").'.xml');
+        }
     }
 
-/*
+    /**
  *@desc cette fonction valide le module a partir des paramètres passés
  *@param array $param ('reponses'=>array(), 'path'=>string)
- *@return boolean true | false en fonction de s il est bon
+ *@return boolean true | false en fonctio de s'il est bon
  */
     public function valider($param){}
 /**
@@ -206,5 +308,6 @@ class QcusController extends QuestionsController implements iQuestions {
  *@desc Cette fonction va sauvegarder en base l'instance chargée
  */
     public function saveInstance(){}
+
 }
 ?>

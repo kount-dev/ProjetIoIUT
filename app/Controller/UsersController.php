@@ -18,6 +18,7 @@ class UsersController extends AppController {
 		$this->set('users', $this->paginate());
 	}
 
+
 /**
  * view method
  *
@@ -26,6 +27,9 @@ class UsersController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+		if($id == null){
+			$id = $this->Auth->user('id');
+		}
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
@@ -49,7 +53,8 @@ class UsersController extends AppController {
 			}
 		}
 		$groups = $this->User->Group->find('list');
-		$this->set(compact('groups'));
+		$iutgroups = $this->User->IutGroup->find('list');
+		$this->set(compact('groups','iutgroups'));
 	}
 
 /**
@@ -75,7 +80,8 @@ class UsersController extends AppController {
 			$this->request->data = $this->User->find('first', $options);
 		}
 		$groups = $this->User->Group->find('list');
-		$this->set(compact('groups'));
+		$iutgroups = $this->User->IutGroup->find('list');
+		$this->set(compact('groups','iutgroups'));
 	}
 
 /**
@@ -99,17 +105,20 @@ class UsersController extends AppController {
 		$this->Session->setFlash(__('User was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-	public function beforeFilter() {
-	    parent::beforeFilter();
-	    $this->Auth->allow('index', 'view');
-	}
+
 	public function login() {
 		if ($this->Session->read('Auth.User')) {
+			if($this->User->field('group_id', array('id' => $this->Auth->user('id'))) == 1){
+				$this->Session->write('Auth.Admin', 'Yes');
+			}
 	        $this->Session->setFlash('Vous êtes connecté!');
 	        $this->redirect('/', null, false);
 	    }
 		else if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
+	        	if($this->User->field('group_id', array('id' => $this->Auth->user('id'))) == 1){
+					$this->Session->write('Auth.Admin', 'Yes');
+				}
 	            $this->redirect($this->Auth->redirect());
 	        } else {
 	            $this->Session->setFlash('Votre nom d\'user ou mot de passe sont incorrects.');
@@ -127,10 +136,10 @@ class UsersController extends AppController {
 
 		$nCpt = 0;
 		$aUsers = array();
-		
+
 		foreach ($aLeaderboard as $aUserTab) {
-			$nEcartRank = -1*($aUserTab['User']['actual_rank'] - $aUserTab['User']['last_rank']); 
-			
+			$nEcartRank = -1*($aUserTab['User']['actual_rank'] - $aUserTab['User']['last_rank']);
+
 			if(!$aUserTab['User']['actual_rank'] && !$aUserTab['User']['last_rank']){
 				$this->User->updateAll(
 				    array('User.last_rank' => (int)$nCpt+1, 'User.actual_rank' => (int)$nCpt+1),
@@ -145,7 +154,7 @@ class UsersController extends AppController {
 				);
 				$nEcartRank = -1*((int)$nCpt+1 - (int)$aUserTab['User']['actual_rank']);
 			}
-			
+
 			$aUsers[$nCpt]['ecart'] = $nEcartRank;
 			$aUsers[$nCpt]['actual_rank'] = $nCpt+1;
 			$aUsers[$nCpt]['xp'] = $aUserTab['User']['xp'];
@@ -167,7 +176,7 @@ class UsersController extends AppController {
 			$sOrder = ($this->request->data['t'] == 'xp_rank') ? "User.xp ".$this->request->data['s'] : "User.username ".$this->request->data['s'];
 
 			$aLeaderboard = $this->User->find('all', array('conditions' => array('User.xp >' => '0'), 'order'=> $sOrder));
-			
+
 			$nCpt = 0;
 			$aUsers = array();
 			foreach ($aLeaderboard as $aUserTab) {
@@ -186,18 +195,40 @@ class UsersController extends AppController {
 		}
 	}
 
-	// public function beforeFilter() {
-	//     parent::beforeFilter();
-	//     $this->Auth->allow('initDB'); // Nous pouvons supprimer cette ligne après avoir fini
-	// }
+	public function admin(){
 
-	// public function initDB() {
-	//     $group = $this->User->Group;
-	//     //Allow admins to everything
-	//     $group->id = 1;
-	//     $this->Acl->allow($group, 'controllers');
+	}
 
-	//     echo "tout est ok";
-	//     exit;
-	// }
+
+	public function beforeFilter() {
+	    parent::beforeFilter();
+	    $this->Auth->allow('index', 'view');
+	}
+// public function beforeFilter() {
+// 	parent::beforeFilter();
+// 	$this->Auth->allow('initDB'); // Nous pouvons supprimer cette ligne après avoir fini
+// }
+
+public function initDB() {
+    $group = $this->User->Group;
+    //Allow admins to everything
+
+    $group->id = 1;
+    $this->Acl->allow($group, 'controllers');
+
+    //allow managers to posts and widgets
+    $group->id = 2;
+    $this->Acl->deny($group, 'controllers');
+    $this->Acl->allow($group, 'controllers/exercises/listByUser');
+    $this->Acl->allow($group, 'controllers/exercises/display');
+    $this->Acl->allow($group, 'controllers/answers/displayByIdExercise');
+    $this->Acl->allow($group, 'controllers/answers/feedback');
+    $this->Acl->allow($group, 'controllers/answers/saveAnswer');
+    $this->Acl->allow($group, 'controllers/users/leaderboard');
+    $this->Acl->allow($group, 'controllers/users/view');
+
+
+    echo "tout est ok";
+    exit;
+}
 }

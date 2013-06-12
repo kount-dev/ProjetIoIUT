@@ -17,7 +17,6 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-
 	$title = "IoIUT";
 ?>
 <!DOCTYPE html>
@@ -52,9 +51,14 @@
 		</section>
 		<section id="main">
 			<ul id="tabBar">
-				<li id="challenge_tab" class="tab"><?php echo $this->Html->link(__('Challenges'), array('controller' => 'exercises', 'action' => 'index'));; ?> </li>
-				<li id="profile_tab" class="tab"><?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view')); ?></li>
-				<li id="leaderboard_tab" class="tab"><?php echo $this->Html->link(__('LeaderBoard'), array('action' => 'index')); ?> </li>
+				<li id="challenge_tab" class="tab"><?php echo $this->Html->link(__('Challenges'), array('controller' => 'exercises','action' => 'listByUser')); ?></li>
+				<li id="profile_tab" class="tab"><?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view')); ?> </li>
+				<li id="leaderboard_tab" class="tab"><?php echo $this->Html->link(__('Leaderboard'), array('controller' => 'users', 'action' => 'leaderboard')); ?> </li>
+				<?php 
+					if(isset($this->Session) && $this->Session->read('Auth.Admin') == 'Yes'){
+						echo '<li id="admin_tab" class="tab">' . $this->Html->link(__('Administration'), array('controller' => 'users', 'action' => 'admin')) . '</li>'; 
+					}
+				?>
 			</ul>
 			<div id="tabContent">
 				<?php echo $this->fetch('content'); ?>

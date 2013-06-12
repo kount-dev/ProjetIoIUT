@@ -99,4 +99,9 @@ class GroupsController extends AppController {
 	    parent::beforeFilter();
 	    $this->Auth->allow('index', 'view');
 	}
+
+	// public function beforeFilter() {
+	//     parent::beforeFilter();
+	//     $this->Auth->allow('index', 'view');
+	// }
 }

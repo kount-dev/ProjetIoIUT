@@ -47,7 +47,7 @@ class GroupListsController extends AppController {
 				$this->Session->setFlash(__('The group list could not be saved. Please, try again.'));
 			}
 		}
-		$users = $this->GroupList->User->find('list');
+		$users = $this->GroupList->User->find('list', array('fields' => array('id','username')));
 		$iutGroups = $this->GroupList->IutGroup->find('list');
 		$this->set(compact('users', 'iutGroups'));
 	}
@@ -74,7 +74,7 @@ class GroupListsController extends AppController {
 			$options = array('conditions' => array('GroupList.' . $this->GroupList->primaryKey => $id));
 			$this->request->data = $this->GroupList->find('first', $options);
 		}
-		$users = $this->GroupList->User->find('list');
+		$users = $this->GroupList->User->find('list', array('fields' => array('id','username')));
 		$iutGroups = $this->GroupList->IutGroup->find('list');
 		$this->set(compact('users', 'iutGroups'));
 	}

@@ -1,0 +1,17 @@
+<question type="qcu">
+		  <author>quentin</author>
+		  <difficulty>3</difficulty>
+		  <text><![CDATA[H T M L = ?]]></text>
+		  <disciplines>
+		    <discipline>2</discipline>
+		    <discipline>4</discipline>
+		  </disciplines>
+		  <choice>
+		    <option num="0"><![CDATA[Hyper Translate Media Language]]></option>
+		    <option num="1"><![CDATA[Hypertext Media Language ]]></option>
+		    <option num="2"><![CDATA[Hypertext Markup Language]]></option>
+		    <option num="3"><![CDATA[Hypertext Mockup Language]]></option>
+		  </choice>
+		  <answer>2</answer>
+		  <points>5</points>
+		</question>

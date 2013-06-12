@@ -4,7 +4,7 @@ App::uses('AppModel', 'Model');
  * Exercise Model
  *
  * @property User $User
- * @property Resultat $Resultat
+ * @property Answer $Answer
  * @property Discipline $Discipline
  * @property Question $Question
  */
@@ -71,8 +71,8 @@ class Exercise extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Resultat' => array(
-			'className' => 'Resultat',
+		'Answer' => array(
+			'className' => 'Answer',
 			'foreignKey' => 'exercise_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -122,6 +122,21 @@ class Exercise extends AppModel {
 			'finderQuery' => '',
 			'deleteQuery' => '',
 			'insertQuery' => ''
+		),
+		'IutGroup' => array(
+		    'className' => 'IutGroup',
+			'joinTable' => 'exercise_group_lists',
+		    'foreignKey' => 'exercise_id',
+		    'associationForeignKey' => 'iut_group_id',
+		    'unique' => 'keepExisting',
+		    'conditions' => '',
+		    'fields' => '',
+		    'order' => '',
+		    'limit' => '',
+		    'offset' => '',
+		    'finderQuery' => '',
+		    'deleteQuery' => '',
+		    'insertQuery' => ''
 		)
 	);
 

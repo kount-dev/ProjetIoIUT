@@ -1,12 +1,12 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Resultat Model
+ * Answer Model
  *
  * @property User $User
  * @property Exercise $Exercise
  */
-class Resultat extends AppModel {
+class Answer extends AppModel {
 
 /**
  * Validation rules
@@ -44,19 +44,9 @@ class Resultat extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'numero_tentative' => array(
+		'attempt_number' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'date_envoie' => array(
-			'datetime' => array(
-				'rule' => array('datetime'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

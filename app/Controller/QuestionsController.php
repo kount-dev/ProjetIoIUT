@@ -1,6 +1,5 @@
 <?php
 App::uses('AppController', 'Controller');
-App::uses('Folder', 'Question');
 
 /**
  * Questions Controller
@@ -39,29 +38,7 @@ class QuestionsController extends AppController {
 		$this->set('question', $this->Question->find('first', $options));
 	}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Question->create();
-			if ($this->Question->save($this->request->data)) {
-				$this->Session->setFlash(__('The question has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The question could not be saved. Please, try again.'));
-			}
-		}
-		$users = $this->Question->User->find('list');
-		$questionTypes = $this->Question->QuestionType->find('list');
-		$disciplines = $this->Question->Discipline->find('list');
-		$this->set(compact('users', 'questionTypes', 'disciplines'));
-	}
-
-
-	public function upload(){
+	public function import(){
 		if ($this->request->is('post') && isset($this->request->data['Question']['xmlFile'])) {
 			if($this->saveUploadQuestion($this->request->data['Question']['xmlFile']['tmp_name'], false)){
 				$this->Session->setFlash(__('The question has been saved'));
@@ -135,7 +112,7 @@ class QuestionsController extends AppController {
 			}
 		}
 	}
-		
+
 /**
  * edit method
  *
@@ -149,6 +126,13 @@ class QuestionsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Question->save($this->request->data)) {
+				$this->Folder->ImportTypeQuestion();
+				$this->loadModel('QuestionType');
+				$theQuestion = $this->request->data;
+				$controller = $this->QuestionType->field('controller', array('id = ' => $theQuestion['Question']['question_type_id']))."sController";
+				$Question = new $controller();
+				$Question->saveEditQuestion($theQuestion);
+
 				$this->Session->setFlash(__('The question has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -157,11 +141,12 @@ class QuestionsController extends AppController {
 		} else {
 			$options = array('conditions' => array('Question.' . $this->Question->primaryKey => $id));
 			$this->request->data = $this->Question->find('first', $options);
+			$this->Folder->ImportTypeQuestion();
 		}
-		$users = $this->Question->User->find('list');
+		$users = $this->Question->User->find('list', array('fields' => array('id','username')));
 		$questionTypes = $this->Question->QuestionType->find('list');
 		$disciplines = $this->Question->Discipline->find('list');
-		$this->set(compact('users', 'questionTypes', 'disciplines'));
+		$this->set(compact('users', 'questionTypes', 'disciplines', '_HtmlQuestionType'));
 	}
 
 /**
@@ -194,24 +179,31 @@ class QuestionsController extends AppController {
  *pour la generation
  *@return le contenu HTML dans un string
  */
-    public function generation(){
-    	if ($this->request->is('post')){
-			$question_types_name_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'name')));
-			$question_types_controller_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'controller')));
-			$question_types_list = array();
-			foreach ($question_types_name_list as $key => $val) {
-    			$question_types_list[$key] = array('value' => $key,'name' =>$question_types_name_list[$key], 'questiontype' => $question_types_controller_list[$key]);
-			}
+    public function add(){
+    	$this->loadModel('Exercise');
 
-			$author = $this->Auth->user('id');
-			$disciplines = $this->Question->Discipline->find('list');
+    	$question_types_name_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'name')));
+		$question_types_controller_list = $this->Question->QuestionType->find('list', array('fields' => array('id', 'controller')));
+		$question_types_list = array();
+		foreach ($question_types_name_list as $key => $val) {
+    		$question_types_list[$key] = array('value' => $key,'name' =>$question_types_name_list[$key], 'questiontype' => $question_types_controller_list[$key]);
+		}
+
+		$author = $this->Auth->user('id');
+		$disciplines = $this->Question->Discipline->find('list');
+
+    	if ($this->request->is('post')){
+
 			$num_question = (int)$this->request->data['n'];
-			$this->loadModel('Exercise');
 			$exerciseId = $this->Exercise->field('id', array(), 'created DESC') + 1;
 			$this->set(compact('disciplines','question_types_list', 'author','num_question', 'exerciseId'));
 
 	    	$this->layout = false;
 			$this->render();
+    	}
+    	else{
+    		$num_question = -1;
+			$this->set(compact('disciplines','question_types_list', 'author', 'num_question'));
     	}
     }
 

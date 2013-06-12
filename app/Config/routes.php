@@ -33,6 +33,43 @@ Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
+/*Personal connections for this application. For any informations,
+you can see the documentation at http://book.cakephp.org/2.0/fr/development/routing.html */
+
+    /* Accueil */
+    Router::connect('/challenges', array('controller' => 'exercises', 'action' => 'listByUser'));
+    Router::connect('/profile/*', array('controller' => 'users', 'action' => 'view'));
+    Router::connect('/leaderboard', array('controller' => 'users', 'action' => 'leaderboard'));
+    Router::connect('/admin', array('controller' => 'users', 'action' => 'admin'));
+
+    /* Challenge */
+    Router::connect('/challenge/*', array('controller' => 'exercises', 'action' => 'display'));
+    Router::connect('/feedback/challenge/*', array('controller' => 'answers', 'action' => 'displayByIdExercise'));
+
+    /* Admin */
+    Router::connect('/admin/feedbacks', array('controller' => 'answers'));
+    Router::connect('/admin/feedback/user/*', array('controller' => 'answers', 'action' => 'displayByIdUser'));
+    Router::connect('/admin/feedback/challenge/*', array('controller' => 'answers', 'action' => 'displayByIdExercise'));
+
+    Router::connect('/admin/challenges', array('controller' => 'exercises'));
+    Router::connect('/admin/challenge/:action/*', array('controller' => 'exercises'));
+
+    Router::connect('/admin/users', array('controller' => 'users'));
+    Router::connect('/admin/user/:action/*', array('controller' => 'users'));
+
+    Router::connect('/admin/questions', array('controller' => 'questions'));
+    Router::connect('/admin/question/:action/*', array('controller' => 'questions'));
+
+    Router::connect('/admin/disciplines', array('controller' => 'disciplines'));
+    Router::connect('/admin/discipline/:action/*', array('controller' => 'disciplines'));
+
+    Router::connect('/admin/questionTypes', array('controller' => 'questionTypes'));
+    Router::connect('/admin/questionType/:action/*', array('controller' => 'questionTypes'));
+
+    Router::connect('/admin/groups', array('controller' => 'groups'));
+    Router::connect('/admin/group/:action/*', array('controller' => 'groups'));
+
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
