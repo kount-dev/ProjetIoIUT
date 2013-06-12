@@ -1,5 +1,9 @@
+<?php 
+		echo $this->Html->css('profile');
+ ?>
+
 <div class="users view">
-<h2><?php  echo __('User'); ?></h2>
+<h2><?php echo h($user['User']['username']); ?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
