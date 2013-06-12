@@ -195,7 +195,7 @@ public function import(){
 		            	    $nCpt ++;
 		           		}
 		        	}
-		        	
+
 		        }
 
 	   			$this->loadModel('User');
@@ -234,20 +234,21 @@ public function listByUser(){
 	$this->Exercise->recursive = 0;
 	$nXpUser = $this->User->field('xp', array('id' => $this->Auth->user('id')));
 	$aExercises = $this->Exercise->find('all', array(
-							'fields' => 'DISTINCT(Exercise.id), *', 
-							'conditions' => 
+							'fields' => 'DISTINCT(Exercise.id), *',
+							'conditions' =>
 								'Exercise.id IN (
 									SELECT DISTINCT `Exo`.`id`
-									FROM `exercises` AS `Exo` 
-									LEFT JOIN `exercise_group_lists` AS ExoGrpL ON ExoGrpL.exercise_id = Exo.id 
+									FROM `exercises` AS `Exo`
+									LEFT JOIN `exercise_group_lists` AS ExoGrpL ON ExoGrpL.exercise_id = Exo.id
 									LEFT JOIN `group_lists` AS `GroupL` ON (GroupL.iut_group_id = ExoGrpL.iut_group_id AND GroupL.user_id = 4)
-									WHERE minimum_points <= '.$nXpUser.'  
+									WHERE minimum_points <= '.$nXpUser.'
 									AND ((opening_date = closing_date) OR (NOW() BETWEEN opening_date AND closing_date))
 									ORDER BY Exo.id DESC)'
 			));
 
 	foreach ($aExercises as $key => $aExercise) {
-		$aResult[$key]['User']['username'] = $this->User->find('first', array('conditions' => array('User.id =' => $aExercise['Exercise']['user_id'])))['User']['username'];
+		$aUser = $this->User->find('first', array('conditions' => array('User.id =' => $aExercise['Exercise']['user_id'])));
+		$aResult[$key]['User']['username'] = $aUser['User']['username'];
 		$aResult[$key]['Exercise'] = $aExercise['Exercise'];
 	}
 
