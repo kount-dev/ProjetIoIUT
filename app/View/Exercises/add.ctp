@@ -6,7 +6,7 @@
         <li id="admin_disciplines_tab" class="tab"><?php echo $this->Html->link(__('Disciplines'), array('controller' => 'disciplines', 'action' => 'index')); ?></li>
         <li id="admin_typequestions_tab" class="tab"><?php echo $this->Html->link(__('Questions Type'), array('controller' => 'questionTypes', 'action' => 'index')); ?></li>
         <li id="admin_groupuser_tab" class="tab"><?php echo $this->Html->link(__('Groups User'), array('controller' => 'groups', 'action' => 'index')); ?></li>
-		<li id="admin_groupiut_tab" class="tab"><?php echo $this->Html->link(__('Groups IUT'), array('controller' => 'iutgroups', 'action' => 'index')); ?></li>		
+		<li id="admin_groupiut_tab" class="tab"><?php echo $this->Html->link(__('Groups IUT'), array('controller' => 'iutgroups', 'action' => 'index')); ?></li>
     </ul>
 </div>
 <div>
@@ -16,7 +16,7 @@
         <li class="tab"><?php echo $this->Html->link(__('List Challenges'), array('controller' => 'exercises', 'action' => 'index')); ?> </li>
         <li class="tab"><?php echo $this->Html->link(__('List Answers'), array('controller' => 'answers', 'action' => 'index')); ?> </li>
     </ul>
-</div>  
+</div>
 <?php echo $this->Html->script('addQuestions.ajax'); ?>
 
 <div class="exercises generation form">
@@ -38,6 +38,7 @@
                                       'type'=>'select',
                                       'multiple'=>true,
                                       'options' => $iutgroups));
+        echo $this->Form->input('Question');
         echo $this->Form->hidden('Exercise.Exercise.user_id',
             array('value' => $author));
     ?>
