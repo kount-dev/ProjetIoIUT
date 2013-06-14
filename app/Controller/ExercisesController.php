@@ -138,7 +138,29 @@ public function add(){
 
 public function import(){
 	if ($this->request->is('post') && isset($this->request->data['Exercise']['xmlFile'])) {
-		$file = $this->request->data['Exercise']['xmlFile']['tmp_name'];
+		if($this->request->data['Exercise']['xmlFile']['type'] == 'application/zip'){
+			$zip = new ZipArchive;
+			if ($zip->open($this->request->data['Exercise']['xmlFile']['tmp_name'])) {
+				for ($i = 0; $i < $zip->numFiles; $i++) {
+					$zip->extractTo('../../uploads/zip', $zip->getNameIndex($i));
+			    	$aFiles[] = '../../uploads/zip/' . $zip->getNameIndex($i);
+			 	}
+			}
+			$zip->close();
+			foreach ($aFiles as $sPathFile) {
+				$this->importDataXML($sPathFile);
+			}
+		}
+		else if($this->request->data['Exercise']['xmlFile']['type'] == 'text/xml'){
+			$file = $this->request->data['Exercise']['xmlFile']['tmp_name'];
+			$this->importDataXML($file);
+		}
+		$this->redirect(array('action' => 'index'));	
+	}
+}
+
+public function importDataXML($file = null){
+	if($file != null){
 
 		if($this->Xml->XMLIsValide('exercise', $file, "../../dtd/exercise.dtd")){
 			$oXml = new XMLReader();
@@ -212,7 +234,6 @@ public function import(){
 					}
 					if($VarTmp){
 						$this->Session->setFlash(__('The exercise has been saved'));
-						$this->redirect(array('action' => 'index'));
 					}
 					else{
 						$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
@@ -247,7 +268,8 @@ public function listByUser(){
 			));
 
 	foreach ($aExercises as $key => $aExercise) {
-		$aResult[$key]['User']['username'] = $this->User->find('first', array('conditions' => array('User.id =' => $aExercise['Exercise']['user_id'])))['User']['username'];
+		$aUser = $this->User->find('first', array('conditions' => array('User.id =' => $aExercise['Exercise']['user_id'])));
+		$aResult[$key]['User']['username'] = $aUser['User']['username'];
 		$aResult[$key]['Exercise'] = $aExercise['Exercise'];
 	}
 
