@@ -1,0 +1,48 @@
+table{
+	width: 80%;
+	margin: 20px auto 0 auto	;
+}
+
+thead tr{
+	border: 1px #ccc solid;
+}
+
+thead tr th{
+	border-right: 1px #ccc dashed;
+}
+
+#col_rank{
+	width: 20%;
+}
+#col_user{
+	width: 60%;
+}
+
+tbody tr {
+	border-bottom: 1px #9a291a dashed;
+	border-left: 1px #9a291a dashed;
+}
+tbody tr td{
+	border-right: 1px #9a291a dashed;
+	padding: 3px 3px 3px 15px;
+} 
+
+.up_progress, .up_progress a{
+	color : #34b400;
+}
+
+.down_progress, .down_progress a{
+	color : #ee1c00;
+}
+
+.egal_progress, .egal_progress a{
+	color : #5c9bca;
+}
+
+.username{
+	width: 280px;
+}
+.profile a{
+	color : white;
+	text-decoration: none;
+}
