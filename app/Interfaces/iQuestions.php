@@ -34,38 +34,5 @@ interface iQuestions {
  */
     public function add();
 
-
-/**
- *@desc cette fonction valide le module a partir des paramètres passés
- *@param array $param ('reponses'=>array(), 'path'=>string)
- *@return boolean true | false en fonctio de s'il est bon
- */
-    public function valider($param);
-
-/**
- *@desc cette fonction est celle qui gère l'ajout en base de données et création
- *éventuelle des fichiers
- *@param array $param ('infos'=>array) (infos est en fait la variable POST)
- *@return boolean true|false en fonction du succès ou non de la sauvegarde
- */
-    public function saveFromPost($param);
-
-/**
- *@desc Cette fonction va sauvegarder en base l'instance chargée
- */
-    public function saveInstance();
-
-    //public function getId(){ return $this->$id;}
-    //public function setId($val){ $this->$id=$val;}
-    //public function getNamefile(){ return $this->$namefile;}
-    //public function setNamefile($val){ $this->$namefile=$val;}
-    //public function getAuthor(){ return $this->$author;}
-    //public function setAuthor($val){ $this->$author=$val;}
-    //public function getPoints(){ return $this->$points;}
-    //public function setPoints($val){ $this->$points=$val;}
-    //public function getDifficulty(){ return $this->$difficulty;}
-    //public function setDifficulty($val){ $this->$difficulty=$val;}
-    //public function getType(){ return $this->$type;}
-    //public function setType($val){ $this->$type=$val;}
 }
 ?>
