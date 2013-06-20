@@ -3,21 +3,15 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Dim 09 Juin 2013 à 19:34
+-- Généré le: Jeu 20 Juin 2013 à 21:07
 -- Version du serveur: 5.5.29
 -- Version de PHP: 5.4.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Base de données: `ioiut`
+-- Base de données: `bdd_ioiut`
 --
 
 -- --------------------------------------------------------
@@ -233,15 +227,15 @@ CREATE TABLE `aros` (
   `lft` int(10) DEFAULT NULL,
   `rght` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Contenu de la table `aros`
 --
 
 INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, 'Group', 1, NULL, 1, 18),
-(3, NULL, 'Group', 2, NULL, 19, 22),
+(1, NULL, 'Group', 1, NULL, 1, 20),
+(3, NULL, 'Group', 2, NULL, 21, 24),
 (5, 1, 'User', 8, NULL, 2, 3),
 (6, 1, 'User', 9, NULL, 4, 5),
 (7, 1, 'User', 10, NULL, 6, 7),
@@ -250,7 +244,8 @@ INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (10, 1, 'User', 8, NULL, 12, 13),
 (11, 1, 'User', 9, NULL, 14, 15),
 (12, 1, 'User', 10, NULL, 16, 17),
-(13, 3, 'User', 11, NULL, 20, 21);
+(13, 3, 'User', 11, NULL, 22, 23),
+(14, 1, 'User', 12, NULL, 18, 19);
 
 -- --------------------------------------------------------
 
@@ -617,7 +612,7 @@ CREATE TABLE `users` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Contenu de la table `users`
@@ -626,9 +621,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `mail`, `xp`, `actual_rank`, `last_rank`, `group_id`, `avatar_namefile`, `created`, `modified`) VALUES
 (8, 'florian', '51ba318570e3d416974b93511b0024512bf5dcb4', 'florian@florian.fr', 0, NULL, NULL, 1, NULL, '2013-06-09 19:16:59', '2013-06-09 19:18:03'),
 (9, 'louis', 'b28d04149bc5151bfc258aa7c01f605d354f81ef', 'louis@louis.fr', 0, NULL, NULL, 1, NULL, '2013-06-09 19:17:38', '2013-06-09 19:17:38'),
-(10, 'quentin', 'aa26144053d99fcff013ff1e96c169d0f7a35401', 'quentin@quentin.fr', 6.03, 1, 1, 1, NULL, '2013-06-09 19:17:56', '2013-06-09 19:17:56'),
-(11, 'eleve', 'c7b15743ef49977b9164e2eb2bce1ced7bc1fcf0', 'eleve@eleve.fr', 10.08, 2, 1, 2, NULL, '2013-06-09 19:26:10', '2013-06-09 19:26:10');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+(10, 'quentin', 'aa26144053d99fcff013ff1e96c169d0f7a35401', 'quentin@quentin.fr', 6.03, 2, 1, 1, NULL, '2013-06-09 19:17:56', '2013-06-09 19:17:56'),
+(11, 'eleve', 'c7b15743ef49977b9164e2eb2bce1ced7bc1fcf0', 'eleve@eleve.fr', 10.08, 1, 2, 2, NULL, '2013-06-09 19:26:10', '2013-06-09 19:26:10'),
+(12, 'administrateur', 'caca30d5ff5ac02b71c2ea2c56f8d3c01dfd4fc0', 'admin@admin.fr', 0, NULL, NULL, 1, NULL, '2013-06-20 21:05:52', '2013-06-20 21:05:52');

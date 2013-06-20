@@ -111,6 +111,9 @@ class UsersController extends AppController {
 			if($this->User->field('group_id', array('id' => $this->Auth->user('id'))) == 1){
 				$this->Session->write('Auth.Admin', 'Yes');
 			}
+			else{
+				$this->Session->write('Auth.Admin', 'NO');
+			}
 	        $this->Session->setFlash('Vous êtes connecté!');
 	        $this->redirect('/', null, false);
 	    }
@@ -118,6 +121,9 @@ class UsersController extends AppController {
 	        if ($this->Auth->login()) {
 	        	if($this->User->field('group_id', array('id' => $this->Auth->user('id'))) == 1){
 					$this->Session->write('Auth.Admin', 'Yes');
+				}
+				else{
+					$this->Session->write('Auth.Admin', 'NO');
 				}
 	            $this->redirect($this->Auth->redirect());
 	        } else {
