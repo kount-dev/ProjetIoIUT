@@ -2,7 +2,6 @@
 	echo $this->Html->css('admin');
 	echo $this->Html->css('question');
 	if($num_question == -1){
-    $bTest = 'test';
 		$num_question = 1;
 	echo $this->Html->script('addQuestions.ajax');
  ?>
@@ -22,9 +21,7 @@
 <div id="tabContent">
 	<div class="questions generation form">
 <?php 
-    if(isset($bTest) && $bTest == 'test'){
-      echo $this->Form->create('Question');
-    }
+  }
 ?>
 	<?php echo '<fieldset id="question_'.$num_question.'">'; ?>
 			<legend><?php echo __('Question'); ?></legend>
@@ -46,12 +43,8 @@
 				echo $this->Form->hidden('Question.'.$num_question.'.Exercise.0', array('value' => $exerciseId));
 			}
 	?>
+   <div class="questions typeQuestion generation">
+    </div>
 	</fieldset>
-<?php
-  if(isset($bTest) && $bTest == 'test'){
-      echo $this->Form->hidden('nb_question', array('value' => 1));
-      echo $this->Form->end(__('Submit'));
-  }
-?>
 </div>
 </div>
