@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exercise>
 	<author>quentin</author>
-	<name>Exercise 5</name>
+	<name>Exercise 1333</name>
 	<minimum_points>0</minimum_points>
 	<groups_iut>
 		<group>1</group>
@@ -13,6 +13,22 @@
 	<opening_date>2013-03-30 15:20:00</opening_date>
 	<closing_date>2014-04-15 15:20:00</closing_date>
 	<questions>
+		<question type="qcm">
+		  <author>quentin</author>
+		  <difficulty>1</difficulty>
+		  <text><![CDATA[dfddfdfgd]]></text>
+		  <disciplines>
+		    <discipline>4</discipline>
+		  </disciplines>
+		  <choice>
+		    <option num="1"><![CDATA[gdfsgd]]></option>
+		    <option num="2"><![CDATA[dfsgd]]></option>
+		  </choice>
+		  <answers>
+		    <answer>2</answer>
+		  </answers>
+		  <points>1</points>
+		</question>
 		<question type="qcu">
 		  <author>quentin</author>
 		  <difficulty>3</difficulty>

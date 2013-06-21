@@ -1,13 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<question type="choixMultiple">
-    <id val="1"/>
-    <text><![CDATA[La propriété overflow permet de :]]></text>
-    <choice>
-        <option num="0"><![CDATA[cacher du texte qui dépasse]]></option>
-        <option num="1"><![CDATA[changer la couleur d\'une image]]></option>
-        <option num="2"><![CDATA[modifier la taille d\'une boite]]></option>
-        <option num="3"><![CDATA[ajouter une barre de scroll si le texte dépasse]]></option>
-    </choice>
-    <answer>0,3</answer>
-    <points val="2"/>
+<question type="qcm">
+  <author>quentin</author>
+  <difficulty>3</difficulty>
+  <text><![CDATA[H T M L = ?]]></text>
+  <disciplines>
+    <discipline>2</discipline>
+    <discipline>4</discipline>
+  </disciplines>
+  <choice>
+    <option num="0"><![CDATA[Hyper Translate Media Language]]></option>
+    <option num="1"><![CDATA[Hypertext Media Language ]]></option>
+    <option num="2"><![CDATA[Hypertext Markup Language]]></option>
+    <option num="3"><![CDATA[Hypertext Mockup Language]]></option>
+  </choice>
+  <answers>
+    <answer>2</answer>
+    <answer>3</answer>
+  </answers>
+  <points>5</points>
 </question>

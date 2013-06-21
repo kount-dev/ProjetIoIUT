@@ -2,6 +2,7 @@
 <!ELEMENT disciplines (discipline+)>
 <!ELEMENT groups_iut (group+)>
 <!ELEMENT questions (question+)>
+<!ELEMENT answers (answer+)>
 
 <!ELEMENT question ANY>
 <!ELEMENT author (#PCDATA)>

@@ -1,0 +1,15 @@
+<!ELEMENT question (author, difficulty, text, disciplines, choice, answers, points)>
+<!ELEMENT disciplines (discipline+)>
+<!ELEMENT choice (option+)>
+<!ELEMENT answers (answer+)>
+
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT difficulty (#PCDATA)>
+<!ELEMENT text (#PCDATA)>
+<!ELEMENT discipline (#PCDATA)>
+<!ELEMENT option (#PCDATA)>
+<!ELEMENT answer (#PCDATA)>
+<!ELEMENT points (#PCDATA)>
+
+<!ATTLIST option num CDATA #REQUIRED>
+<!ATTLIST question type CDATA #REQUIRED> 
