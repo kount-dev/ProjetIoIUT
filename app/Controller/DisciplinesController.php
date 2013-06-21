@@ -71,8 +71,6 @@ class DisciplinesController extends AppController {
 			$options = array('conditions' => array('Discipline.' . $this->Discipline->primaryKey => $id));
 			$this->request->data = $this->Discipline->find('first', $options);
 		}
-
-
 	}
 
 /**
