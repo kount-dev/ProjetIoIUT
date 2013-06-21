@@ -134,6 +134,7 @@ class UsersController extends AppController {
 
 	public function logout() {
 	    $this->Session->setFlash('Au-revoir');
+	    $this->Session->write('Auth.Admin', 'deco');
 		$this->redirect($this->Auth->logout());
 	}
 
@@ -232,7 +233,7 @@ public function initDB() {
     $this->Acl->allow($group, 'controllers/answers/saveAnswer');
     $this->Acl->allow($group, 'controllers/users/leaderboard');
     $this->Acl->allow($group, 'controllers/users/view');
-
+    $this->Acl->allow($group, 'controllers/users/logout');
 
     echo "tout est ok";
     exit;

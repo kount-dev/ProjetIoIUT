@@ -39,9 +39,12 @@
 	<header>
 		<h1><?php echo $this->Html->link(__($title), array('controller' => 'exercises', 'action' => 'listByUser')) ?></h1>
 		<?php 
-		if(isset($this->Session) && $this->Session->read('Auth.Admin') == 'Yes'){
-			echo '<div id="admin_panel">' . $this->Html->link(__('Admin'), array('controller' => 'exercises', 'action' => 'index')) . '</div>'; 
-		}
+			if(isset($this->Session) && $this->Session->read('Auth.Admin') == 'Yes'){
+				echo '<div id="admin_panel">' . $this->Html->link(__('Admin'), array('controller' => 'exercises', 'action' => 'index')) . '</div>'; 
+			}
+			if(isset($this->Session) && $this->Session->read('Auth.Admin') != 'deco'){
+				echo '<div id="deco_panel">' . $this->Html->link(__('Deconnexion'), array('controller' => 'users', 'action' => 'logout')) . '</div>'; 
+			}
 		?>
 	</header>
 	<section id="main">
