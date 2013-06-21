@@ -42,6 +42,8 @@ you can see the documentation at http://book.cakephp.org/2.0/fr/development/rout
     Router::connect('/leaderboard', array('controller' => 'users', 'action' => 'leaderboard'));
     Router::connect('/admin', array('controller' => 'users', 'action' => 'admin'));
 
+    Router::connect('/users', array('controller' => 'users', 'action' => 'login'));
+
     /* Challenge */
     Router::connect('/challenge/*', array('controller' => 'exercises', 'action' => 'display'));
     Router::connect('/feedback/challenge/*', array('controller' => 'answers', 'action' => 'displayByIdExercise'));
