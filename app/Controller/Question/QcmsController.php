@@ -87,8 +87,8 @@ class QcmsController extends QuestionsController implements iQuestions {
 
         $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
 
-        $sHTML = '<div><p>' . $aFileXML['question']['text'] . '</p>';
-        $sHTML .= '<ul>';
+        $sHTML = '<div class="question"><h1 class="title">' . $aFileXML['question']['text'] . '</h1>';
+        $sHTML .= '<ul class="descr">';
 
         foreach ($aFileXML['question']['option'] as $key => $value) {
             $bDataTest = false;
@@ -109,15 +109,16 @@ class QcmsController extends QuestionsController implements iQuestions {
                 }
             }
             if($bDataTest == false){
+                $bTest2 = false;
                 foreach ($aFileXML['question']['answers'] as $Rep) {
                     if($Rep == $key){
                         $bTest2 = true;
                         $sHTML .= '<li class="goodAnswer">' .$value;
                     }
                 }
-            }
-            if(!$bTest2){
-                $sHTML .= '<li>'.$value;
+                if(!$bTest2){
+                    $sHTML .= '<li>'.$value;
+                }
             }
             $sHTML .= '</li>';
         }
