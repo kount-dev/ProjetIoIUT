@@ -26,7 +26,7 @@ class AnswersController extends AppController {
 		$this->render('index');
 	}
 
-	public function displayByIdExercise($nIdExercise,$nIdUser){
+	public function displayByIdExercise($nIdExercise,$nIdUser = null){
 		$aParams = array('Answer.exercise_id =' . $nIdExercise);
 		if($nIdUser == -1){
 			$aParams = array('Answer.exercise_id =' . $nIdExercise, 'Answer.user_id = ' . $this->Auth->user('id'));
