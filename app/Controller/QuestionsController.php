@@ -193,8 +193,10 @@ class QuestionsController extends AppController {
 		$disciplines = $this->Question->Discipline->find('list');
 
     	if ($this->request->is('post')){
-
-			$num_question = (int)$this->request->data['n'];
+    		if(isset($this->request->data['n']))
+				$num_question = (int)$this->request->data['n'];
+			else
+				$num_question = 1;
 			$exerciseId = $this->Exercise->field('id', array(), 'created DESC') + 1;
 			$this->set(compact('disciplines','question_types_list', 'author','num_question', 'exerciseId'));
 

@@ -1,6 +1,7 @@
 <?php 
 
 if($num_question == -1){
+  $bTest = 'test';
 	$num_question = 1;
 	echo $this->Html->script('addQuestions.ajax');
  ?> 
@@ -22,7 +23,11 @@ if($num_question == -1){
       <li class="tab"><?php echo $this->Html->link(__('Import Question'), array('controller' => 'questions', 'action' => 'import')); ?> </li>
     </ul>
   </div>
-  <?php } ?>
+  <?php 
+
+  echo $this->Form->create('Question');
+
+} ?>
 
 <?php echo '<fieldset id="question_'.$num_question.'">'; ?>
     <legend><?php echo __('Question'); ?></legend>
@@ -41,9 +46,18 @@ if($num_question == -1){
     echo $this->Form->hidden('Question.'.$num_question.'.Question.user_id', array('value' => $author));
    	
    	if(isset($exerciseId) || !empty($exerciseId)){
+
     	echo $this->Form->hidden('Question.'.$num_question.'.Exercise.0', array('value' => $exerciseId));
+
     }
 ?>
     <div class="questions typeQuestion generation">
     </div>
 </fieldset>
+<?php 
+  
+  if(isset($bTest) && $bTest == 'test'){
+      echo $this->Form->hidden('nb_question', array('value' => 1));
+      echo $this->Form->end(__('Submit'));
+  }
+?>

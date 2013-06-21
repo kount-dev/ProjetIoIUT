@@ -38,14 +38,14 @@
                                       'type'=>'select',
                                       'multiple'=>true,
                                       'options' => $iutgroups));
-        echo $this->Form->input('Question');
+        //echo $this->Form->input('Question');
         echo $this->Form->hidden('Exercise.Exercise.user_id',
             array('value' => $author));
     ?>
     </fieldset>
     <?php echo $this->Form->hidden('nb_question', array('value' => 0)); ?>
 
-    <div class="questions generation">
+    <div class="questions generation" id="exercises_questions">
 
     </div>
     <input id="add_question" type="button" value="Add question"/>
