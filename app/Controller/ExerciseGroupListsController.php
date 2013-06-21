@@ -63,7 +63,7 @@ class ExerciseGroupListsController extends AppController {
 		if (!$this->ExerciseGroupList->exists($id)) {
 			throw new NotFoundException(__('Invalid group list'));
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if (($this->request->is('post') || $this->request->is('put')) && !empty($this->request->data)) {
 			if ($this->ExerciseGroupList->save($this->request->data)) {
 				$this->Session->setFlash(__('The group list has been saved'));
 				$this->redirect(array('action' => 'index'));

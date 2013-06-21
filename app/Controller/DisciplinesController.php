@@ -60,7 +60,7 @@ class DisciplinesController extends AppController {
 		if (!$this->Discipline->exists($id)) {
 			throw new NotFoundException(__('Invalid discipline'));
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if (($this->request->is('post') || $this->request->is('put')) && !empty($this->request->data)) {
 			if ($this->Discipline->save($this->request->data)) {
 				$this->Session->setFlash(__('The discipline has been saved'));
 				$this->redirect(array('action' => 'index'));
@@ -69,8 +69,10 @@ class DisciplinesController extends AppController {
 			}
 		} else {
 			$options = array('conditions' => array('Discipline.' . $this->Discipline->primaryKey => $id));
-			$this->request->data = $this->Discipline->find('first', $options);
+			//$this->request->data = $this->Discipline->find('first', $options);
 		}
+
+
 	}
 
 /**

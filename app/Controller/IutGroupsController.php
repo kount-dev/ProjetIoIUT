@@ -60,7 +60,7 @@ class IutGroupsController extends AppController {
 		if (!$this->IutGroup->exists($id)) {
 			throw new NotFoundException(__('Invalid iut group'));
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if (($this->request->is('post') || $this->request->is('put')) && !empty($this->request->data)) {
 			if ($this->IutGroup->save($this->request->data)) {
 				$this->Session->setFlash(__('The iut group has been saved'));
 				$this->redirect(array('action' => 'index'));

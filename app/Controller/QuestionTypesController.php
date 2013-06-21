@@ -60,7 +60,7 @@ class QuestionTypesController extends AppController {
 		if (!$this->QuestionType->exists($id)) {
 			throw new NotFoundException(__('Invalid question type'));
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if (($this->request->is('post') || $this->request->is('put')) && !empty($this->request->data)) {
 			if ($this->QuestionType->save($this->request->data)) {
 				$this->Session->setFlash(__('The question type has been saved'));
 				$this->redirect(array('action' => 'index'));

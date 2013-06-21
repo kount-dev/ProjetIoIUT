@@ -48,9 +48,9 @@
 				<th><?php //echo $this->Paginator->sort('question_type_id'); ?></th>
 				<th><?php //echo $this->Paginator->sort('created'); ?></th>
 				<th><?php //echo $this->Paginator->sort('modified'); ?></th>
-				<th class="actions"><?php echo __('Actions'); ?></th>
+				<th class="actions"><?php //echo __('Actions'); ?></th>
 		</tr>
-		<?php foreach ($questions as $question): ?>
+		<?php //foreach ($questions as $question): ?>
 		<tr>
 			<td><?php //echo h($question['Question']['id']); ?>&nbsp;</td>
 			<td><?php //echo h($question['Question']['namefile']); ?>&nbsp;</td>
@@ -70,7 +70,7 @@
 				<?php //echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $question['Question']['id']), null, __('Are you sure you want to delete # %s?', $question['Question']['id'])); ?>
 			</td>
 		</tr>
-	<?php endforeach; ?>
+	<?php //endforeach; ?>
 		</table> -->
 	</div>
 </div>

@@ -11,7 +11,7 @@
 </div>
 <div>
 	<ul>
-		<!-- <li class="tab"><?php echo $this->Html->link(__('New Question'), array('controller' => 'questions', 'action' => 'add')); ?></li> -->
+		<!-- <li class="tab"><?php //echo $this->Html->link(__('New Question'), array('controller' => 'questions', 'action' => 'add')); ?></li> -->
 		<li class="tab"><?php echo $this->Html->link(__('List Questions'), array('controller' => 'questions', 'action' => 'index')); ?> </li>
 		<li class="tab"><?php echo $this->Html->link(__('Import Question'), array('controller' => 'questions', 'action' => 'import')); ?> </li>
 	</ul>

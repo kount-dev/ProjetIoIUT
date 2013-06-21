@@ -124,7 +124,7 @@ class QuestionsController extends AppController {
 		if (!$this->Question->exists($id)) {
 			throw new NotFoundException(__('Invalid question'));
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
+		if (($this->request->is('post') || $this->request->is('put')) && !empty($this->request->data)) {
 			if ($this->Question->save($this->request->data)) {
 				$this->Folder->ImportTypeQuestion();
 				$this->loadModel('QuestionType');
