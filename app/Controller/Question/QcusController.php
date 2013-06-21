@@ -80,19 +80,21 @@ class QcusController extends QuestionsController implements iQuestions {
 
         $aFileXML = $this->load("../../uploads/questions/".$sPath_fileXML);
 
-        $sHTML = '<div><p>' . $aFileXML['question']['text'] . '</p>';
-        $sHTML .= '<ul>';
+        $sHTML = '<div class="question"><h1 class="title">' . $aFileXML['question']['text'] . '</h1>';
+        $sHTML .= '<ul class="descr">';
 
         foreach ($aFileXML['question']['option'] as $key => $value) {
-            $sHTML .= '<li>' . $value;
             if($aData[0] == $key && $aFileXML['question']['answer'] == $key){
-                $sHTML .= "    <==== La bonne réponse et également votre réponse";
+                $sHTML .= '<li class="valid">' .$value;
             }
             else if($aData[0] == $key){
-                $sHTML .= "    <==== Votre réponse";
+                $sHTML .= '<li class="yourAnswer">' .$value;
             }
             else if($aFileXML['question']['answer'] == $key){
-                $sHTML .= "    <==== La bonne réponse";
+                $sHTML .= '<li class="goodAnswer">' .$value;
+            }
+            else{
+                $sHTML .= '<li>'.$value;
             }
             $sHTML .= '</li>';
         }

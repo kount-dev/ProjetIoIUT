@@ -1,4 +1,4 @@
-<fieldset>
+<fieldset class="question">
 	<?php
 		echo "<h1>".$oData['question']['text']."</h1>";
 		

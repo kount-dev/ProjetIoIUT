@@ -93,3 +93,37 @@ a:hover{
 #question_list .question:hover .btn{
 	opacity: 1;
 }
+
+/* ----------- answer form ----------- */
+
+.generation.display .question input{
+	float: left;
+	margin-bottom: 5px;
+}
+
+.generation.display h1{
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+
+/* ----------- feedback list----------- */
+
+.feedback li{
+	margin-bottom: 5px;
+	padding-left: 30px;
+	background-size: 20px;
+	background-position: left center;
+	background-repeat: no-repeat;
+}
+
+.feedback .valid{
+	background-image: url(../img/valid.png);
+}
+
+.feedback .yourAnswer{
+	background-image: url(../img/yourAnswer.png);
+}
+
+.feedback .goodAnswer{
+	background-image: url(../img/goodAnswer.png);
+}

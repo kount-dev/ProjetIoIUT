@@ -91,7 +91,6 @@ class QcmsController extends QuestionsController implements iQuestions {
         $sHTML .= '<ul>';
 
         foreach ($aFileXML['question']['option'] as $key => $value) {
-            $sHTML .= '<li>' . $value;
             $bDataTest = false;
             foreach ($aData as $DataRep) {
                 if($DataRep == $key){
@@ -100,21 +99,25 @@ class QcmsController extends QuestionsController implements iQuestions {
                         if($Rep == $key){
                             $bDataTest = true;
                             $bTest = true;
-                            $sHTML .= "    <==== La bonne réponse et également votre réponse";
+                            $sHTML .= '<li class="valid">' .$value;
                         }
                     }
                     if($bTest == false){
                         $bDataTest = true;
-                        $sHTML .= "    <==== Votre réponse";
+                        $sHTML .= '<li class="yourAnswer">' .$value;
                     }
                 }
             }
             if($bDataTest == false){
                 foreach ($aFileXML['question']['answers'] as $Rep) {
                     if($Rep == $key){
-                        $sHTML .= "    <==== La bonne réponse";
+                        $bTest2 = true;
+                        $sHTML .= '<li class="goodAnswer">' .$value;
                     }
                 }
+            }
+            if(!$bTest2){
+                $sHTML .= '<li>'.$value;
             }
             $sHTML .= '</li>';
         }

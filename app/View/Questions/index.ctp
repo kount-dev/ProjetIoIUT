@@ -1,7 +1,7 @@
 <?php 
 		echo $this->Html->css('admin');
 		echo $this->Html->css('question');
- ?>
+?>
 <div id="actionBar">
 	<?php //echo $this->Html->link(null, array('controller' => 'questions', 'action' => 'add'), array('class' => 'action_btn new')); ?>
 	<?php echo $this->Html->link(null, array('controller' => 'questions', 'action' => 'import'), array('class' => 'action_btn import')); ?>
