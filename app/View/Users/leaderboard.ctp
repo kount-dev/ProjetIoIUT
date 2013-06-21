@@ -1,3 +1,9 @@
+<ul id="tabBar">
+	<li id="challenge_tab" class="tab"><?php echo $this->Html->link(__('Challenges'), array('controller' => 'exercises','action' => 'listByUser')); ?></li>
+	<li id="profile_tab" class="tab"><?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view')); ?> </li>
+	<li id="leaderboard_tab" class="tab"><?php echo $this->Html->link(__('Leaderboard'), array('controller' => 'users', 'action' => 'leaderboard')); ?> </li>
+</ul>
+<div id="tabContent">
 <?php
 	echo $this->Html->css('leaderboard');
 	echo $this->Html->script('sortLeaderBoard.ajax');
@@ -30,3 +36,5 @@
 	echo "</table>";
 
 ?>
+<br/>
+</div>

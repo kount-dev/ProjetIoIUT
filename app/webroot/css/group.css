@@ -4,8 +4,7 @@
 /******************************************************/
 
 /* ----------- Tabs ----------- */
-#profile_tab,
-#admin_users_tab{
+#admin_groupuser_tab{
 	background: url(../img/red_stripes.gif);
 	font-weight: bold;
 }
@@ -39,7 +38,7 @@ a:hover{
 
 /* ----------- List ----------- */
 
-#user_list{
+#group_list{
 	width: 100%;
 	height: 100%;
 	overflow-y: scroll;
@@ -48,7 +47,7 @@ a:hover{
 	        	inset 0px -11px 8px -10px #111; 
 }
 
-#user_list .btn{
+#group_list .btn{
 	display: block;
 	opacity: 0;
 	margin: 0;
@@ -58,30 +57,30 @@ a:hover{
 	-webkit-transition: opacity linear .3s;
 }
 
-.user{
+.group{
 	margin: 0 30px;
 	padding: 30px 15px 45px;
 	font-family: sans-serif;
 }
 
-.user:not(:last-child){
+.group:not(:last-child){
 	border-bottom: 1px solid #999;
 }
 
-.user .infos{
+.group .infos{
 	float: right;
 	color: rgba(255,30,0,0.7);
 	font-size: 0.7em;
 }
 
-.user .title{
+.group .title{
 	max-width: 400px;
 	padding-bottom: 10px;
 	color: white;
 	font-size: 1.2em;
 }
 
-.user .descr{
+.group .descr{
 	max-width: 400px;
 	color: #ccc;
 	font-size: 0.8em;
@@ -91,6 +90,6 @@ a:hover{
 	float: right;
 }
 
-#user_list .user:hover .btn{
+#group_list .group:hover .btn{
 	opacity: 1;
 }
