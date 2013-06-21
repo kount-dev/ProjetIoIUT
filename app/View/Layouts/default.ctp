@@ -37,34 +37,25 @@
 </head>
 <body>
 	<header>
-		<h1><?php echo $title; ?></h1>
-		<div id="status">This is a preview of the status bar/notif</div>
-		<div id="toolbar"></div>
+		<h1><?php echo $this->Html->link(__($title), array('controller' => 'exercises', 'action' => 'listByUser')) ?></h1>
+		<?php 
+		if(isset($this->Session) && $this->Session->read('Auth.Admin') == 'Yes'){
+			echo '<div id="admin_panel">' . $this->Html->link(__('Admin'), array('controller' => 'exercises', 'action' => 'index')) . '</div>'; 
+		}
+		?>
 	</header>
-	<div id="wrapper">
-		<section id="terminal">
-			<div id="prompt">
-				<?php 
-					echo $this->fetch('term_view');
-				 ?>
-			</div>
-		</section>
-		<section id="main">
-			<ul id="tabBar">
-				<li id="challenge_tab" class="tab"><?php echo $this->Html->link(__('Challenges'), array('controller' => 'exercises','action' => 'listByUser')); ?></li>
-				<li id="profile_tab" class="tab"><?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view')); ?> </li>
-				<li id="leaderboard_tab" class="tab"><?php echo $this->Html->link(__('Leaderboard'), array('controller' => 'users', 'action' => 'leaderboard')); ?> </li>
-				<?php 
-					if(isset($this->Session) && $this->Session->read('Auth.Admin') == 'Yes'){
-						echo '<li id="admin_tab" class="tab">' . $this->Html->link(__('Administration'), array('controller' => 'users', 'action' => 'admin')) . '</li>'; 
-					}
-				?>
-			</ul>
-			<div id="tabContent">
-				<?php echo $this->fetch('content'); ?>
-			</div>
-		</section>
-	</div>
+	<section id="main">
+		<?php echo $this->fetch('content'); ?>
+		
+<!-- 			<ul id="tabBar">
+			<li id="challenge_tab" class="tab"><?php echo $this->Html->link(__('Challenges'), array('controller' => 'exercises','action' => 'listByUser')); ?></li>
+			<li id="profile_tab" class="tab"><?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view')); ?> </li>
+			<li id="leaderboard_tab" class="tab"><?php echo $this->Html->link(__('Leaderboard'), array('controller' => 'users', 'action' => 'leaderboard')); ?> </li>
+		</ul>
+		<div id="tabContent">
+			<?php echo $this->fetch('content'); ?>
+		</div> -->
+	</section>
 </body>
 <?php
 	echo $this->Html->script('jquery');

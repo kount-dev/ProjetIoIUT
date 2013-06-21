@@ -1,0 +1,48 @@
+#actionBar{
+	position: absolute;
+	top: 18px;
+	right: 120px;
+}
+
+#actionBar .action_btn{
+	padding: 0 10px;
+	margin-right: 20px;
+	background-size: 20px;
+	background-position: center;
+	cursor: pointer;
+}
+
+#actionBar .new{
+	background-image: url(../img/new.png);
+}
+
+#actionBar .import{
+	background-image: url(../img/upload.png);
+}
+
+#actionBar .list{
+	background-image: url(../img/list.png);
+}
+
+#actionBar .answer{
+	background-image: url(../img/answer.png);
+}
+
+/* ----------- Generation ----------- */
+
+.generation legend{
+	padding:15px 30px;
+	color: rgba(255,30,0,0.7);
+	font-size: 1.5em;
+}
+
+.generation input,
+.generation select,
+.generation label{
+	margin-left: 30px;
+}
+
+.generation label{
+	color: #aaa;
+	display: block;
+}

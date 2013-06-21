@@ -9,18 +9,10 @@
 	font-style: normal;
 }
 
-#wrapper{
-	position: absolute;
-	top: 50px;
-	bottom: 0px;
-	width: 100%;
-	-webkit-transform: translate(0%, -220px);
-	-webkit-transition: -webkit-transform ease-out .3s;
-	-webkit-font-smoothing: antialiased;
-}
-
-#wrapper.unfold{
-	-webkit-transform: translate(0%, 0%);
+body{
+	background: url(../img/gradient_light.svg) center -300px no-repeat,
+				url(../img/bg.png) repeat #3D3D3D;
+	background-size: 150%, auto;
 }
 
 .separator{
@@ -79,11 +71,8 @@ select{
 /******************************************************/
 
 header{
-	position: absolute;
 	height: 50px;
 	width: 100%;
-	top: 0;
-	z-index: 10;
 
 	font-family: "Menlo", sans-serif;
 	line-height: 50px;
@@ -105,6 +94,11 @@ header h1{
 	font-size: 2.2em;
 }
 
+header h1 a{
+	text-decoration: none;
+	color: white;
+}
+
 #status{
 	float: left;
 	height: 20px;
@@ -120,60 +114,40 @@ header h1{
 	background-size: cover;
 }
 
-#toolbar{
+#admin_panel{
+	padding-left: 35px;
+	background: url(../img/admin_access.png) 3px center no-repeat;
+	background-size: 23px;
+	border: 1px solid rgba(255,30,0,0.5);
+	border-radius: 2px;
+	margin: 12px;
+	line-height: 25px;
 	float: right;
-	margin-right: 20px;
-	margin-top: 15px;
 	height: 25px;
-	width: 30px;
-	background: url(../img/terminal.png) no-repeat;
-	background-size: contain;
+	width: 60px;
 	cursor: pointer;
 }
 
-/******************************************************/
-/*						TERMINAL					  */
-/******************************************************/
-
-#terminal{
-	height: 200px;
-	width: inherit;
-	padding-bottom: 20px;
-	background: url(../img/dark_stripes.gif) repeat, #3D3D3D;
-	box-shadow: inset 0px 0px 12px #000;
-}
-
-#prompt{
-	box-sizing: border-box;
-	height: inherit;
-	width: 80%;
-	margin: 0 auto;
-
-	padding: 20px;
-	font-family: "Menlo", sans-serif;
-	font-weight: 300;
-	font-size: 0.9em;
-
-	color: #fff;
-	background: url(../img/gradient_dark.svg) 90% no-repeat;
-	background-size: cover;
-	box-shadow: 0 0 7px rgba(255,30,0,0.5);
+#admin_panel a{
+	color: white;
+	font-weight: normal;
+	font-size: 0.8em;
+	text-decoration: none;
 }
 
 /******************************************************/
 /*						MAIN						  */
 /******************************************************/
 
+
+
 #main{
 	box-sizing: border-box;
 	height: 100%;
 	padding: 30px;
 	padding-bottom: 60px;
-
-	background: url(../img/gradient_light.svg) center -300px no-repeat,
-				url(../img/bg.png) repeat #3D3D3D;
-	background-size: 150%, auto;
 	font-family: "Menlo", sans-serif;
+	color: white;
 }
 
 #tabBar{
