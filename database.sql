@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 21 Juin 2013 à 08:07
+-- Généré le: Sam 22 Juin 2013 à 08:48
 -- Version du serveur: 5.5.29
 -- Version de PHP: 5.4.10
 
@@ -207,22 +207,7 @@ CREATE TABLE `answers` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
-
---
--- Contenu de la table `answers`
---
-
-INSERT INTO `answers` (`id`, `namefile`, `user_id`, `exercise_id`, `attempt_number`, `success_rate`, `created`, `modified`) VALUES
-(16, '16_2013-06-09.xml', 11, 1, 12, 100, '2013-06-09 19:29:06', '2013-06-09 19:29:06'),
-(17, '17_2013-06-09.xml', 10, 1, 13, 100, '2013-06-09 19:29:36', '2013-06-09 19:29:36'),
-(18, '18_2013-06-09.xml', 11, 1, 3, 100, '2013-06-09 19:33:48', '2013-06-09 19:33:48'),
-(19, '19_2013-06-12.xml', 10, 1, 4, 100, '2013-06-12 09:11:31', '2013-06-12 09:11:31'),
-(20, '20_2013-06-12.xml', 9, 3, 5, 100, '2013-06-12 10:08:04', '2013-06-12 10:08:04'),
-(21, '21_2013-06-16.xml', 8, 1, 6, 100, '2013-06-16 08:39:36', '2013-06-16 08:39:36'),
-(22, '22_2013-06-16.xml', 8, 2, 7, 100, '2013-06-16 08:41:54', '2013-06-16 08:41:54'),
-(23, '23_2013-06-16.xml', 10, 3, 8, 100, '2013-06-16 08:58:39', '2013-06-16 08:58:39'),
-(24, '24_2013-06-16.xml', 9, 2, 9, 100, '2013-06-16 08:59:22', '2013-06-16 08:59:22');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 -- --------------------------------------------------------
 
@@ -240,25 +225,23 @@ CREATE TABLE `aros` (
   `lft` int(10) DEFAULT NULL,
   `rght` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Contenu de la table `aros`
 --
 
 INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, 'Group', 1, NULL, 1, 20),
-(3, NULL, 'Group', 2, NULL, 21, 24),
+(1, NULL, 'Group', 1, NULL, 1, 14),
+(3, NULL, 'Group', 2, NULL, 15, 18),
 (5, 1, 'User', 8, NULL, 2, 3),
 (6, 1, 'User', 9, NULL, 4, 5),
 (7, 1, 'User', 10, NULL, 6, 7),
 (8, 1, 'User', 11, NULL, 8, 9),
 (9, 1, 'User', 12, NULL, 10, 11),
-(10, 1, 'User', 8, NULL, 12, 13),
-(11, 1, 'User', 9, NULL, 14, 15),
-(12, 1, 'User', 10, NULL, 16, 17),
-(13, 3, 'User', 11, NULL, 22, 23),
-(14, 1, 'User', 12, NULL, 18, 19);
+(13, 3, 'User', 11, NULL, 16, 17),
+(14, 1, 'User', 12, NULL, 12, 13),
+(15, NULL, 'Group', 3, NULL, 19, 20);
 
 -- --------------------------------------------------------
 
@@ -277,7 +260,7 @@ CREATE TABLE `aros_acos` (
   `_delete` varchar(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ARO_ACO_KEY` (`aro_id`,`aco_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Contenu de la table `aros_acos`
@@ -293,7 +276,8 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 (7, 3, 143, '1', '1', '1', '1'),
 (8, 3, 144, '1', '1', '1', '1'),
 (9, 3, 135, '1', '1', '1', '1'),
-(10, 3, 130, '1', '1', '1', '1');
+(10, 3, 130, '1', '1', '1', '1'),
+(11, 3, 49, '1', '1', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -309,17 +293,14 @@ CREATE TABLE `disciplines` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `disciplines`
 --
 
 INSERT INTO `disciplines` (`id`, `name`, `created`, `modified`) VALUES
-(1, 'CSS', '2013-03-22 15:21:43', '2013-03-22 15:21:43'),
-(2, 'HTML', '2013-03-22 15:21:53', '2013-03-22 15:21:53'),
-(3, 'PHP', '2013-03-22 15:22:04', '2013-03-22 15:22:04'),
-(4, 'Framework', '2013-03-22 15:22:25', '2013-03-22 15:22:25');
+(5, 'Discipline Test', '2013-06-22 08:43:55', '2013-06-22 08:43:55');
 
 -- --------------------------------------------------------
 
@@ -339,16 +320,14 @@ CREATE TABLE `exercises` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `exercises`
 --
 
 INSERT INTO `exercises` (`id`, `name`, `minimum_points`, `opening_date`, `closing_date`, `user_id`, `created`, `modified`) VALUES
-(1, 'Exercise', 0, '2013-03-30 15:20:00', '2014-04-15 15:20:00', 10, '2013-06-07 12:15:11', '2013-06-09 13:50:47'),
-(2, 'Exercise 2', 0, '2013-03-30 15:20:00', '2014-04-15 15:20:00', 10, '2013-06-07 12:15:39', '2013-06-07 12:15:39'),
-(3, 'Exercise 3', 0, '2013-03-30 15:20:00', '2014-04-15 15:20:00', 10, '2013-06-07 12:15:55', '2013-06-09 16:10:59');
+(9, 'Exercise 1', 0, '2013-03-30 15:20:00', '2014-04-15 15:20:00', 12, '2013-06-22 08:47:49', '2013-06-22 08:47:49');
 
 -- --------------------------------------------------------
 
@@ -364,19 +343,14 @@ CREATE TABLE `exercises_disciplines` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Contenu de la table `exercises_disciplines`
 --
 
 INSERT INTO `exercises_disciplines` (`id`, `exercise_id`, `discipline_id`, `created`, `modified`) VALUES
-(1, 1, 2, NULL, NULL),
-(2, 1, 4, NULL, NULL),
-(3, 2, 2, NULL, NULL),
-(4, 2, 4, NULL, NULL),
-(5, 3, 2, NULL, NULL),
-(6, 3, 4, NULL, NULL);
+(15, 9, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -392,22 +366,17 @@ CREATE TABLE `exercises_questions` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Contenu de la table `exercises_questions`
 --
 
 INSERT INTO `exercises_questions` (`id`, `exercise_id`, `question_id`, `created`, `modified`) VALUES
-(1, 1, 1, NULL, NULL),
-(2, 1, 2, NULL, NULL),
-(3, 1, 3, NULL, NULL),
-(4, 2, 4, NULL, NULL),
-(5, 2, 5, NULL, NULL),
-(6, 2, 6, NULL, NULL),
-(7, 3, 7, NULL, NULL),
-(8, 3, 8, NULL, NULL),
-(9, 3, 9, NULL, NULL);
+(30, 9, 1, NULL, NULL),
+(31, 9, 2, NULL, NULL),
+(32, 9, 3, NULL, NULL),
+(33, 9, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -423,16 +392,14 @@ CREATE TABLE `exercise_group_lists` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `exercise_group_lists`
 --
 
 INSERT INTO `exercise_group_lists` (`id`, `exercise_id`, `iut_group_id`, `created`, `modified`) VALUES
-(1, 2, 1, '2013-06-09 12:50:11', '2013-06-09 12:53:08'),
-(2, 1, 1, NULL, NULL),
-(3, 1, 2, NULL, NULL);
+(9, 9, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -474,13 +441,6 @@ CREATE TABLE `group_lists` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
---
--- Contenu de la table `group_lists`
---
-
-INSERT INTO `group_lists` (`id`, `user_id`, `iut_group_id`, `created`, `modified`) VALUES
-(8, 11, 1, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -494,15 +454,14 @@ CREATE TABLE `iut_groups` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `iut_groups`
 --
 
 INSERT INTO `iut_groups` (`id`, `name`, `created`, `modified`) VALUES
-(1, '2A', '2013-06-09 10:27:54', '2013-06-09 10:27:54'),
-(2, '1A', '2013-06-09 10:56:59', '2013-06-09 10:56:59');
+(3, 'Group Test', '2013-06-22 08:46:14', '2013-06-22 08:46:14');
 
 -- --------------------------------------------------------
 
@@ -521,22 +480,17 @@ CREATE TABLE `questions` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Contenu de la table `questions`
 --
 
 INSERT INTO `questions` (`id`, `namefile`, `user_id`, `points`, `difficulty`, `question_type_id`, `created`, `modified`) VALUES
-(1, 'qcu_1_2013-06-07.xml', 4, 1, 3, 1, '2013-06-07 12:15:12', '2013-06-20 21:47:30'),
-(2, 'qcu_2_2013-06-07.xml', 4, 5, 3, 1, '2013-06-07 12:15:13', '2013-06-07 12:15:13'),
-(3, 'qcu_3_2013-06-07.xml', 4, 3, 3, 1, '2013-06-07 12:15:14', '2013-06-07 12:15:14'),
-(4, 'qcu_4_2013-06-07.xml', 4, 1, 3, 1, '2013-06-07 12:15:40', '2013-06-07 12:15:40'),
-(5, 'qcu_5_2013-06-07.xml', 4, 5, 3, 1, '2013-06-07 12:15:41', '2013-06-07 12:15:41'),
-(6, 'qcu_6_2013-06-07.xml', 4, 3, 3, 1, '2013-06-07 12:15:42', '2013-06-07 12:15:42'),
-(7, 'qcu_7_2013-06-07.xml', 4, 1, 3, 1, '2013-06-07 12:15:56', '2013-06-07 12:15:56'),
-(8, 'qcu_8_2013-06-07.xml', 4, 5, 3, 1, '2013-06-07 12:15:57', '2013-06-07 12:15:57'),
-(9, 'qcu_9_2013-06-07.xml', 4, 3, 3, 1, '2013-06-07 12:15:58', '2013-06-07 12:15:58');
+(47, 'qcm_1_2013-06-22.xml', 12, 1, 1, 4, '2013-06-22 08:47:50', '2013-06-22 08:47:50'),
+(48, 'qcu_48_2013-06-22.xml', 12, 1, 3, 5, '2013-06-22 08:47:51', '2013-06-22 08:47:51'),
+(49, 'qcu_49_2013-06-22.xml', 12, 5, 3, 5, '2013-06-22 08:47:52', '2013-06-22 08:47:52'),
+(50, 'qcu_50_2013-06-22.xml', 12, 3, 3, 5, '2013-06-22 08:47:54', '2013-06-22 08:47:54');
 
 -- --------------------------------------------------------
 
@@ -552,31 +506,21 @@ CREATE TABLE `questions_disciplines` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
 --
 -- Contenu de la table `questions_disciplines`
 --
 
 INSERT INTO `questions_disciplines` (`id`, `question_id`, `discipline_id`, `created`, `modified`) VALUES
-(1, 1, 1, NULL, NULL),
-(2, 1, 4, NULL, NULL),
-(3, 2, 2, NULL, NULL),
-(4, 2, 4, NULL, NULL),
-(5, 3, 3, NULL, NULL),
-(6, 3, 4, NULL, NULL),
-(7, 4, 1, NULL, NULL),
-(8, 4, 4, NULL, NULL),
-(9, 5, 2, NULL, NULL),
-(10, 5, 4, NULL, NULL),
-(11, 6, 3, NULL, NULL),
-(12, 6, 4, NULL, NULL),
-(13, 7, 1, NULL, NULL),
-(14, 7, 4, NULL, NULL),
-(15, 8, 2, NULL, NULL),
-(16, 8, 4, NULL, NULL),
-(17, 9, 3, NULL, NULL),
-(18, 9, 4, NULL, NULL);
+(42, 45, 2, NULL, NULL),
+(43, 45, 4, NULL, NULL),
+(44, 46, 3, NULL, NULL),
+(45, 46, 4, NULL, NULL),
+(46, 47, 5, NULL, NULL),
+(47, 48, 5, NULL, NULL),
+(48, 49, 5, NULL, NULL),
+(49, 50, 5, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -592,15 +536,15 @@ CREATE TABLE `question_types` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `question_types`
 --
 
 INSERT INTO `question_types` (`id`, `name`, `controller`, `created`, `modified`) VALUES
-(1, 'Question Ã  choix unique', 'Qcu', '2013-03-22 15:23:03', '2013-03-22 15:23:03'),
-(3, 'Question Ã  choix multiple', 'Qcm', '2013-06-20 23:45:26', '2013-06-20 23:45:50');
+(4, 'Question Ã  choix multiple', 'Qcm', '2013-06-22 08:47:24', '2013-06-22 08:47:24'),
+(5, 'Question Ã  choix unique', 'Qcu', '2013-06-22 08:47:38', '2013-06-22 08:47:38');
 
 -- --------------------------------------------------------
 
@@ -630,8 +574,5 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `mail`, `xp`, `actual_rank`, `last_rank`, `group_id`, `avatar_namefile`, `created`, `modified`) VALUES
-(8, 'florian', 'ef3ce76a84fe7519453a613804375f66b9a7a118', 'florian@florian.fr', 12.06, 2, 1, 1, NULL, '2013-06-09 19:16:59', '2013-06-12 09:38:08'),
-(9, 'louis', 'b28d04149bc5151bfc258aa7c01f605d354f81ef', 'louis@louis.fr', 12.06, 3, 4, 1, NULL, '2013-06-09 19:17:38', '2013-06-12 09:38:42'),
-(10, 'quentin', 'aa26144053d99fcff013ff1e96c169d0f7a35401', 'quentin@quentin.fr', 16.91, 1, 2, 1, NULL, '2013-06-09 19:17:56', '2013-06-09 19:17:56'),
-(11, 'eleve', 'c7b15743ef49977b9164e2eb2bce1ced7bc1fcf0', 'eleve@eleve.fr', 10.08, 4, 3, 2, NULL, '2013-06-09 19:26:10', '2013-06-09 19:26:10'),
-(12, 'administrateur', 'caca30d5ff5ac02b71c2ea2c56f8d3c01dfd4fc0', 'admin@admin.fr', 0, NULL, NULL, 1, NULL, '2013-06-21 07:26:13', '2013-06-21 07:26:13');
+(11, 'eleve', 'c7b15743ef49977b9164e2eb2bce1ced7bc1fcf0', 'eleve@eleve.fr', 12.78, 2, 4, 2, NULL, '2013-06-09 19:26:10', '2013-06-09 19:26:10'),
+(12, 'administrateur', 'caca30d5ff5ac02b71c2ea2c56f8d3c01dfd4fc0', 'admin@admin.fr', 3.35, 5, 5, 1, NULL, '2013-06-21 07:26:13', '2013-06-21 07:26:13');

@@ -1,10 +1,9 @@
 <question type="qcu">
-		  <author>quentin</author>
+		  <author>administrateur</author>
 		  <difficulty>3</difficulty>
 		  <text><![CDATA[2+2 = ?]]></text>
 		  <disciplines>
-		    <discipline>1</discipline>
-		    <discipline>4</discipline>
+		    <discipline>5</discipline>
 		  </disciplines>
 		  <choice>
 		    <option num="0"><![CDATA[2]]></option>

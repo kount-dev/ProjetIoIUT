@@ -1,0 +1,16 @@
+<question type="qcm">
+  <author>administrateur</author>
+  <difficulty>1</difficulty>
+  <text><![CDATA[dfddfdfgd]]></text>
+  <disciplines>
+    <discipline>4</discipline>
+  </disciplines>
+  <choice>
+    <option num="1"><![CDATA[gdfsgd]]></option>
+    <option num="2"><![CDATA[dfsgd]]></option>
+  </choice>
+  <answers>
+    <answer>2</answer>
+  </answers>
+  <points>1</points>
+</question>

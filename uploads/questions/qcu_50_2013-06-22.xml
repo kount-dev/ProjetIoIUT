@@ -1,10 +1,9 @@
 <question type="qcu">
-		  <author>quentin</author>
+		  <author>administrateur</author>
 		  <difficulty>3</difficulty>
 		  <text><![CDATA[WAMP, MAMP, LAMP : AMP = ?]]></text>
 		  <disciplines>
-		    <discipline>3</discipline>
-		    <discipline>4</discipline>
+		    <discipline>5</discipline>
 		  </disciplines>
 		  <choice>
 		    <option num="0"><![CDATA[APACHE MYSQL PHP]]></option>

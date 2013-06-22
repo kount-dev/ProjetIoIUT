@@ -1,9 +1,9 @@
 <question type="qcm">
-		  <author>quentin</author>
+		  <author>administrateur</author>
 		  <difficulty>1</difficulty>
 		  <text><![CDATA[dfddfdfgd]]></text>
 		  <disciplines>
-		    <discipline>4</discipline>
+		    <discipline>5</discipline>
 		  </disciplines>
 		  <choice>
 		    <option num="1"><![CDATA[gdfsgd]]></option>

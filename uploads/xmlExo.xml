@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exercise>
-	<author>quentin</author>
-	<name>Exercise 1333</name>
+	<author>administrateur</author>
+	<name>Exercise 1</name>
 	<minimum_points>0</minimum_points>
 	<groups_iut>
-		<group>1</group>
+		<group>3</group>
 	</groups_iut>
 	<disciplines>
-		<discipline>2</discipline>
-		<discipline>4</discipline>
+		<discipline>5</discipline>
 	</disciplines>
 	<opening_date>2013-03-30 15:20:00</opening_date>
 	<closing_date>2014-04-15 15:20:00</closing_date>
 	<questions>
 		<question type="qcm">
-		  <author>quentin</author>
+		  <author>administrateur</author>
 		  <difficulty>1</difficulty>
 		  <text><![CDATA[dfddfdfgd]]></text>
 		  <disciplines>
-		    <discipline>4</discipline>
+		    <discipline>5</discipline>
 		  </disciplines>
 		  <choice>
 		    <option num="1"><![CDATA[gdfsgd]]></option>
@@ -30,12 +29,11 @@
 		  <points>1</points>
 		</question>
 		<question type="qcu">
-		  <author>quentin</author>
+		  <author>administrateur</author>
 		  <difficulty>3</difficulty>
 		  <text><![CDATA[2+2 = ?]]></text>
 		  <disciplines>
-		    <discipline>1</discipline>
-		    <discipline>4</discipline>
+		    <discipline>5</discipline>
 		  </disciplines>
 		  <choice>
 		    <option num="0"><![CDATA[2]]></option>
@@ -47,12 +45,11 @@
 		  <points>1</points>
 		</question>
 		<question type="qcu">
-		  <author>quentin</author>
+		  <author>administrateur</author>
 		  <difficulty>3</difficulty>
 		  <text><![CDATA[H T M L = ?]]></text>
 		  <disciplines>
-		    <discipline>2</discipline>
-		    <discipline>4</discipline>
+		    <discipline>5</discipline>
 		  </disciplines>
 		  <choice>
 		    <option num="0"><![CDATA[Hyper Translate Media Language]]></option>
@@ -64,12 +61,11 @@
 		  <points>5</points>
 		</question>
 		<question type="qcu">
-		  <author>quentin</author>
+		  <author>administrateur</author>
 		  <difficulty>3</difficulty>
 		  <text><![CDATA[WAMP, MAMP, LAMP : AMP = ?]]></text>
 		  <disciplines>
-		    <discipline>3</discipline>
-		    <discipline>4</discipline>
+		    <discipline>5</discipline>
 		  </disciplines>
 		  <choice>
 		    <option num="0"><![CDATA[APACHE MYSQL PHP]]></option>
